@@ -5,4 +5,10 @@
     <string name="noInternet">noInternet</string>
     <string name="tryAgain">tryAgain</string>
     <string name="NotInternet">NotInternet</string>
+    <string name="login">Login</string>
+    <string name="loginErr">loginErr</string>
+    <string name="allFieldsRequired">allFieldsRequired</string>
+    <string name="registrationOK">registrationOK</string>
+    <string name="errorRegistration">errorRegistration</string>
+    <string name="invalidEmail">invalidEmail</string>
 </resources>
