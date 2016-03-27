@@ -1,9 +1,11 @@
-package tfg2016.gymapp_tfg;
+package tfg2016.gymapp_tfg.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import tfg2016.gymapp_tfg.R;
 
 public class RegisterActivity extends Activity {
     @Override
