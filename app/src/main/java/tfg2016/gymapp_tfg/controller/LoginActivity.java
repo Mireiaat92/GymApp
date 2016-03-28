@@ -39,6 +39,9 @@ public class LoginActivity extends Activity {
         testObject.saveInBackground();*/
     }
 
+    /**
+     * Inicializació dels botons de l'activitat Login. El botó de login i el de registre.
+     */
     private void initializeButtons() {
         Button login = (Button)findViewById(R.id.btnLogin);
         TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
@@ -50,6 +53,9 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(clickLogin);
     }
 
+    /**
+     * Al clickar el botó Registre ens portarà a l'activitat del Registre
+     */
     public View.OnClickListener clickRegister = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -59,9 +65,13 @@ public class LoginActivity extends Activity {
         }
     };
 
+    /**
+     * Al clickar el botó Login es procedirà amb les comprovacions necessaries per el login.
+     */
     public Button.OnClickListener clickLogin = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //Comrpovar que disposem d'internet
            if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
                 Intent noInternet = new Intent(LoginActivity.this, NoInternetConnection.class);
                 startActivity(noInternet);
@@ -80,15 +90,24 @@ public class LoginActivity extends Activity {
                popupWindow.showAsDropDown(popupView);
                boolean login = false;
                try {
-                   User myUser = LoginActivity.this.login(LoginActivity.this.getUser(),
+                   //Crida de la funció login
+                   User myUserClient = LoginActivity.this.loginClient(LoginActivity.this.getUser(),
                            LoginActivity.this.getPassword());
-                   if (myUser != null) {
-                       Intent tripList = new Intent(LoginActivity.this, UserActivity.class);
-                       tripList.putExtra("myUser", myUser);
-                       startActivity(tripList);
+                   if (myUserClient != null) {
+                       Intent userDashboard = new Intent(LoginActivity.this, ClientDashboard.class);
+                       userDashboard.putExtra("myUser", myUserClient);
+                       startActivity(userDashboard);
                    } else {
-                       Complements.showInfoAlert(getResources().getString(R.string.loginErr), LoginActivity.this);
-                       popupWindow.dismiss();
+                       User myUserEntrenador = LoginActivity.this.loginEntrenador(LoginActivity.this.getUser(),
+                               LoginActivity.this.getPassword());
+                       if (myUserEntrenador != null) {
+                           Intent userDashboard = new Intent(LoginActivity.this, EntrenadorDashboard.class);
+                           userDashboard.putExtra("myUser", myUserEntrenador);
+                           startActivity(userDashboard);
+                       } else {
+                           Complements.showInfoAlert(getResources().getString(R.string.loginErr), LoginActivity.this);
+                           popupWindow.dismiss();
+                       }
                    }
                } catch (java.text.ParseException e) {
                    e.printStackTrace();
@@ -100,28 +119,60 @@ public class LoginActivity extends Activity {
 
     /**
      * Login.
-     * @param user = mail
-     * @param passw
-     * @return success
+     * Enviem el mail i el password encriptat al CloudCode "login" que s'encarregarà de l'autentcació
+     * @param mail
+     * @param password
+     * @return myUser - Dades de l'usuaa
      * @throws ParseException
      */
-    public User login(String user, String passw) throws java.text.ParseException {
+    public User loginClient(String mail, String password) throws java.text.ParseException {
         Encrypt encrypt = new Encrypt(getApplicationContext());
         User myUser = null;
-        passw = encrypt.encryptPassword(passw);
-        HashMap<String, Object> params = new HashMap<String, Object>();
-        params.put("mail", user);
-        params.put("password", passw);
+        password = encrypt.encryptPassword(password);
+        HashMap<String, Object> loginParams = new HashMap<String, Object>();
+        loginParams.put("mail", mail);
+        loginParams.put("password", password);
 
         List<ParseObject> loginResponse = null;
         try {
-            loginResponse = ParseCloud.callFunction("login", params);
+            loginResponse = ParseCloud.callFunction("loginClient", loginParams);
 
         if(!loginResponse.isEmpty()) {
             ParseObject userParse = loginResponse.iterator().next();
             myUser = new User(userParse.getString("Mail"), userParse.getString("Password"),
                     userParse.getString("Nom"), userParse.getString("Cognom"));
         }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return myUser;
+    }
+
+    /**
+     * Login.
+     * Enviem el mail i el password encriptat al CloudCode "login" que s'encarregarà de l'autentcació
+     * @param mail
+     * @param password
+     * @return myUser - Dades de l'usuaa
+     * @throws ParseException
+     */
+    public User loginEntrenador(String mail, String password) throws java.text.ParseException {
+        Encrypt encrypt = new Encrypt(getApplicationContext());
+        User myUser = null;
+        password = encrypt.encryptPassword(password);
+        HashMap<String, Object> loginParams = new HashMap<String, Object>();
+        loginParams.put("mail", mail);
+        loginParams.put("password", password);
+
+        List<ParseObject> loginResponse = null;
+        try {
+            loginResponse = ParseCloud.callFunction("loginEntrenador", loginParams);
+
+            if(!loginResponse.isEmpty()) {
+                ParseObject userParse = loginResponse.iterator().next();
+                myUser = new User(userParse.getString("Mail"), userParse.getString("Password"),
+                        userParse.getString("Nom"), userParse.getString("Cognom"));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

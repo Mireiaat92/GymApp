@@ -25,9 +25,13 @@
         <activity android:name=".controller.NoInternetConnection"
             android:label="No internet connection"></activity>
 
-        <!--  Entry for UserActivity -->
-        <activity android:name=".controller.UserActivity"
-            android:label="User Activity"></activity>
+        <!--  Entry for ClientDashboard -->
+        <activity android:name=".controller.ClientDashboard"
+            android:label="Client Dashboard"></activity>
+
+        <!--  Entry for EntrenadorDashboard -->
+        <activity android:name=".controller.EntrenadorDashboard"
+            android:label="Entrenador Dashboard"></activity>
 
     </application>
 </manifest>

@@ -8,7 +8,7 @@ import tfg2016.gymapp_tfg.R;
 /**
  * Created by Mireia on 27/03/2016.
  */
-public class UserActivity extends Activity {
+public class ClientDashboard extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

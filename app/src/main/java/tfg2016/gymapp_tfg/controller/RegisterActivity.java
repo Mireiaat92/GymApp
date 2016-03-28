@@ -3,15 +3,17 @@ package tfg2016.gymapp_tfg.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.ParseObject;
+import com.parse.ParseCloud;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +46,9 @@ public class RegisterActivity extends Activity {
 
     }
 
+    /**
+     * Al clickar el botó Login ens portarà a l'activitat de login.
+     */
     public View.OnClickListener clickLogin = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,35 +58,44 @@ public class RegisterActivity extends Activity {
         }
     };
 
+    /**
+     * Al clickar el botó Registre es procedirà amb el procediment de registre
+     */
     public Button.OnClickListener clickRegister = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
             try {
+            //Comprovació de que tots els camps estan omplerts sinó mostrarà popup solicitant omplir tots els camps
             if (RegisterActivity.this.getName().equalsIgnoreCase("")
                     || RegisterActivity.this.getSurname().equalsIgnoreCase("")
                     || RegisterActivity.this.getMail().equalsIgnoreCase("")
                     || RegisterActivity.this.getPassword().equalsIgnoreCase("")){
                 Toast.makeText(RegisterActivity.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
             }
+            //Comprovació de que el camp mail té el format adequat - mitjaçant la funció emailcheck
             checkemail(RegisterActivity.this.getMail());
             if (emailcheck == true) {
+                //Comprovar que disposem d'internet
                 if (!Complements.isNetworkStatusAvialable(getApplicationContext())) {
                     Intent noInternet = new Intent(RegisterActivity.this, NoInternetConnection.class);
                     startActivity(noInternet);
                 }
                 else{
-                        boolean register = RegisterActivity.this.register(RegisterActivity.this.getName(),
-                                RegisterActivity.this.getSurname(), RegisterActivity.this.getMail(),
-                                RegisterActivity.this.getPassword());
+                    //Crida de la funció "registre" que realitzarà les comprovacions de que el mail no estigui registrat ja
+                    boolean register = RegisterActivity.this.register(RegisterActivity.this.getName(),
+                        RegisterActivity.this.getSurname(), RegisterActivity.this.getMail(), RegisterActivity.this.getPassword());
+                    //si el registre es realitza correctament ho notificarà mitjançant un popup
                     if (register) {
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.registrationOK), Toast.LENGTH_SHORT).show();
                         finish();
+                    //si el registre falla ho notificarà mitjançant un popup
                     } else {
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.errorRegistration), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
             else{
+            //Si el format de l'email no és correcte ho notificarà mitjançant un popup
                 Toast.makeText(RegisterActivity.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
             }
             } catch (ParseException e) {
@@ -112,28 +126,34 @@ public class RegisterActivity extends Activity {
         params.put("password", password);
 
         //Comprovem si el mail existeix a la BD
-        /*ArrayList checkRegistro = null;
+        ArrayList checkRegistro = null;
         try {
-            checkRegistro = ParseCloud.callFunction("checkUserSignIn", params);
+            checkRegistro = ParseCloud.callFunction("checkUserSignInClients", params);
             if (checkRegistro.size() == 1) {//mail existente
+                success = false;
                 return success;
             } else {
-                //Creem el nou usuari a la BD
-                String registerResponse = ParseCloud.callFunction("register", params);
-                if (registerResponse.isEmpty() == false) //S'ha creat l'usuari
-                    success = true;
-                Log.i("Registration objectId:", registerResponse);
-
+                checkRegistro = ParseCloud.callFunction("checkUserSignInEntrenadors", params);
+                if (checkRegistro.size() == 1) {//mail existente
+                    success = false;
+                    return success;
+                } else {
+                    //Creem el nou usuari a la BD
+                    String registerResponse = ParseCloud.callFunction("register", params);
+                    if (registerResponse.isEmpty() == false) //S'ha creat l'usuari
+                        success = true;
+                    Log.i("Registration objectId:", registerResponse);
+                }
             }
         } catch (com.parse.ParseException e) {
             e.printStackTrace();
-        }*/
-        ParseObject testObject = new ParseObject("CLIENTS");
+        }
+        /*ParseObject testObject = new ParseObject("CLIENTS");
         testObject.put("Nom", name);
 		testObject.put("Cognom", surname);
 		testObject.put("Mail", mail);
 		testObject.put("Contrasenya", password);
-        testObject.saveInBackground();
+        testObject.saveInBackground();*/
         return success;
     }
 
