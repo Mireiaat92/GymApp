@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.parse.Parse;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -32,7 +31,7 @@ public class LoginActivity extends Activity {
         // setting default screen to login.xml
         setContentView(R.layout.login);
         this.initializeButtons();
-        Parse.initialize(this, "1SDM9Lv7AxwkSgfmgR2kXWnhTBHhsBSYGiMfGkLW", "zq8RaTSdErsyFNhb0LbCQbwkkbpl3UCm1M9ly4Hk");
+        //Parse.initialize(this, "1SDM9Lv7AxwkSgfmgR2kXWnhTBHhsBSYGiMfGkLW", "zq8RaTSdErsyFNhb0LbCQbwkkbpl3UCm1M9ly4Hk");
 
         /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");

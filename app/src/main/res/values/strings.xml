@@ -4,11 +4,11 @@
     <string name="action_settings">Settings</string>
     <string name="noInternet">noInternet</string>
     <string name="tryAgain">tryAgain</string>
-    <string name="NotInternet">NotInternet</string>
+    <string name="NotInternet">Necesita estar conectat a Internet</string>
     <string name="login">Login</string>
     <string name="loginErr">loginErr</string>
-    <string name="allFieldsRequired">allFieldsRequired</string>
-    <string name="registrationOK">registrationOK</string>
-    <string name="errorRegistration">errorRegistration</string>
-    <string name="invalidEmail">invalidEmail</string>
+    <string name="allFieldsRequired">Tots els camps són obligatoria</string>
+    <string name="registrationOK">Registrat correctament</string>
+    <string name="errorRegistration">Aquest mail ja està registrat</string>
+    <string name="invalidEmail">Email invàlid</string>
 </resources>
