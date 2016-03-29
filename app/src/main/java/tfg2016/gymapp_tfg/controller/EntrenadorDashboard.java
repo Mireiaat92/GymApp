@@ -16,7 +16,7 @@ public class EntrenadorDashboard extends Activity {
         super.onCreate(savedInstanceState);
         // Set View to activity_user_dashboard.xml
         setContentView(R.layout.activity_entrenador_dashboard);
-        this.initializeButtons();
+        //this.initializeButtons();
     }
 
     private void initializeButtons() {

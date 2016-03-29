@@ -6,7 +6,7 @@
     <string name="tryAgain">tryAgain</string>
     <string name="NotInternet">Necesita estar conectat a Internet</string>
     <string name="login">Login</string>
-    <string name="loginErr">loginErr</string>
+    <string name="loginErr">Error al loguearte</string>
     <string name="allFieldsRequired">Tots els camps són obligatoria</string>
     <string name="registrationOK">Registrat correctament</string>
     <string name="errorRegistration">Aquest mail ja està registrat</string>
