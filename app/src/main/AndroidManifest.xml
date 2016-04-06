@@ -37,5 +37,19 @@
         <activity android:name=".controller.EntrenadorDashboard"
             android:label="Entrenador Dashboard"></activity>
 
+        <!--  Entry for EntrenadorDashboard -->
+        <activity android:name=".controller.ClientActivityFromEntrenador"
+            android:label="ClientActivityFromEntrenador"></activity>
+
+        <!--  Entry for ActivityAddClient -->
+        <activity android:name=".controller.ActivityAddClient"
+            android:label="Add Client"></activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
     </application>
 </manifest>

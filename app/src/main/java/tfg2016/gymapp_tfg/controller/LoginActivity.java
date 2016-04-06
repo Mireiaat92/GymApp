@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
@@ -17,6 +18,8 @@ import com.parse.ParseObject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.User;
@@ -25,17 +28,14 @@ import tfg2016.gymapp_tfg.resources.Encrypt;
 
 public class LoginActivity extends Activity {
 
+    private boolean emailcheck;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setting default screen to login.xml
         setContentView(R.layout.login);
         this.initializeButtons();
-        //Parse.initialize(this, "1SDM9Lv7AxwkSgfmgR2kXWnhTBHhsBSYGiMfGkLW", "zq8RaTSdErsyFNhb0LbCQbwkkbpl3UCm1M9ly4Hk");
-
-        /*ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();*/
     }
 
     /**
@@ -70,50 +70,61 @@ public class LoginActivity extends Activity {
     public Button.OnClickListener clickLogin = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //Comrpovar que disposem d'internet
-           if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
-                Intent noInternet = new Intent(LoginActivity.this, NoInternetConnection.class);
-                startActivity(noInternet);
+            if (LoginActivity.this.getMail().equalsIgnoreCase("") ||LoginActivity.this.getPassword().equalsIgnoreCase("")){
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
             }
-            else {
-               //POPUP DE LOGIN
-               LayoutInflater layoutInflater
-                       = (LayoutInflater) getBaseContext()
-                       .getSystemService(LAYOUT_INFLATER_SERVICE);
+            checkemail(LoginActivity.this.getMail());
+            if (emailcheck == true) {
+                //Comrpovar que disposem d'internet
+               if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
+                   Toast.makeText(LoginActivity.this, "no hi ha internet", Toast.LENGTH_SHORT).show();
+                    Intent noInternet = new Intent(LoginActivity.this, NoInternetConnection.class);
+                    startActivity(noInternet);
+                }
+                else {
+                   //POPUP DE LOGIN
+                   LayoutInflater layoutInflater
+                           = (LayoutInflater) getBaseContext()
+                           .getSystemService(LAYOUT_INFLATER_SERVICE);
 
-               final View popupView = layoutInflater.inflate(R.layout.popup_login, null);
-               final PopupWindow popupWindow = new PopupWindow(popupView);
-               popupWindow.setFocusable(true);
-               popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-               popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-               popupWindow.showAsDropDown(popupView);
-               boolean login = false;
-               try {
-                   //Crida de la funció login
-                   User myUserClient = LoginActivity.this.loginClient(LoginActivity.this.getUser(),
-                           LoginActivity.this.getPassword());
-                   if (myUserClient != null) {
-                       Intent userDashboard = new Intent(LoginActivity.this, ClientDashboard.class);
-                       userDashboard.putExtra("myUser", myUserClient);
-                       startActivity(userDashboard);
-                   } else {
-                       User myUserEntrenador = LoginActivity.this.loginEntrenador(LoginActivity.this.getUser(),
+                   final View popupView = layoutInflater.inflate(R.layout.popup_login, null);
+                   final PopupWindow popupWindow = new PopupWindow(popupView);
+                   popupWindow.setFocusable(true);
+                   popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                   popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                   popupWindow.showAsDropDown(popupView);
+                   boolean login = false;
+                   try {
+                       //Crida de les funcions login
+                       User myUserClient = LoginActivity.this.loginClient(LoginActivity.this.getMail(),
                                LoginActivity.this.getPassword());
-                       if (myUserEntrenador != null) {
-                           Intent userDashboard = new Intent(LoginActivity.this, EntrenadorDashboard.class);
-                           userDashboard.putExtra("myUser", myUserEntrenador);
+                       if (myUserClient != null) {
+                           Intent userDashboard = new Intent(LoginActivity.this, ClientDashboard.class);
+                           userDashboard.putExtra("myUser", myUserClient);
                            startActivity(userDashboard);
                        } else {
-                           Complements.showInfoAlert(getResources().getString(R.string.loginErr), LoginActivity.this);
-                           popupWindow.dismiss();
+                           User myUserEntrenador = LoginActivity.this.loginEntrenador(LoginActivity.this.getMail(),
+                                   LoginActivity.this.getPassword());
+                           if (myUserEntrenador != null) {
+                               Intent entrenadorDashboard = new Intent(LoginActivity.this, EntrenadorDashboard.class);
+                               entrenadorDashboard.putExtra("myUser", myUserEntrenador);
+                               //Toast.makeText(LoginActivity.this, myUserEntrenador.getMail(), Toast.LENGTH_SHORT).show();
+                               startActivity(entrenadorDashboard);
+                           } else {
+                               Complements.showInfoAlert(getResources().getString(R.string.loginErr), LoginActivity.this);
+                               popupWindow.dismiss();
+                           }
                        }
-                   }
-               } catch (java.text.ParseException e) {
-                   e.printStackTrace();
+                   } catch (java.text.ParseException e) {
+                       e.printStackTrace();
                }
            }
+           }
+            else{
+                //Si el format de l'email no és correcte ho notificarà mitjançant un popup
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
+            }
         }
-
     };
 
     /**
@@ -126,25 +137,26 @@ public class LoginActivity extends Activity {
      */
     public User loginClient(String mail, String password) throws java.text.ParseException {
         Encrypt encrypt = new Encrypt(getApplicationContext());
-        User myUser = null;
-        password = encrypt.encryptPassword(password);
-        HashMap<String, Object> loginParams = new HashMap<String, Object>();
-        loginParams.put("mail", mail);
-        loginParams.put("password", password);
+        User myUserClient = null;
 
-        List<ParseObject> loginResponse = null;
-        try {
-            loginResponse = ParseCloud.callFunction("loginClient", loginParams);
+            password = encrypt.encryptPassword(password);
+            HashMap<String, Object> loginParams = new HashMap<String, Object>();
+            loginParams.put("mail", mail);
+            loginParams.put("password", password);
 
-        if(!loginResponse.isEmpty()) {
-            ParseObject userParse = loginResponse.iterator().next();
-            myUser = new User(userParse.getString("Mail"), userParse.getString("Password"),
-                    userParse.getString("Nom"), userParse.getString("Cognom"));
-        }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return myUser;
+            List<ParseObject> loginResponse = null;
+            try {
+                loginResponse = ParseCloud.callFunction("loginClient", loginParams);
+
+                if (!loginResponse.isEmpty()) {
+                    ParseObject userParse = loginResponse.iterator().next();
+                    myUserClient = new User(userParse.getString("Mail"), userParse.getString("Password"),
+                            userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getObjectId());
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        return myUserClient;
     }
 
     /**
@@ -157,7 +169,7 @@ public class LoginActivity extends Activity {
      */
     public User loginEntrenador(String mail, String password) throws java.text.ParseException {
         Encrypt encrypt = new Encrypt(getApplicationContext());
-        User myUser = null;
+        User myUserEntrenador = null;
         password = encrypt.encryptPassword(password);
         HashMap<String, Object> loginParams = new HashMap<String, Object>();
         loginParams.put("mail", mail);
@@ -169,20 +181,20 @@ public class LoginActivity extends Activity {
 
             if(!loginResponse.isEmpty()) {
                 ParseObject userParse = loginResponse.iterator().next();
-                myUser = new User(userParse.getString("Mail"), userParse.getString("Password"),
-                        userParse.getString("Nom"), userParse.getString("Cognom"));
+                myUserEntrenador = new User(userParse.getString("Nom"), userParse.getString("Cognom"),
+                        userParse.getString("Mail"), userParse.getString("Contrasenya"), userParse.getObjectId());
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return myUser;
+        return myUserEntrenador;
     }
 
     /**
-     * Method getUser
+     * Method getMail
      * @return userText
      */
-    public String getUser() {
+    public String getMail() {
         EditText user = (EditText) findViewById(R.id.user);
         String userText = user.getText().toString();
         return userText;
@@ -196,5 +208,15 @@ public class LoginActivity extends Activity {
         EditText passw = (EditText) findViewById(R.id.password);
         String passwText = passw.getText().toString();
         return passwText;
+    }
+
+    /**
+     * Method checkemail
+     * @param mail
+     */
+    public void checkemail(String mail) {
+        Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher matcher = pattern.matcher(mail);
+        emailcheck = matcher.matches();
     }
 }

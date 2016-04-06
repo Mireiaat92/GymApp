@@ -11,4 +11,9 @@
     <string name="registrationOK">Registrat correctament</string>
     <string name="errorRegistration">Aquest mail ja està registrat</string>
     <string name="invalidEmail">Email invàlid</string>
+    <string name="mailClient">mailClient</string>
+    <string name="addClient">addClient</string>
+    <string name="namelabel">"Name: "</string>
+    <string name="userNoExist">"L'usuari introduit no existeix"</string>
+
 </resources>

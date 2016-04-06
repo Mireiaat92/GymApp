@@ -4,18 +4,17 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
-    private String mail;
-
-    private String password;
-
     private String name;
 
     private String surname;
 
+    private String mail;
+
+    private String password;
 
     private String objectId;
 
-    public User(String mail, String password, String name, String surname) {
+    public User(String name, String surname, String mail, String password, String objectId) {
         this.setMail(mail);
         this.setPassword(password);
         this.setName(name);
