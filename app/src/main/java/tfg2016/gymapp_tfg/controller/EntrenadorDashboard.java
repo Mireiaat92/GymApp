@@ -184,7 +184,7 @@ public class EntrenadorDashboard extends Activity {
                     R.layout.item_entrenador_dashboard);
             // Retrieve object "name" from Parse.com database
             for (ParseObject clients : ob) {
-                adapter.add((String) clients.get("Nom"));
+                adapter.add((String) clients.get("Nom") + " " + clients.get("Cognom"));
             }
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);
@@ -198,7 +198,7 @@ public class EntrenadorDashboard extends Activity {
                     // Send single item click data to SingleItemView Class
                     Intent i = new Intent(EntrenadorDashboard.this, ClientActivityFromEntrenador.class);
                     // Pass data "name" followed by the position
-                    i.putExtra("Nom", ob.get(position).getString("Nom").toString());
+                    i.putExtra("Nom", ob.get(position).getString("Nom").toString() + " " + ob.get(position).getString("Cognom").toString());
                     // Open SingleItemView.java Activity
                     startActivity(i);
                 }

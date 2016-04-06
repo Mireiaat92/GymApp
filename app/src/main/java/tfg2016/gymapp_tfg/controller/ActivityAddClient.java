@@ -54,6 +54,9 @@ public class ActivityAddClient extends Activity {
                 if (emailcheck == true) {
                     addClient(ActivityAddClient.this.getMail());
                 }
+                else{
+                    Toast.makeText(ActivityAddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

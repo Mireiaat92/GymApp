@@ -12,9 +12,10 @@
     <string name="errorRegistration">Aquest mail ja està registrat</string>
     <string name="invalidEmail">Email invàlid</string>
     <string name="mailClient">mailClient</string>
-    <string name="addClient">addClient</string>
-    <string name="namelabel">Name: </string>
+    <string name="addClient">Afegir client</string>
+    <string name="namelabel">"Name: "</string>
     <string name="userNoExist">El mail introduit no existeix</string>
     <string name="entrenadorlabel">Entrenador: </string>
+    <string name="customerMail">Email del client</string>
 
 </resources>

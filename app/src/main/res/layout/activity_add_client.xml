@@ -23,6 +23,8 @@
             <!--MAIL CLIENT LABEL-->
             <EditText
                 android:id="@+id/mail_client"
+                android:hint="@string/customerMail"
+                android:textColorHint="#bbbbbb"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
