@@ -150,7 +150,7 @@ public class EntrenadorDashboard extends Activity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(EntrenadorDashboard.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Parse.com Simple ListView Tutorial");
+            mProgressDialog.setTitle("Accedint a la llista de clients");
             // Set progressdialog message
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
@@ -196,11 +196,9 @@ public class EntrenadorDashboard extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(EntrenadorDashboard.this,
-                            ClientActivityFromEntrenador.class);
+                    Intent i = new Intent(EntrenadorDashboard.this, ClientActivityFromEntrenador.class);
                     // Pass data "name" followed by the position
-                    i.putExtra("Nom", ob.get(position).getString("Nom")
-                            .toString());
+                    i.putExtra("Nom", ob.get(position).getString("Nom").toString());
                     // Open SingleItemView.java Activity
                     startActivity(i);
                 }

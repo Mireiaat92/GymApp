@@ -73,13 +73,12 @@ public class ActivityAddClient extends Activity {
         List<ParseObject> checkRegistro = ParseCloud.callFunction("checkUserSignInClients", paramsCheckMail);
 
         if (checkRegistro.size() == 1) {//mail e
-            Toast.makeText(ActivityAddClient.this, "el mail existeix", Toast.LENGTH_SHORT).show();
             HashMap<String, Object> paramsAddEntrenador = new HashMap<String, Object>();
             paramsAddEntrenador.put("mail", mail);
             paramsAddEntrenador.put("identrenador", myUser.getObjectId());
             ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
 
-            Toast.makeText(ActivityAddClient.this, "Client afegit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityAddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
 
             Intent userDashboard = new Intent(ActivityAddClient.this, EntrenadorDashboard.class);
             userDashboard.putExtra("myUser", myUser);

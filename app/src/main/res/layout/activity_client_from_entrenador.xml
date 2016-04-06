@@ -5,11 +5,11 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/namelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/namelabel"
-        android:textSize="25sp" />
+    android:id="@+id/namelabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/namelabel"
+    android:textSize="25sp" />
 
     <TextView
         android:id="@+id/name"

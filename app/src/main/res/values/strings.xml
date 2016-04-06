@@ -13,7 +13,8 @@
     <string name="invalidEmail">Email invàlid</string>
     <string name="mailClient">mailClient</string>
     <string name="addClient">addClient</string>
-    <string name="namelabel">"Name: "</string>
-    <string name="userNoExist">"L'usuari introduit no existeix"</string>
+    <string name="namelabel">Name: </string>
+    <string name="userNoExist">El mail introduit no existeix</string>
+    <string name="entrenadorlabel">Entrenador: </string>
 
 </resources>
