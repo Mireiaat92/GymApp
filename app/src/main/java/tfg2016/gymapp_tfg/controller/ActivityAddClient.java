@@ -49,14 +49,17 @@ public class ActivityAddClient extends Activity {
     public Button.OnClickListener clickAddClient = new Button.OnClickListener() {
         public void onClick(View v) {
             try {
+                if (ActivityAddClient.this.getMail().equalsIgnoreCase("")) {
+                    Toast.makeText(ActivityAddClient.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
+                } else {
                 //Comprovem que el camp mail tingui el format adequat
                 checkemail(ActivityAddClient.this.getMail());
                 if (emailcheck == true) {
                     addClient(ActivityAddClient.this.getMail());
-                }
-                else{
+                } else {
                     Toast.makeText(ActivityAddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
                 }
+            }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

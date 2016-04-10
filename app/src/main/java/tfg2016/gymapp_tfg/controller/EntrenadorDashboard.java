@@ -17,13 +17,16 @@ import android.widget.ListView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
+import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.User;
 
 
@@ -37,21 +40,28 @@ public class EntrenadorDashboard extends Activity {
     ProgressDialog mProgressDialog;
     ArrayAdapter<String> adapter;
 
+    private Client selectedClient;
+    public Client getSeectedClient() {
+        return selectedClient;
+    }
+    public void setSelelctedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
+    }
 
     private User myUser;
+    public User getMyUser() {
+        return myUser;
+    }
+    public void setMyUser(User myUser) {
+        this.myUser = myUser;
+    }
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
-    public User getMyUser() {
-        return myUser;
-    }
 
-    public void setMyUser(User myUser) {
-        this.myUser = myUser;
-    }
 
     private static Intent intent;
 
@@ -76,7 +86,7 @@ public class EntrenadorDashboard extends Activity {
 
 
     /**
-     * Inicializació dels botons de l'activitat EntrenadorDashboard. AddClient
+     * Inicializació dels botons de l'activitat EntrenadorDashboard. clickAddClientClient
      */
     private void initializeButtons() {
         Button addClient = (Button) findViewById(R.id.btnAddClient);
@@ -198,7 +208,26 @@ public class EntrenadorDashboard extends Activity {
                     // Send single item click data to SingleItemView Class
                     Intent i = new Intent(EntrenadorDashboard.this, ClientActivityFromEntrenador.class);
                     // Pass data "name" followed by the position
-                    i.putExtra("Nom", ob.get(position).getString("Nom").toString() + " " + ob.get(position).getString("Cognom").toString());
+                    //i.putExtra("Nom", ob.get(position).getString("Nom").toString() + " " + ob.get(position).getString("Cognom").toString());
+                    //selectedClient = new Client (ob.get(position).getString("Nom").toString(), ob.get(position).getString("Cognom").toString(), ob.get(position).getString("Mail").toString(), ob.get(position).getString("objectId").toString(), ob.get(position).getString("ID_Entrenador").toString());
+                    //String idClient = ob.get(position).getString("objectId");
+
+                    //ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("CLIENTS");
+                    //query.whereEqualTo("objectID", idClient);
+
+                    try {
+                        HashMap<String, Object> params = new HashMap<String, Object>();
+                        params.put("mail", ob.get(position).getString("Mail"));
+                        List<ParseObject> nameResponse = null;
+
+                        nameResponse = ParseCloud.callFunction("checkUserSignInClients", params);
+                        ParseObject userParse = nameResponse.iterator().next();
+                        selectedClient = new Client(userParse.getString("Nom"), /*userParse.getString("Password"),*/userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    i.putExtra("selectedClient", selectedClient);
                     // Open SingleItemView.java Activity
                     startActivity(i);
                 }

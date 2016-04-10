@@ -1,10 +1,10 @@
 package tfg2016.gymapp_tfg.resources;
 
 import android.content.Context;
-import java.io.UnsupportedEncodingException;
+
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
 
 public class Encrypt {
 
@@ -18,41 +18,22 @@ public class Encrypt {
         this.mContext = context;
     }
 
-    /**
-     * Method encryptPassword
-     * @param password
-     * @return sha1
-     */
-    public String encryptPassword(String password) {
-        String sha1 = "";
-        try {
-            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
-            crypt.reset();
-            crypt.update(password.getBytes("UTF-8"));
-            sha1 = byteToHex(crypt.digest());
-        } catch(NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-        catch(UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return sha1;
-    }
+        public String encryptPassword (String password) {
+            MessageDigest objSHA = null;
+            try {
+                objSHA = MessageDigest.getInstance("SHA-256");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            byte[] bytSHA = objSHA.digest(password.getBytes());
+            BigInteger intNumber = new BigInteger(1, bytSHA);
+            String strHashCode = intNumber.toString(16);
 
-    /**
-     * Method byteToHex
-     * @param hash
-     * @return result
-     */
-    public String byteToHex(final byte[] hash) {
-        Formatter formatter = new Formatter();
-        for (byte b : hash)
-        {
-            formatter.format("%02x", b);
+            // pad with 0 if the hexa digits are less then 64.
+            while (strHashCode.length() < 64) {
+                strHashCode = "0" + strHashCode;
+            }
+            return strHashCode;
         }
-        String result = formatter.toString();
-        formatter.close();
-        return result;
-    }
+
 }

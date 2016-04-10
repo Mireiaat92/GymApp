@@ -44,6 +44,11 @@
         <!--  Entry for ActivityAddClient -->
         <activity android:name=".controller.ActivityAddClient"
             android:label="Add Client"></activity>
+
+        <!--  Entry for ActivityPerfilClientFromEntrenador -->
+        <activity android:name=".controller.ActivityPerfilClientFromEntrenador"
+            android:label="Perfil del client"></activity>
+
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

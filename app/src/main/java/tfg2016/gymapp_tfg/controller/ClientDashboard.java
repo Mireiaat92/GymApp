@@ -78,8 +78,8 @@ public class ClientDashboard extends Activity {
 
             if (!nameResponse.isEmpty()) {
                 ParseObject userParse = nameResponse.iterator().next();
-                myClient = new Client(userParse.getString("Mail"), userParse.getString("Password"),
-                        userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+                myClient = new Client(userParse.getString("Nom"), /*userParse.getString("Password"),*/
+                        userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
 
                 Toast.makeText(ClientDashboard.this, userParse.getString("ID_Entrenador"), Toast.LENGTH_SHORT).show();
             }
