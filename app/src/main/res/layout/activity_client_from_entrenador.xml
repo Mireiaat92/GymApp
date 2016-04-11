@@ -4,12 +4,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <!-- AddClient button -->
+    <!-- PerfilClient button -->
     <Button android:id="@+id/btnPerfilClient"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:text="Perfil Client"/>
+
+    <!-- AddTask button -->
+    <Button android:id="@+id/btnAddTask"
+        android:layout_below="@+id/btnPerfilClient"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="Add Task"/>
+
+    <ListView
+        android:id="@+id/tascalistview"
+        android:layout_below="@+id/btnAddTask"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 
 </RelativeLayout>

@@ -37,7 +37,7 @@
         <activity android:name=".controller.EntrenadorDashboard"
             android:label="Entrenador Dashboard"></activity>
 
-        <!--  Entry for EntrenadorDashboard -->
+        <!--  Entry for ClientActivityFromEntrenador -->
         <activity android:name=".controller.ClientActivityFromEntrenador"
             android:label="ClientActivityFromEntrenador"></activity>
 
@@ -49,15 +49,21 @@
         <activity android:name=".controller.ActivityPerfilClientFromEntrenador"
             android:label="Perfil del client"></activity>
 
-        <!--  Entry for ActivityPerfilClientFromEntrenador -->
+        <!--  Entry for PerfilClient -->
         <activity android:name=".controller.PerfilClient"
             android:label="Perfil del client"></activity>
 
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <!--  Entry for TaskActivityFromEntrenador -->
+        <activity android:name=".controller.TaskActivityFromEntrenador"
+            android:label="Descripció de la tasca"></activity>
+
+        <!--  Entry for AddTask -->
+        <activity android:name=".controller.AddTask"
+            android:label="Add Task"></activity>
+
+        <!--  Entry for TaskActivityFromClient -->
+        <activity android:name=".controller.TaskActivityFromClient"
+            android:label="Task"></activity>
 
 
     </application>

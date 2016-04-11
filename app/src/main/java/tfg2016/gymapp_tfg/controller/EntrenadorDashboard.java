@@ -3,7 +3,6 @@ package tfg2016.gymapp_tfg.controller;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,9 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -55,13 +51,6 @@ public class EntrenadorDashboard extends Activity {
     public void setMyUser(User myUser) {
         this.myUser = myUser;
     }
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
-
 
     private static Intent intent;
 
@@ -78,10 +67,6 @@ public class EntrenadorDashboard extends Activity {
         new RemoteDataTask().execute();
 
         this.initializeButtons();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -102,7 +87,6 @@ public class EntrenadorDashboard extends Activity {
         @Override
         public void onClick(View v) {
 
-
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddClient.class);
             i.putExtra("myUser", myUser);
@@ -110,45 +94,6 @@ public class EntrenadorDashboard extends Activity {
         }
     };
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "EntrenadorDashboard Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://tfg2016.gymapp_tfg.controller/http/host/path")
-        );
-        //AppIndex.AppIndexApi.start(client, viewAction);------------------------------------------------------aki
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "EntrenadorDashboard Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://tfg2016.gymapp_tfg.controller/http/host/path")
-        );
-        //AppIndex.AppIndexApi.end(client, viewAction);---------------------------------------------------aki
-        client.disconnect();
-    }
 
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
@@ -207,13 +152,6 @@ public class EntrenadorDashboard extends Activity {
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
                     Intent i = new Intent(EntrenadorDashboard.this, ClientActivityFromEntrenador.class);
-                    // Pass data "name" followed by the position
-                    //i.putExtra("Nom", ob.get(position).getString("Nom").toString() + " " + ob.get(position).getString("Cognom").toString());
-                    //selectedClient = new Client (ob.get(position).getString("Nom").toString(), ob.get(position).getString("Cognom").toString(), ob.get(position).getString("Mail").toString(), ob.get(position).getString("objectId").toString(), ob.get(position).getString("ID_Entrenador").toString());
-                    //String idClient = ob.get(position).getString("objectId");
-
-                    //ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("CLIENTS");
-                    //query.whereEqualTo("objectID", idClient);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();
