@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -13,12 +12,12 @@ import tfg2016.gymapp_tfg.model.Client;
  * Created by Mireia on 10/04/2016.
  */
 public class PerfilClient extends Activity {
-    private Client selectedClient;
-    public Client getSelectedClient() {
-        return selectedClient;
+    private Client client;
+    public Client getClient() {
+        return client;
     }
-    public void setSelectedClient(Client selectedClient) {
-        this.selectedClient = selectedClient;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
@@ -30,8 +29,8 @@ public class PerfilClient extends Activity {
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
 
-        selectedClient = (Client) i.getSerializableExtra("selectedClient");
-        Toast.makeText(PerfilClient.this, selectedClient.getName(), Toast.LENGTH_SHORT).show();
+        client = (Client) i.getSerializableExtra("client");
+        //Toast.makeText(PerfilClient.this, client.getName(), Toast.LENGTH_SHORT).show();
 
         this.initializeUserData();
 
@@ -39,11 +38,11 @@ public class PerfilClient extends Activity {
 
     public void initializeUserData() {
 
-        String name = selectedClient.getName() + " " + selectedClient.getSurname();
+        String name = client.getName() + " " + client.getSurname();
         TextView txtname = (TextView) findViewById(R.id.name);
         txtname.setText(name);
 
-        String mail = selectedClient.getMail();
+        String mail = client.getMail();
         TextView txtmail = (TextView) findViewById(R.id.mail);
         txtmail.setText(mail);
 
