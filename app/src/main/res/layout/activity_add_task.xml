@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:background="#eee">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <!--TITOL TASK LABEL-->
+            <EditText
+                android:id="@+id/titol_task"
+                android:hint="@string/titol"
+                android:textColorHint="#bbbbbb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="20dip"
+                android:textColor="#708090"
+                android:singleLine="true"/>
+
+            <!--DECRIPCIO TASK LABEL-->
+            <EditText
+                android:id="@+id/descripcio_task"
+                android:hint="@string/descripcio"
+                android:textColorHint="#bbbbbb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="20dip"
+                android:textColor="#708090"
+                android:singleLine="true"/>
+
+
+            <!--DUE DATE LABEL-->
+            <LinearLayout
+                android:id="@+id/linearLayoutDueDate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/descripcio_task"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+
+                <EditText
+                    android:id="@+id/duedate_task"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="date"
+                    android:hint="@string/duedate"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textColorHint="#bbbbbb"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/AddNewTask"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:text="@string/addTask"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
