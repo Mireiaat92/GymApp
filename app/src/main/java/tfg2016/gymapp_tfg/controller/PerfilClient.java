@@ -30,7 +30,6 @@ public class PerfilClient extends Activity {
         Intent i = getIntent();
 
         client = (Client) i.getSerializableExtra("client");
-        //Toast.makeText(PerfilClient.this, client.getName(), Toast.LENGTH_SHORT).show();
 
         this.initializeUserData();
 
