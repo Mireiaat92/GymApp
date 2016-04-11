@@ -41,12 +41,16 @@
         <activity android:name=".controller.ClientActivityFromEntrenador"
             android:label="ClientActivityFromEntrenador"></activity>
 
-        <!--  Entry for ActivityAddClient -->
-        <activity android:name=".controller.ActivityAddClient"
+        <!--  Entry for AddClient -->
+        <activity android:name=".controller.AddClient"
             android:label="Add Client"></activity>
 
         <!--  Entry for ActivityPerfilClientFromEntrenador -->
         <activity android:name=".controller.ActivityPerfilClientFromEntrenador"
+            android:label="Perfil del client"></activity>
+
+        <!--  Entry for ActivityPerfilClientFromEntrenador -->
+        <activity android:name=".controller.PerfilClient"
             android:label="Perfil del client"></activity>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for

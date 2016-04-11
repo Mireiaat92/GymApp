@@ -104,7 +104,7 @@ public class EntrenadorDashboard extends Activity {
 
 
             // Switching to addClient screen
-            Intent i = new Intent(getApplicationContext(), ActivityAddClient.class);
+            Intent i = new Intent(getApplicationContext(), AddClient.class);
             i.putExtra("myUser", myUser);
             startActivity(i);
         }

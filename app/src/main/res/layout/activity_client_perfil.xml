@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+    <!-- NAME LABEL -->
+    <TextView
+        android:id="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/namelabel"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/namelabel"
+        android:textSize="25sp" />
+
+    <!-- MAIL LABEL -->
+    <TextView
+        android:id="@+id/maillabel"
+        android:layout_below="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/maillabel"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_below="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/maillabel"
+        android:textSize="25sp" />
+
+</RelativeLayout>

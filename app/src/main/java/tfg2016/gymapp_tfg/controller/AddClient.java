@@ -23,7 +23,7 @@ import tfg2016.gymapp_tfg.model.User;
 /**
  * Created by Mireia on 03/04/2016.
  */
-public class ActivityAddClient extends Activity {
+public class AddClient extends Activity {
 
     private User myUser;
     private boolean emailcheck;
@@ -49,15 +49,15 @@ public class ActivityAddClient extends Activity {
     public Button.OnClickListener clickAddClient = new Button.OnClickListener() {
         public void onClick(View v) {
             try {
-                if (ActivityAddClient.this.getMail().equalsIgnoreCase("")) {
-                    Toast.makeText(ActivityAddClient.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
+                if (AddClient.this.getMail().equalsIgnoreCase("")) {
+                    Toast.makeText(AddClient.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
                 } else {
                 //Comprovem que el camp mail tingui el format adequat
-                checkemail(ActivityAddClient.this.getMail());
+                checkemail(AddClient.this.getMail());
                 if (emailcheck == true) {
-                    addClient(ActivityAddClient.this.getMail());
+                    addClient(AddClient.this.getMail());
                 } else {
-                    Toast.makeText(ActivityAddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
                 }
             }
             } catch (ParseException e) {
@@ -84,14 +84,14 @@ public class ActivityAddClient extends Activity {
             paramsAddEntrenador.put("identrenador", myUser.getObjectId());
             ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
 
-            Toast.makeText(ActivityAddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
 
-            Intent userDashboard = new Intent(ActivityAddClient.this, EntrenadorDashboard.class);
+            Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
             userDashboard.putExtra("myUser", myUser);
             startActivity(userDashboard);
         }
         else{
-            Toast.makeText(ActivityAddClient.this, getResources().getString(R.string.userNoExist), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddClient.this, getResources().getString(R.string.userNoExist), Toast.LENGTH_SHORT).show();
         }
 
     }

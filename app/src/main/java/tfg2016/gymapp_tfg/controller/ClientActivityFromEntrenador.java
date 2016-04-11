@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -39,9 +38,6 @@ public class ClientActivityFromEntrenador extends Activity {
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
-
-        Toast.makeText(ClientActivityFromEntrenador.this, selectedClient.getMail(), Toast.LENGTH_SHORT).show();
-
 
         this.initializeButtons();
     }

@@ -150,8 +150,8 @@ public class LoginActivity extends Activity {
 
                 if (!loginResponse.isEmpty()) {
                     ParseObject userParse = loginResponse.iterator().next();
-                    myUserClient = new User(userParse.getString("Mail"), userParse.getString("Password"),
-                            userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getObjectId());
+                    myUserClient = new User(userParse.getString("Nom"), userParse.getString("Cognom"),
+                            userParse.getString("Mail"), userParse.getString("Contrasenya"), userParse.getObjectId());
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -195,7 +195,7 @@ public class LoginActivity extends Activity {
      * @return userText
      */
     public String getMail() {
-        EditText user = (EditText) findViewById(R.id.user);
+        EditText user = (EditText) findViewById(R.id.email);
         String userText = user.getText().toString();
         return userText;
     }
