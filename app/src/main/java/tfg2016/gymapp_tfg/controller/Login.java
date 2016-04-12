@@ -26,7 +26,7 @@ import tfg2016.gymapp_tfg.model.User;
 import tfg2016.gymapp_tfg.resources.Complements;
 import tfg2016.gymapp_tfg.resources.Encrypt;
 
-public class LoginActivity extends Activity {
+public class Login extends Activity {
 
     private boolean emailcheck;
 
@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View v) {
             // Switching to Register screen
-            Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+            Intent i = new Intent(getApplicationContext(), Register.class);
             startActivity(i);
         }
     };
@@ -70,15 +70,15 @@ public class LoginActivity extends Activity {
     public Button.OnClickListener clickLogin = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (LoginActivity.this.getMail().equalsIgnoreCase("") ||LoginActivity.this.getPassword().equalsIgnoreCase("")){
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
+            if (Login.this.getMail().equalsIgnoreCase("") ||Login.this.getPassword().equalsIgnoreCase("")){
+                Toast.makeText(Login.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
             }
-            checkemail(LoginActivity.this.getMail());
+            checkemail(Login.this.getMail());
             if (emailcheck == true) {
                 //Comrpovar que disposem d'internet
                if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
-                   Toast.makeText(LoginActivity.this, "no hi ha internet", Toast.LENGTH_SHORT).show();
-                    Intent noInternet = new Intent(LoginActivity.this, NoInternetConnection.class);
+                   Toast.makeText(Login.this, "no hi ha internet", Toast.LENGTH_SHORT).show();
+                    Intent noInternet = new Intent(Login.this, NoInternetConnection.class);
                     startActivity(noInternet);
                 }
                 else {
@@ -96,22 +96,22 @@ public class LoginActivity extends Activity {
                    boolean login = false;
                    try {
                        //Crida de les funcions login
-                       User myUserClient = LoginActivity.this.loginClient(LoginActivity.this.getMail(),
-                               LoginActivity.this.getPassword());
+                       User myUserClient = Login.this.loginClient(Login.this.getMail(),
+                               Login.this.getPassword());
                        if (myUserClient != null) {
-                           Intent userDashboard = new Intent(LoginActivity.this, ClientDashboard.class);
+                           Intent userDashboard = new Intent(Login.this, ClientDashboard.class);
                            userDashboard.putExtra("myUser", myUserClient);
                            startActivity(userDashboard);
                        } else {
-                           User myUserEntrenador = LoginActivity.this.loginEntrenador(LoginActivity.this.getMail(),
-                                   LoginActivity.this.getPassword());
+                           User myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
+                                   Login.this.getPassword());
                            if (myUserEntrenador != null) {
-                               Intent entrenadorDashboard = new Intent(LoginActivity.this, EntrenadorDashboard.class);
+                               Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
                                entrenadorDashboard.putExtra("myUser", myUserEntrenador);
-                               //Toast.makeText(LoginActivity.this, myUserEntrenador.getMail(), Toast.LENGTH_SHORT).show();
+                               //Toast.makeText(Login.this, myUserEntrenador.getMail(), Toast.LENGTH_SHORT).show();
                                startActivity(entrenadorDashboard);
                            } else {
-                               Complements.showInfoAlert(getResources().getString(R.string.loginErr), LoginActivity.this);
+                               Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
                                popupWindow.dismiss();
                            }
                        }
@@ -122,7 +122,7 @@ public class LoginActivity extends Activity {
            }
             else{
                 //Si el format de l'email no és correcte ho notificarà mitjançant un popup
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
             }
         }
     };

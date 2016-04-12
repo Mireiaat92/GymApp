@@ -27,6 +27,6 @@
     <string name="descripciolabel">Descripcio: </string>
     <string name="titollabel">Titol: </string>
     <string name="duedatelabel">Due Date: </string>
-    <string name="addTask">Att Task: </string>
+    <string name="addTask">Add Task: </string>
 
 </resources>

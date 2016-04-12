@@ -22,7 +22,7 @@ import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.resources.Complements;
 import tfg2016.gymapp_tfg.resources.Encrypt;
 
-public class RegisterActivity extends Activity {
+public class Register extends Activity {
 
     private boolean emailcheck;
 
@@ -53,7 +53,7 @@ public class RegisterActivity extends Activity {
         @Override
         public void onClick(View v) {
             // Switching to Register screen
-            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);
         }
     };
@@ -66,24 +66,24 @@ public class RegisterActivity extends Activity {
         public void onClick(View v) {
             try {
             //Comprovació de que tots els camps estan omplerts sinó mostrarà popup solicitant omplir tots els camps
-            if (RegisterActivity.this.getName().equalsIgnoreCase("")
-                    || RegisterActivity.this.getSurname().equalsIgnoreCase("")
-                    || RegisterActivity.this.getMail().equalsIgnoreCase("")
-                    || RegisterActivity.this.getPassword().equalsIgnoreCase("")){
-                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
+            if (Register.this.getName().equalsIgnoreCase("")
+                    || Register.this.getSurname().equalsIgnoreCase("")
+                    || Register.this.getMail().equalsIgnoreCase("")
+                    || Register.this.getPassword().equalsIgnoreCase("")){
+                Toast.makeText(Register.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
             }
             //Comprovació de que el camp mail té el format adequat - mitjaçant la funció emailcheck
-            checkemail(RegisterActivity.this.getMail());
+            checkemail(Register.this.getMail());
             if (emailcheck == true) {
                 //Comprovar que disposem d'internet
                 if (!Complements.isNetworkStatusAvialable(getApplicationContext())) {
-                    Intent noInternet = new Intent(RegisterActivity.this, NoInternetConnection.class);
+                    Intent noInternet = new Intent(Register.this, NoInternetConnection.class);
                     startActivity(noInternet);
                 }
                 else{
                     //Crida de la funció "registre" que realitzarà les comprovacions de que el mail no estigui registrat ja
-                    boolean register = RegisterActivity.this.register(RegisterActivity.this.getName(),
-                        RegisterActivity.this.getSurname(), RegisterActivity.this.getMail(), RegisterActivity.this.getPassword());
+                    boolean register = Register.this.register(Register.this.getName(),
+                            Register.this.getSurname(), Register.this.getMail(), Register.this.getPassword());
                     //si el registre es realitza correctament ho notificarà mitjançant un popup
                     if (register) {
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.registrationOK), Toast.LENGTH_SHORT).show();
@@ -96,7 +96,7 @@ public class RegisterActivity extends Activity {
             }
             else{
             //Si el format de l'email no és correcte ho notificarà mitjançant un popup
-                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
             }
             } catch (ParseException e) {
                 e.printStackTrace();

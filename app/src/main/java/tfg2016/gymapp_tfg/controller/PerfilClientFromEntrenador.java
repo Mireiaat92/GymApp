@@ -11,7 +11,7 @@ import tfg2016.gymapp_tfg.model.Client;
 /**
  * Created by Mireia on 08/04/2016.
  */
-public class ActivityPerfilClientFromEntrenador extends Activity {
+public class PerfilClientFromEntrenador extends Activity {
     private Client selectedClient;
     public Client getSelectedClient() {
         return selectedClient;

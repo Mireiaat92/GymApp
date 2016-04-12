@@ -46,6 +46,7 @@ public class AddTask extends Activity {
 
         Intent intent = getIntent();
         selectedClient = (Client) intent.getSerializableExtra("selectedClient");
+        Toast.makeText(AddTask.this, "id onCreate" + selectedClient.getObjectId() , Toast.LENGTH_SHORT).show();
 
         this.initializeButtons();
     }
@@ -66,13 +67,11 @@ public class AddTask extends Activity {
                     Toast.makeText(AddTask.this, "Els camps titol i descripcio son obligatoris", Toast.LENGTH_SHORT).show();
                 } else {
 
-                        addTask(AddTask.this.getTitol(), AddTask.this.getDescripcio(), AddTask.this.getDueDate());
+                        addTask(selectedClient.getObjectId(), AddTask.this.getTitol(), AddTask.this.getDescripcio(), /*AddTask.this.getDueDate()*/ null);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
         }
     };
 
@@ -82,24 +81,24 @@ public class AddTask extends Activity {
      * @return
      * @throws ParseException
      */
-    public void addTask(String titol, String descripcio, Date dueDate) throws ParseException {
-        HashMap<String, Object> paramsCheckMail = new HashMap<String, Object>();
-        paramsCheckMail.put("idClient", selectedClient.getObjectId());
+    public void addTask(String objectId, String titol, String descripcio, Date dueDate) throws ParseException {
+       /* HashMap<String, Object> paramsCheckMail = new HashMap<String, Object>();
+        paramsCheckMail.put("idClient", objectId);
         paramsCheckMail.put("titol", titol);
         paramsCheckMail.put("descripcio", descripcio);
-        paramsCheckMail.put("dueDate", dueDate);
-
+        paramsCheckMail.put("dueDate", dueDate);*/
+        Toast.makeText(AddTask.this, "id addTask" + objectId , Toast.LENGTH_SHORT).show();
 
             HashMap<String, Object> paramsAddTasca = new HashMap<String, Object>();
+            paramsAddTasca.put("idclient", objectId);
             paramsAddTasca.put("titol", titol);
             paramsAddTasca.put("descripcio", descripcio);
             paramsAddTasca.put("duedate", dueDate);
-            paramsAddTasca.put("idlient", selectedClient.getObjectId());
             ParseCloud.callFunction("addTask", paramsAddTasca);
 
             Toast.makeText(AddTask.this, "Tasca afegida correctament", Toast.LENGTH_SHORT).show();
 
-            Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientActivityFromEntrenador.class);
+            Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientViewFromEntrenador.class);
             clientActivityFromEntrenador.putExtra("selectedClient", selectedClient);
             startActivity(clientActivityFromEntrenador);
 

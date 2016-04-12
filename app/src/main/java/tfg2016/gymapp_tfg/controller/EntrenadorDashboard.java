@@ -151,7 +151,7 @@ public class EntrenadorDashboard extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(EntrenadorDashboard.this, ClientActivityFromEntrenador.class);
+                    Intent i = new Intent(EntrenadorDashboard.this, ClientViewFromEntrenador.class);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();

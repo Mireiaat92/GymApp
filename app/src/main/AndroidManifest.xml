@@ -13,7 +13,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name">
         <activity
-            android:name=".controller.LoginActivity"
+            android:name=".controller.Login"
             android:label="Login to your Account">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
 
-        <!--  Entry for RegisterActivity.class -->
-        <activity android:name=".controller.RegisterActivity"
+        <!--  Entry for Register.class -->
+        <activity android:name=".controller.Register"
             android:label="Register New Account"></activity>
 
         <!--  Entry for NoInternetConnection.class -->
@@ -37,32 +37,32 @@
         <activity android:name=".controller.EntrenadorDashboard"
             android:label="Entrenador Dashboard"></activity>
 
-        <!--  Entry for ClientActivityFromEntrenador -->
-        <activity android:name=".controller.ClientActivityFromEntrenador"
+        <!--  Entry for ClientViewFromEntrenador -->
+        <activity android:name=".controller.ClientViewFromEntrenador"
             android:label="ClientActivityFromEntrenador"></activity>
 
         <!--  Entry for AddClient -->
         <activity android:name=".controller.AddClient"
             android:label="Add Client"></activity>
 
-        <!--  Entry for ActivityPerfilClientFromEntrenador -->
-        <activity android:name=".controller.ActivityPerfilClientFromEntrenador"
+        <!--  Entry for PerfilClientFromEntrenador -->
+        <activity android:name=".controller.PerfilClientFromEntrenador"
             android:label="Perfil del client"></activity>
 
         <!--  Entry for PerfilClient -->
         <activity android:name=".controller.PerfilClient"
             android:label="Perfil del client"></activity>
 
-        <!--  Entry for TaskActivityFromEntrenador -->
-        <activity android:name=".controller.TaskActivityFromEntrenador"
+        <!--  Entry for TaskViewFromEntrenador -->
+        <activity android:name=".controller.TaskViewFromEntrenador"
             android:label="Descripció de la tasca"></activity>
 
         <!--  Entry for AddTask -->
         <activity android:name=".controller.AddTask"
             android:label="Add Task"></activity>
 
-        <!--  Entry for TaskActivityFromClient -->
-        <activity android:name=".controller.TaskActivityFromClient"
+        <!--  Entry for TaskViewFromClient -->
+        <activity android:name=".controller.TaskViewFromClient"
             android:label="Task"></activity>
 
 

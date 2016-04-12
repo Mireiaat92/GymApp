@@ -30,7 +30,7 @@ import tfg2016.gymapp_tfg.model.Tasca;
 /**
  * Created by Mireia on 01/04/2016.
  */
-public class ClientActivityFromEntrenador extends Activity {
+public class ClientViewFromEntrenador extends Activity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -74,7 +74,7 @@ public class ClientActivityFromEntrenador extends Activity {
     }
 
     /**
-     * Inicializació dels botons de l'activitat ClientActivityFromEntrenador. Perfil
+     * Inicializació dels botons de l'activitat ClientViewFromEntrenador. Perfil
      */
     private void initializeButtons() {
         Button perfilClient = (Button) findViewById(R.id.btnPerfilClient);
@@ -92,7 +92,7 @@ public class ClientActivityFromEntrenador extends Activity {
         @Override
         public void onClick(View v) {
             // Switching to addClient screen
-            Intent i = new Intent(getApplicationContext(), ActivityPerfilClientFromEntrenador.class);
+            Intent i = new Intent(getApplicationContext(), PerfilClientFromEntrenador.class);
             i.putExtra("selectedClient", selectedClient);
             startActivity(i);
         }
@@ -126,7 +126,7 @@ public class ClientActivityFromEntrenador extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Create a progressdialog
-            mProgressDialog = new ProgressDialog(ClientActivityFromEntrenador.this);
+            mProgressDialog = new ProgressDialog(ClientViewFromEntrenador.this);
             // Set progressdialog title
             mProgressDialog.setTitle("Accedint a la llista de tasques");
             // Set progressdialog message
@@ -158,7 +158,7 @@ public class ClientActivityFromEntrenador extends Activity {
             // Locate the listview in listview_main.xml
             listview = (ListView) findViewById(R.id.tascalistview);
             // Pass the results into an ArrayAdapter
-            adapter = new ArrayAdapter<String>(ClientActivityFromEntrenador.this,
+            adapter = new ArrayAdapter<String>(ClientViewFromEntrenador.this,
                     R.layout.item_entrenador_dashboard);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
@@ -174,7 +174,7 @@ public class ClientActivityFromEntrenador extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(ClientActivityFromEntrenador.this, TaskActivityFromEntrenador.class);
+                    Intent i = new Intent(ClientViewFromEntrenador.this, TaskViewFromEntrenador.class);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();

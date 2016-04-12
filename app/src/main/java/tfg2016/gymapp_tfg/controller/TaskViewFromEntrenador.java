@@ -12,7 +12,7 @@ import tfg2016.gymapp_tfg.model.Tasca;
 /**
  * Created by Mireia on 11/04/2016.
  */
-public class TaskActivityFromEntrenador extends Activity {
+public class TaskViewFromEntrenador extends Activity {
     private Tasca selectedTasca;
     public Tasca getSelectedTasca() {
         return selectedTasca;

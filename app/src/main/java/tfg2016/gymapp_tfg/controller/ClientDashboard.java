@@ -262,7 +262,7 @@ public class ClientDashboard extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(ClientDashboard.this, TaskActivityFromClient.class);
+                    Intent i = new Intent(ClientDashboard.this, TaskViewFromClient.class);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();
