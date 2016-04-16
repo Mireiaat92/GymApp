@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress ALL -->
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:background="#eee">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_add_task"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/toolbar_add_task"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +34,8 @@
             <!--TITOL TASK LABEL-->
             <EditText
                 android:id="@+id/titol_task"
-                android:hint="@string/titol"
+                android:hint="@string/titollabel"
+                android:maxLength="20"
                 android:textColorHint="#bbbbbb"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +47,9 @@
             <!--DECRIPCIO TASK LABEL-->
             <EditText
                 android:id="@+id/descripcio_task"
-                android:hint="@string/descripcio"
+                android:hint="@string/descripciolabel"
+                android:maxLength="120"
+                android:layout_below="@+id/titol_task"
                 android:textColorHint="#bbbbbb"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +62,8 @@
             <!--DUE DATE TASK LABEL-->
             <EditText
                 android:id="@+id/duedate_task"
-                android:hint="@string/duedate"
+                android:hint="@string/duedatelabel"
+                android:layout_below="@+id/descripcio_task"
                 android:textColorHint="#bbbbbb"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -71,5 +86,5 @@
                 android:layout_marginTop="10dip"
                 android:text="@string/addTask"/>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>

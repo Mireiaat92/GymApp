@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_view_profile"
+        android:orderInCategory="200"
+        android:title="ViewProfile"
+        android:icon="@drawable/ic_menu_info_details"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/action_add_task"
+        android:orderInCategory="200"
+        android:title="AddTask"
+        android:icon="@drawable/ic_menu_add"
+        app:showAsAction="ifRoom"></item>
+</menu>

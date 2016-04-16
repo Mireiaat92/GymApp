@@ -1,18 +1,19 @@
 package tfg2016.gymapp_tfg.controller;
 
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
@@ -30,7 +31,7 @@ import tfg2016.gymapp_tfg.model.Tasca;
 /**
  * Created by Mireia on 01/04/2016.
  */
-public class ClientViewFromEntrenador extends Activity {
+public class ClientViewFromEntrenador extends AppCompatActivity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -53,9 +54,7 @@ public class ClientViewFromEntrenador extends Activity {
         this.selectedTasca = selectedTasca;
     }
 
-    // Declare Variables
-    TextView txtname;
-    String name;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,55 +69,60 @@ public class ClientViewFromEntrenador extends Activity {
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
 
-        this.initializeButtons();
+        initToolBar();
     }
 
-    /**
-     * Inicializació dels botons de l'activitat ClientViewFromEntrenador. Perfil
-     */
-    private void initializeButtons() {
-        Button perfilClient = (Button) findViewById(R.id.btnPerfilClient);
-        Button addTask = (Button) findViewById(R.id.btnAddTask);
 
-        // Listening to login link
-        perfilClient.setOnClickListener(clickPerfilClient);
-        addTask.setOnClickListener(clickAddtask);
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_client_from_entrenador);
+        toolbar.setTitle(selectedClient.getName() + " " + selectedClient.getSurname());
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+                        startActivity(i);
+                    }
+                }
+
+        );
     }
 
-    /**
-     * Al clickar el botó PerfilClient ens portarà a l'activitat PerfilClientFromEntrenador
-     */
-    public Button.OnClickListener clickPerfilClient = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_client_view_from_entrenador, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_view_profile) {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), PerfilClientFromEntrenador.class);
             i.putExtra("selectedClient", selectedClient);
             startActivity(i);
         }
-    };
-
-    /**
-     * Al clickar el botó addTask ens portarà a l'activitat de addTask.
-     */
-    public Button.OnClickListener clickAddtask = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+        else if (id == R.id.action_add_task){
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddTask.class);
             i.putExtra("selectedClient", selectedClient);
             startActivity(i);
         }
-    };
 
-
-
-    //===========================================================================   MODIFICAR  V   =================
-
-
-
-
-    // RemoteDataTask AsyncTask
+        return super.onOptionsItemSelected(item);
+    }
+    //===============================================0
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -178,7 +182,6 @@ public class ClientViewFromEntrenador extends Activity {
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();
-                        //params.put("idclient", ob.get(position).getObjectId());
                         params.put("objectid", ob.get(position).getObjectId());
                         List<ParseObject> nameResponse = null;
 

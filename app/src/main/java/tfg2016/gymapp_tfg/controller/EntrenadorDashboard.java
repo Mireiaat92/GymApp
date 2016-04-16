@@ -1,16 +1,18 @@
 package tfg2016.gymapp_tfg.controller;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.parse.ParseCloud;
@@ -29,7 +31,7 @@ import tfg2016.gymapp_tfg.model.User;
 /**
  * Created by Mireia on 01/04/2016.
  */
-public class EntrenadorDashboard extends Activity {
+public class EntrenadorDashboard extends AppCompatActivity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -54,6 +56,9 @@ public class EntrenadorDashboard extends Activity {
 
     private static Intent intent;
 
+    Toolbar toolbar;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,34 +71,42 @@ public class EntrenadorDashboard extends Activity {
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
 
-        this.initializeButtons();
+        initToolBar();
+
     }
 
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_entrenador_dashboard);
+        toolbar.setTitle(R.string.EntrenadorDashboard);
 
-    /**
-     * Inicializació dels botons de l'activitat EntrenadorDashboard. clickAddClientClient
-     */
-    private void initializeButtons() {
-        Button addClient = (Button) findViewById(R.id.btnAddClient);
-
-        // Listening to login link
-        addClient.setOnClickListener(clickAddClient);
+        setSupportActionBar(toolbar);
     }
 
-    /**
-     * Al clickar el botó addClient ens portarà a l'activitat de addClient.
-     */
-    public Button.OnClickListener clickAddClient = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_entrenador_dashboard, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_add_client) {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddClient.class);
             i.putExtra("myUser", myUser);
             startActivity(i);
+            //return true;
         }
-    };
 
+        return super.onOptionsItemSelected(item);
+    }
 
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {

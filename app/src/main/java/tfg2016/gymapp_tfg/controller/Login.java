@@ -75,7 +75,7 @@ public class Login extends Activity {
             }
             checkemail(Login.this.getMail());
             if (emailcheck == true) {
-                //Comrpovar que disposem d'internet
+                //Comprovar que disposem d'internet
                if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
                    Toast.makeText(Login.this, "no hi ha internet", Toast.LENGTH_SHORT).show();
                     Intent noInternet = new Intent(Login.this, NoInternetConnection.class);

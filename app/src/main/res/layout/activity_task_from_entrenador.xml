@@ -3,10 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_task_from_entrenador"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
 
     <!-- TITOL LABEL -->
     <TextView
         android:id="@+id/titollabel"
+        android:layout_below="@+id/toolbar_task_from_entrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/titollabel"
@@ -14,6 +24,7 @@
 
     <TextView
         android:id="@+id/titol"
+        android:layout_below="@+id/toolbar_task_from_entrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/titollabel"
@@ -22,7 +33,7 @@
     <!-- DESCRIPCIO LABEL -->
     <TextView
         android:id="@+id/descripciolabel"
-        android:layout_below="@+id/titollabel"
+        android:layout_below="@+id/titol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/descripciolabel"
@@ -30,7 +41,7 @@
 
     <TextView
         android:id="@+id/descripcio"
-        android:layout_below="@+id/titollabel"
+        android:layout_below="@+id/titol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/descripciolabel"
@@ -39,7 +50,7 @@
     <!-- DUE DATE LABEL -->
     <TextView
         android:id="@+id/duedatelabel"
-        android:layout_below="@+id/descripciolabel"
+        android:layout_below="@+id/descripcio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/duedatelabel"
@@ -47,7 +58,7 @@
 
     <TextView
         android:id="@+id/duedate"
-        android:layout_below="@+id/descripciolabel"
+        android:layout_below="@+id/descripcio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/duedatelabel"

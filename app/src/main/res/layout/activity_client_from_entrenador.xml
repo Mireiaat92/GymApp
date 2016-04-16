@@ -4,26 +4,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <!-- PerfilClient button -->
-    <Button android:id="@+id/btnPerfilClient"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:text="Perfil Client"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_client_from_entrenador"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
 
-    <!-- AddTask button -->
-    <Button android:id="@+id/btnAddTask"
-        android:layout_below="@+id/btnPerfilClient"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:text="Add Task"/>
 
     <ListView
         android:id="@+id/tascalistview"
-        android:layout_below="@+id/btnAddTask"
+        android:layout_below="@+id/toolbar_client_from_entrenador"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
-
 
 </RelativeLayout>

@@ -1,10 +1,11 @@
 package tfg2016.gymapp_tfg.controller;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,7 +28,7 @@ import tfg2016.gymapp_tfg.model.Tasca;
 /**
  * Created by Mireia on 11/04/2016.
  */
-public class AddTask extends Activity {
+public class AddTask extends AppCompatActivity {
 
     private Client selectedClient;
     public Client getSelectedClient() {
@@ -47,6 +48,8 @@ public class AddTask extends Activity {
 
     private TextView tvDisplayDate;
 
+    Toolbar toolbar;
+
     private int year;
     private int month;
     private int day;
@@ -62,6 +65,7 @@ public class AddTask extends Activity {
         selectedClient = (Client) intent.getSerializableExtra("selectedClient");
 
         this.initializeButtons();
+        initToolBar();
 
         setCurrentDateOnView();
     }
@@ -98,6 +102,26 @@ public class AddTask extends Activity {
             showDialog(DATE_DIALOG_ID);
         }
     };
+
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_add_task);
+        toolbar.setTitle(R.string.addTask);
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+                        i.putExtra("selectedClient", selectedClient);
+                        startActivity(i);
+                    }
+                }
+
+        );
+    }
 
     /**
      * Method addTask

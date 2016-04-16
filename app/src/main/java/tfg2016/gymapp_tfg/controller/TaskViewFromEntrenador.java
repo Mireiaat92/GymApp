@@ -1,8 +1,10 @@
 package tfg2016.gymapp_tfg.controller;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import tfg2016.gymapp_tfg.R;
@@ -12,7 +14,7 @@ import tfg2016.gymapp_tfg.model.Tasca;
 /**
  * Created by Mireia on 11/04/2016.
  */
-public class TaskViewFromEntrenador extends Activity {
+public class TaskViewFromEntrenador extends AppCompatActivity {
     private Tasca selectedTasca;
     public Tasca getSelectedTasca() {
         return selectedTasca;
@@ -29,6 +31,8 @@ public class TaskViewFromEntrenador extends Activity {
         this.selectedClient = selectedClient;
     }
 
+    Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,27 @@ public class TaskViewFromEntrenador extends Activity {
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
 
         this.initializeTascaData();
+        initToolBar();
+    }
 
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_task_from_entrenador);
+        toolbar.setTitle(selectedTasca.getTitol());
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+                        i.putExtra("selectedClient", selectedClient);
+                        startActivity(i);
+                    }
+                }
+
+        );
     }
 
     public void initializeTascaData() {
@@ -60,6 +84,4 @@ public class TaskViewFromEntrenador extends Activity {
 
 
     }
-
-
 }

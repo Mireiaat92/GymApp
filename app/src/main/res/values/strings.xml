@@ -21,12 +21,11 @@
     <string name="userNoExist">El mail introduit no existeix</string>
     <string name="entrenadorlabel">Entrenador: </string>
     <string name="customerMail">Email del client</string>
-    <string name="titol">Titol: </string>
-    <string name="descripcio">Descripció: </string>
-    <string name="duedate">Due Date: </string>
-    <string name="descripciolabel">Descripcio: </string>
-    <string name="titollabel">Titol: </string>
-    <string name="duedatelabel">Due Date: </string>
-    <string name="addTask">Add Task: </string>
-
+    <string name="descripciolabel">"Descripcio: "</string>
+    <string name="titollabel">"Títol: "</string>
+    <string name="duedatelabel">"Due Date: "</string>
+    <string name="addTask">Add Task</string>
+    <string name="toolbarTitle">"toolbarTitle"</string>
+    <string name="EntrenadorDashboard">"Entrenador Dashboard"</string>
+    <string name="clientView">"Client View"</string>
 </resources>

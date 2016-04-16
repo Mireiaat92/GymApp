@@ -1,13 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="tfg2016.gymapp_tfg.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_add_client"
         android:orderInCategory="200"
-        android:title="Search"
+        android:title="AddClient"
         android:icon="@drawable/ic_menu_invite"
         app:showAsAction="ifRoom"
         ></item>
-
 </menu>

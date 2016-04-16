@@ -1,11 +1,14 @@
 package tfg2016.gymapp_tfg.controller;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +34,7 @@ import tfg2016.gymapp_tfg.resources.Encrypt;
 /**
  * Created by Mireia on 27/03/2016.
  */
-public class ClientDashboard extends Activity {
+public class ClientDashboard extends AppCompatActivity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -66,6 +69,8 @@ public class ClientDashboard extends Activity {
 
     private static Intent intent;
 
+    Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -77,6 +82,7 @@ public class ClientDashboard extends Activity {
             setMyUser((User) intent.getSerializableExtra("myUser")); //serialització de l'objecte
 
             this.initializeButtons();
+            initToolBar();
 
             this.initializeNomEntrenador();
 
@@ -92,6 +98,53 @@ public class ClientDashboard extends Activity {
         addClient.setOnClickListener(clickPerfil);
 
     }
+
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_client_dashboard);
+        toolbar.setTitle(myUser.getName() + " " + myUser.getSurname());
+
+        setSupportActionBar(toolbar);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_client_dashboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_perfil_client) {
+            Intent i = new Intent(getApplicationContext(), PerfilClient.class);
+
+            try {
+                HashMap<String, Object> params = new HashMap<String, Object>();
+                params.put("mail", myUser.getMail());
+                List<ParseObject> nameResponse = null;
+
+                nameResponse = ParseCloud.callFunction("checkUserSignInClients", params);
+                ParseObject userParse = nameResponse.iterator().next();
+                client = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            i.putExtra("client", client);
+            // Open SingleItemView.java Activity
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void initializeNomEntrenador() {
         try {
@@ -121,10 +174,6 @@ public class ClientDashboard extends Activity {
     public Button.OnClickListener clickPerfil = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // Switching to addClient screen
-           // Intent i = new Intent(getApplicationContext(), PerfilClient.class);
-           // i.putExtra("myUser", myUser);
-          //  startActivity(i);
 
             Intent i = new Intent(getApplicationContext(), PerfilClient.class);
 
@@ -200,13 +249,6 @@ public class ClientDashboard extends Activity {
         return myEntrenador;
     }
 
-
-    //===========================================================================   MODIFICAR  V   =================
-
-
-
-
-    // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
 
 
@@ -266,7 +308,6 @@ public class ClientDashboard extends Activity {
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();
-                        //params.put("idclient", ob.get(position).getObjectId());
                         params.put("objectid", ob.get(position).getObjectId());
                         List<ParseObject> nameResponse = null;
 

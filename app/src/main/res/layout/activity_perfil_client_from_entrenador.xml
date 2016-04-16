@@ -3,10 +3,19 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_perfil_client_from_entrenador"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
 
     <!-- NAME LABEL -->
     <TextView
         android:id="@+id/namelabel"
+        android:layout_below="@+id/toolbar_perfil_client_from_entrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/namelabel"
@@ -14,6 +23,7 @@
 
     <TextView
         android:id="@+id/name"
+        android:layout_below="@+id/toolbar_perfil_client_from_entrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/namelabel"

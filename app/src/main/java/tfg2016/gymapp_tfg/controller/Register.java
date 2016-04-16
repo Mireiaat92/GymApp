@@ -148,12 +148,6 @@ public class Register extends Activity {
         } catch (com.parse.ParseException e) {
             e.printStackTrace();
         }
-        /*ParseObject testObject = new ParseObject("CLIENTS");
-        testObject.put("Nom", name);
-		testObject.put("Cognom", surname);
-		testObject.put("Mail", mail);
-		testObject.put("Contrasenya", password);
-        testObject.saveInBackground();*/
         return success;
     }
 
