@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tfg2016.gymapp_tfg.R;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.User;
 
 /**
@@ -31,13 +32,21 @@ public class AddClient extends AppCompatActivity {
     private boolean emailcheck;
     Toolbar toolbar;
 
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
+    }
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_client);
 
         Intent intent = getIntent();
-        myUser = (User) intent.getSerializableExtra("myUser");
+        myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
 
         this.initializeButtons();
 
@@ -83,9 +92,7 @@ public class AddClient extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
-                        i.putExtra("myUser", myUser);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -103,7 +110,7 @@ public class AddClient extends AppCompatActivity {
         if (id == R.id.action_add_client) {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddClient.class);
-            i.putExtra("myUser", myUser);
+            i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
             //return true;
         }
@@ -126,13 +133,13 @@ public class AddClient extends AppCompatActivity {
         if (checkRegistro.size() == 1) {//mail e
             HashMap<String, Object> paramsAddEntrenador = new HashMap<String, Object>();
             paramsAddEntrenador.put("mail", mail);
-            paramsAddEntrenador.put("identrenador", myUser.getObjectId());
+            paramsAddEntrenador.put("identrenador", myEntrenador.getObjectId());
             ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
 
             Toast.makeText(AddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
 
             Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
-            userDashboard.putExtra("myUser", myUser);
+            userDashboard.putExtra("myEntrenador", myEntrenador);
             startActivity(userDashboard);
         }
         else{
@@ -159,5 +166,17 @@ public class AddClient extends AppCompatActivity {
         Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
         Matcher matcher = pattern.matcher(mail);
         emailcheck = matcher.matches();
+    }
+
+
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

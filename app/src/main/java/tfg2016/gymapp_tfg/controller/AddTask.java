@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
 
 /**
@@ -46,6 +47,14 @@ public class AddTask extends AppCompatActivity {
         this.selectedTasca = selectedTasca;
     }
 
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
+    }
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
+    }
+
     private TextView tvDisplayDate;
 
     Toolbar toolbar;
@@ -63,6 +72,7 @@ public class AddTask extends AppCompatActivity {
 
         Intent intent = getIntent();
         selectedClient = (Client) intent.getSerializableExtra("selectedClient");
+        myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
 
         this.initializeButtons();
         initToolBar();
@@ -114,9 +124,7 @@ public class AddTask extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
-                        i.putExtra("selectedClient", selectedClient);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -246,4 +254,15 @@ public class AddTask extends AppCompatActivity {
         return data;
     }
 
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+        i.putExtra("selectedClient", selectedClient);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
+    }
 }

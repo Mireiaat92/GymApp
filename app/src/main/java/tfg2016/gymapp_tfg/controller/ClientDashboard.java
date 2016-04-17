@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,8 +27,6 @@ import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
-import tfg2016.gymapp_tfg.model.User;
-import tfg2016.gymapp_tfg.resources.Encrypt;
 
 /**
  * Created by Mireia on 27/03/2016.
@@ -41,20 +38,12 @@ public class ClientDashboard extends AppCompatActivity {
     ProgressDialog mProgressDialog;
     ArrayAdapter<String> adapter;
 
-    private User myUser;
-    public User getMyUser() {
-        return myUser;
+    private Client myClient;
+    public Client getMyClient() {
+        return myClient;
     }
-    public void setMyUser(User myUser) {
-        this.myUser = myUser;
-    }
-
-    private Client client;
-    public Client getClient() {
-        return client;
-    }
-    public void setClient(Client client) {
-        this.client = client;
+    public void setMyClient(Client myClient) {
+        this.myClient = myClient;
     }
 
     private Tasca selectedTasca;
@@ -79,9 +68,8 @@ public class ClientDashboard extends AppCompatActivity {
             setContentView(R.layout.activity_client_dashboard);
 
             intent = this.getIntent();
-            setMyUser((User) intent.getSerializableExtra("myUser")); //serialització de l'objecte
+            myClient = (Client) intent.getSerializableExtra("myClient"); //serialització de l'objecte
 
-            this.initializeButtons();
             initToolBar();
 
             this.initializeNomEntrenador();
@@ -91,20 +79,12 @@ public class ClientDashboard extends AppCompatActivity {
 
     }
 
-    private void initializeButtons() {
-        Button addClient = (Button) findViewById(R.id.btnPerfil);
-
-        // Listening to login link
-        addClient.setOnClickListener(clickPerfil);
-
-    }
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_client_dashboard);
-        toolbar.setTitle(myUser.getName() + " " + myUser.getSurname());
+        toolbar.setTitle(myClient.getName() + " " + myClient.getSurname());
 
         setSupportActionBar(toolbar);
-
     }
 
     @Override
@@ -124,21 +104,7 @@ public class ClientDashboard extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_perfil_client) {
             Intent i = new Intent(getApplicationContext(), PerfilClient.class);
-
-            try {
-                HashMap<String, Object> params = new HashMap<String, Object>();
-                params.put("mail", myUser.getMail());
-                List<ParseObject> nameResponse = null;
-
-                nameResponse = ParseCloud.callFunction("checkUserSignInClients", params);
-                ParseObject userParse = nameResponse.iterator().next();
-                client = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            i.putExtra("client", client);
-            // Open SingleItemView.java Activity
+            i.putExtra("client", myClient);
             startActivity(i);
         }
 
@@ -148,10 +114,10 @@ public class ClientDashboard extends AppCompatActivity {
 
     private void initializeNomEntrenador() {
         try {
-            String mail = myUser.getMail();
+            //String mail = myClient.getMail();
             String entrenadorName= null;
 
-            myEntrenador = getEntrenadorName(mail);
+            myEntrenador = getEntrenadorName();
             if (myEntrenador==null){
                 entrenadorName = "Encara no tens un entrenador assignat";
             }
@@ -167,63 +133,15 @@ public class ClientDashboard extends AppCompatActivity {
     }
 
 
-
-    /**
-     * Al clickar el botó addClient ens portarà a l'activitat de addClient.
-     */
-    public Button.OnClickListener clickPerfil = new Button.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            Intent i = new Intent(getApplicationContext(), PerfilClient.class);
-
-            try {
-                HashMap<String, Object> params = new HashMap<String, Object>();
-                params.put("mail", myUser.getMail());
-                List<ParseObject> nameResponse = null;
-
-                nameResponse = ParseCloud.callFunction("checkUserSignInClients", params);
-                ParseObject userParse = nameResponse.iterator().next();
-                client = new Client(userParse.getString("Nom"), /*userParse.getString("Password"),*/userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            i.putExtra("client", client);
-            // Open SingleItemView.java Activity
-            startActivity(i);
-        }
-    };
     /**
      * GetEntrenadorName
      * A partir del mail del client obtenim el nom del seu entrenador
-     * @param mail
      * @return myUser - Dades de l'usuaa
      * @throws ParseException
      */
-    public Entrenador getEntrenadorName(String mail) throws java.text.ParseException {
-        Encrypt encrypt = new Encrypt(getApplicationContext());
-        Client myClient = null;
-        String nameEntrenador;
+    public Entrenador getEntrenadorName() throws java.text.ParseException {
+
         Entrenador myEntrenador = null;
-
-
-        HashMap<String, Object> paramsClient = new HashMap<String, Object>();
-        paramsClient.put("mail", mail);
-
-        List<ParseObject> nameResponse = null;
-        try {
-            nameResponse = ParseCloud.callFunction("checkUserSignInClients", paramsClient);
-
-            if (!nameResponse.isEmpty()) {
-                ParseObject userParse = nameResponse.iterator().next();
-                myClient = new Client(userParse.getString("Nom"), /*userParse.getString("Password"),*/
-                        userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
-
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         String idEntrenador = myClient.getID_Entrenador();
         if (!idEntrenador.isEmpty()) {
@@ -272,7 +190,7 @@ public class ClientDashboard extends AppCompatActivity {
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                     "TASQUES");
 
-            query.whereEqualTo("ID_Client", myUser.getObjectId());
+            query.whereEqualTo("ID_Client", myClient.getObjectId());
             query.orderByDescending("_created_at");
             try {
                 ob = query.find();
@@ -319,12 +237,17 @@ public class ClientDashboard extends AppCompatActivity {
                     }
 
                     i.putExtra("selectedTasca", selectedTasca);
-                    i.putExtra("selectedClient", myUser);
+                    i.putExtra("myClient", myClient);
 
                     startActivity(i);
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 
 

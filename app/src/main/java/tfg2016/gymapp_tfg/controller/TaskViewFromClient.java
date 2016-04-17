@@ -44,7 +44,7 @@ public class TaskViewFromClient extends AppCompatActivity {
         Intent i = getIntent();
 
         selectedTasca = (Tasca) i.getSerializableExtra("selectedTasca");
-        myClient = (Client) i.getSerializableExtra("myUser");
+        myClient = (Client) i.getSerializableExtra("myClient");
 
 
         this.initializeTascaData();
@@ -62,9 +62,7 @@ public class TaskViewFromClient extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
-                        i.putExtra("myClient", myClient);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -83,5 +81,16 @@ public class TaskViewFromClient extends AppCompatActivity {
         String dueDate = String.valueOf(selectedTasca.getDueDate());
         TextView txtdueDate = (TextView) findViewById(R.id.duedate);
         txtdueDate.setText(dueDate);
+    }
+
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
+        i.putExtra("myClient", myClient);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

@@ -22,7 +22,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tfg2016.gymapp_tfg.R;
-import tfg2016.gymapp_tfg.model.User;
+import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.resources.Complements;
 import tfg2016.gymapp_tfg.resources.Encrypt;
 
@@ -96,19 +97,20 @@ public class Login extends Activity {
                    boolean login = false;
                    try {
                        //Crida de les funcions login
-                       User myUserClient = Login.this.loginClient(Login.this.getMail(),
+                       Client myUserClient = Login.this.loginClient(Login.this.getMail(),
                                Login.this.getPassword());
                        if (myUserClient != null) {
                            Intent userDashboard = new Intent(Login.this, ClientDashboard.class);
-                           userDashboard.putExtra("myUser", myUserClient);
+                           userDashboard.putExtra("myClient", myUserClient);
+
                            startActivity(userDashboard);
                        } else {
-                           User myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
+                           Entrenador myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
                                    Login.this.getPassword());
                            if (myUserEntrenador != null) {
                                Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
-                               entrenadorDashboard.putExtra("myUser", myUserEntrenador);
-                               //Toast.makeText(Login.this, myUserEntrenador.getMail(), Toast.LENGTH_SHORT).show();
+                               entrenadorDashboard.putExtra("myEntrenador", myUserEntrenador);
+
                                startActivity(entrenadorDashboard);
                            } else {
                                Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
@@ -135,9 +137,9 @@ public class Login extends Activity {
      * @return myUser - Dades de l'usuaa
      * @throws ParseException
      */
-    public User loginClient(String mail, String password) throws java.text.ParseException {
+    public Client loginClient(String mail, String password) throws java.text.ParseException {
         Encrypt encrypt = new Encrypt(getApplicationContext());
-        User myUserClient = null;
+        Client myUserClient = null;
 
             password = encrypt.encryptPassword(password);
             HashMap<String, Object> loginParams = new HashMap<String, Object>();
@@ -150,8 +152,8 @@ public class Login extends Activity {
 
                 if (!loginResponse.isEmpty()) {
                     ParseObject userParse = loginResponse.iterator().next();
-                    myUserClient = new User(userParse.getString("Nom"), userParse.getString("Cognom"),
-                            userParse.getString("Mail"), userParse.getString("Contrasenya"), userParse.getObjectId());
+                    myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"),
+                            userParse.getString("Mail"), /*userParse.getString("Contrasenya"),*/ userParse.getObjectId(), userParse.getString("ID_Entrenador"));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -167,9 +169,10 @@ public class Login extends Activity {
      * @return myUser - Dades de l'usuaa
      * @throws ParseException
      */
-    public User loginEntrenador(String mail, String password) throws java.text.ParseException {
+    public Entrenador loginEntrenador(String mail, String password) throws java.text.ParseException {
         Encrypt encrypt = new Encrypt(getApplicationContext());
-        User myUserEntrenador = null;
+        Entrenador myUserEntrenador = null;
+
         password = encrypt.encryptPassword(password);
         HashMap<String, Object> loginParams = new HashMap<String, Object>();
         loginParams.put("mail", mail);
@@ -181,8 +184,8 @@ public class Login extends Activity {
 
             if(!loginResponse.isEmpty()) {
                 ParseObject userParse = loginResponse.iterator().next();
-                myUserEntrenador = new User(userParse.getString("Nom"), userParse.getString("Cognom"),
-                        userParse.getString("Mail"), userParse.getString("Contrasenya"), userParse.getObjectId());
+                myUserEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
+                        userParse.getString("Mail"), userParse.getObjectId());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -218,5 +221,9 @@ public class Login extends Activity {
         Pattern pattern = Pattern.compile(".+@.+\\.[a-z]+");
         Matcher matcher = pattern.matcher(mail);
         emailcheck = matcher.matches();
+    }
+
+    @Override
+    public void onBackPressed(){
     }
 }

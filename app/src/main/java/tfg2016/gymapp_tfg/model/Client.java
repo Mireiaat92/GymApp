@@ -10,15 +10,12 @@ public class Client implements Serializable{
 
     private String mail;
 
-    private String password;
-
     private String objectId;
 
     private String ID_Entrenador;
 
-    public Client(String name, String surname, String mail, /*String password,*/ String objectId, String ID_Entrenador) {
+    public Client(String name, String surname, String mail, String objectId, String ID_Entrenador) {
         this.setMail(mail);
-        //this.setPassword(password);
         this.setName(name);
         this.setSurname(surname);
         this.setObjectId(objectId);
@@ -31,14 +28,6 @@ public class Client implements Serializable{
 
     public String getMail() {
         return this.mail;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 
     public void setName(String name) {

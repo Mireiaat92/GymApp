@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 
 /**
  * Created by Mireia on 08/04/2016.
@@ -20,6 +21,14 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
     }
     public void setSelectedClient(Client selectedClient) {
         this.selectedClient = selectedClient;
+    }
+
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
+    }
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
     }
 
     Toolbar toolbar;
@@ -34,6 +43,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         Intent i = getIntent();
 
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
+        myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
         this.initializeUserData();
         initToolBar();
@@ -50,9 +60,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
-                        i.putExtra("selectedClient", selectedClient);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -70,5 +78,17 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         txtmail.setText(mail);
 
 
+    }
+
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+        i.putExtra("selectedClient", selectedClient);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

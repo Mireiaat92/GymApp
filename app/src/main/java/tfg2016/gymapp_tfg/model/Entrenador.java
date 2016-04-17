@@ -1,9 +1,11 @@
 package tfg2016.gymapp_tfg.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Mireia on 11/04/2016.
  */
-public class Entrenador {
+public class Entrenador  implements Serializable {
 
     private String name;
 
@@ -11,19 +13,14 @@ public class Entrenador {
 
     private String mail;
 
-    private String password;
-
     private String objectId;
 
-    private String ID_Entrenador;
 
-    public Entrenador(String name, String surname, String mail, /*String password,*/ String objectId) {
+    public Entrenador(String name, String surname, String mail, String objectId) {
         this.setMail(mail);
-        //this.setPassword(password);
         this.setName(name);
         this.setSurname(surname);
         this.setObjectId(objectId);
-
     }
 
     public void setMail(String mail) {
@@ -32,14 +29,6 @@ public class Entrenador {
 
     public String getMail() {
         return this.mail;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 
     public void setName(String name) {

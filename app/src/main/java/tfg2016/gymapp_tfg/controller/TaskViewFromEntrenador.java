@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
 
 /**
@@ -31,6 +32,14 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         this.selectedClient = selectedClient;
     }
 
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
+    }
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
+    }
+
     Toolbar toolbar;
 
     @Override
@@ -43,6 +52,7 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         Intent i = getIntent();
         selectedTasca = (Tasca) i.getSerializableExtra("selectedTasca");
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
+        myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
         this.initializeTascaData();
         initToolBar();
@@ -59,12 +69,9 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
-                        i.putExtra("selectedClient", selectedClient);
-                        startActivity(i);
+                        doBack();
                     }
                 }
-
         );
     }
 
@@ -81,7 +88,17 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         String duedate = String.valueOf(selectedTasca.getDueDate());
         TextView txtduedate = (TextView) findViewById(R.id.duedate);
         txtduedate.setText(duedate);
+    }
 
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+        i.putExtra("selectedClient", selectedClient);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+    }
 
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

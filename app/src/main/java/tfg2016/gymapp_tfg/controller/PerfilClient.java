@@ -33,7 +33,7 @@ public class PerfilClient extends AppCompatActivity {
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
 
-        client = (Client) i.getSerializableExtra("client");
+        setClient((Client) i.getSerializableExtra("client"));
 
         this.initializeUserData();
         initToolBar();
@@ -51,9 +51,7 @@ public class PerfilClient extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
-                        i.putExtra("myUser", client);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -71,5 +69,16 @@ public class PerfilClient extends AppCompatActivity {
         txtmail.setText(mail);
 
 
+    }
+
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
+        i.putExtra("myClient", client);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

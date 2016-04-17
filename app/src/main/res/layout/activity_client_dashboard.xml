@@ -12,13 +12,7 @@
         android:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
 
-    <!-- AddClient button -->
-    <Button android:id="@+id/btnPerfil"
-        android:layout_below="@+id/toolbar_client_dashboard"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
-        android:text="Perfil"/>
+
 
     <TextView
         android:id="@+id/entrenadorlabel"

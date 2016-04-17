@@ -25,6 +25,7 @@ import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
 
 
@@ -54,6 +55,14 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         this.selectedTasca = selectedTasca;
     }
 
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
+    }
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
+    }
+
     Toolbar toolbar;
 
     @Override
@@ -65,6 +74,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
+        myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
@@ -84,8 +94,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
-                        startActivity(i);
+                        doBack();
                     }
                 }
 
@@ -111,12 +120,14 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), PerfilClientFromEntrenador.class);
             i.putExtra("selectedClient", selectedClient);
+            i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
         }
         else if (id == R.id.action_add_task){
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddTask.class);
             i.putExtra("selectedClient", selectedClient);
+            i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
         }
 
@@ -194,10 +205,22 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
 
                     i.putExtra("selectedTasca", selectedTasca);
                     i.putExtra("selectedClient", selectedClient);
+                    i.putExtra("myEntrenador", myEntrenador);
 
                     startActivity(i);
                 }
             });
         }
+    }
+
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        doBack();
     }
 }

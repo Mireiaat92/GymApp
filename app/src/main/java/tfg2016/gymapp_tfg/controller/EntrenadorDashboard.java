@@ -25,7 +25,7 @@ import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
-import tfg2016.gymapp_tfg.model.User;
+import tfg2016.gymapp_tfg.model.Entrenador;
 
 
 /**
@@ -46,13 +46,14 @@ public class EntrenadorDashboard extends AppCompatActivity {
         this.selectedClient = selectedClient;
     }
 
-    private User myUser;
-    public User getMyUser() {
-        return myUser;
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
     }
-    public void setMyUser(User myUser) {
-        this.myUser = myUser;
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
     }
+
 
     private static Intent intent;
 
@@ -66,7 +67,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_entrenador_dashboard);
 
         intent = this.getIntent();
-        setMyUser((User) intent.getSerializableExtra("myUser")); //serialització de l'objecte
+        setMyEntrenador((Entrenador) intent.getSerializableExtra("myEntrenador")); //serialització de l'objecte
 
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
@@ -100,7 +101,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
         if (id == R.id.action_add_client) {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddClient.class);
-            i.putExtra("myUser", myUser);
+            i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
             //return true;
         }
@@ -110,8 +111,6 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -132,7 +131,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                     "CLIENTS");
 
-            query.whereEqualTo("ID_Entrenador", myUser.getObjectId());
+            query.whereEqualTo("ID_Entrenador", myEntrenador.getObjectId());
             query.orderByDescending("_created_at");
             try {
                 ob = query.find();
@@ -179,10 +178,16 @@ public class EntrenadorDashboard extends AppCompatActivity {
                     }
 
                     i.putExtra("selectedClient", selectedClient);
+                    i.putExtra("myEntrenador", myEntrenador);
                     // Open SingleItemView.java Activity
                     startActivity(i);
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 }
