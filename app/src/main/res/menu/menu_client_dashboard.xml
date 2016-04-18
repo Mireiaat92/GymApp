@@ -5,7 +5,7 @@
         android:id="@+id/action_perfil_client"
         android:orderInCategory="200"
         android:title="PerfilClient"
-        android:icon="@drawable/ic_menu_info_details"
+        android:icon="@drawable/ic_account_circle"
         app:showAsAction="ifRoom"
         ></item>
 </menu>

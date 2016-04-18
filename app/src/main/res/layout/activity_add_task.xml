@@ -35,6 +35,7 @@
             <EditText
                 android:id="@+id/titol_task"
                 android:hint="@string/titollabel"
+                android:inputType="textCapWords"
                 android:maxLength="20"
                 android:textColorHint="#bbbbbb"
                 android:layout_width="fill_parent"
@@ -48,6 +49,7 @@
             <EditText
                 android:id="@+id/descripcio_task"
                 android:hint="@string/descripciolabel"
+                android:inputType="textCapWords"
                 android:maxLength="120"
                 android:layout_below="@+id/titol_task"
                 android:textColorHint="#bbbbbb"
@@ -60,27 +62,30 @@
 
 
             <!--DUE DATE TASK LABEL-->
+
             <EditText
                 android:id="@+id/duedate_task"
                 android:hint="@string/duedatelabel"
                 android:layout_below="@+id/descripcio_task"
                 android:textColorHint="#bbbbbb"
-                android:layout_width="fill_parent"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
                 android:textColor="#708090"
                 android:singleLine="true"/>
 
-            <Button
-                android:id="@+id/btnChangeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Change Date" />
 
+            <ImageButton
+                android:id="@+id/btnChangeDate"
+                android:src="@drawable/ic_calendar"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/AddNewTask"
+                android:background="#CDDC39"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"

@@ -40,30 +40,35 @@
             android:layout_height="wrap_content"
             android:padding="10dip"
             android:layout_below="@id/header">
+
             <!-- Name Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Name"/>
             <EditText android:id="@+id/reg_name"
+                android:inputType="textCapWords"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
                 android:textColor="#708090"
                 android:layout_marginBottom="20dip"/>
+
             <!-- Surname Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Surame"/>
             <EditText android:id="@+id/reg_surname"
+                android:inputType="textCapWords"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
                 android:textColor="#708090"
                 android:layout_marginBottom="20dip"/>
+
             <!--  Email Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -76,6 +81,7 @@
                 android:singleLine="true"
                 android:textColor="#708090"
                 android:layout_marginBottom="20dip"/>
+
             <!-- Password Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -88,12 +94,15 @@
                 android:singleLine="true"
                 android:textColor="#708090"
                 android:layout_marginTop="5dip"/>
+
             <!-- Register Button -->
             <Button android:id="@+id/btnRegister"
+                android:background="#CDDC39"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:text="Register New Account"/>
+
             <!-- Link to Login Screen -->
             <TextView android:id="@+id/link_to_login"
                 android:layout_width="fill_parent"

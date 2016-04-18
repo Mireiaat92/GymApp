@@ -5,12 +5,12 @@
         android:id="@+id/action_view_profile"
         android:orderInCategory="200"
         android:title="ViewProfile"
-        android:icon="@drawable/ic_menu_info_details"
+        android:icon="@drawable/ic_account_circle"
         app:showAsAction="ifRoom"></item>
     <item
         android:id="@+id/action_add_task"
         android:orderInCategory="200"
         android:title="AddTask"
-        android:icon="@drawable/ic_menu_add"
+        android:icon="@drawable/ic_add_circle"
         app:showAsAction="ifRoom"></item>
 </menu>

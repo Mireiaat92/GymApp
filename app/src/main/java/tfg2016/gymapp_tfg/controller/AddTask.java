@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +88,7 @@ public class AddTask extends AppCompatActivity {
         Button addTask = (Button) findViewById(R.id.AddNewTask);
         addTask.setOnClickListener(clickAddTask);
 
-        Button btnChangeDate = (Button) findViewById(R.id.btnChangeDate);
+        ImageButton btnChangeDate = (ImageButton) findViewById(R.id.btnChangeDate);
         btnChangeDate.setOnClickListener(clickChangeDate);
 
     }
@@ -106,7 +107,7 @@ public class AddTask extends AppCompatActivity {
         }
     };
 
-    public Button.OnClickListener clickChangeDate = new Button.OnClickListener() {
+    public ImageButton.OnClickListener clickChangeDate = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
             showDialog(DATE_DIALOG_ID);

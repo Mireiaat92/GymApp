@@ -71,6 +71,7 @@
                 android:password="true"/>
             <!-- Login button -->
             <Button android:id="@+id/btnLogin"
+                android:background="#CDDC39"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"

@@ -21,14 +21,12 @@ import java.util.regex.Pattern;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Entrenador;
-import tfg2016.gymapp_tfg.model.User;
 
 /**
  * Created by Mireia on 03/04/2016.
  */
 public class AddClient extends AppCompatActivity {
 
-    private User myUser;
     private boolean emailcheck;
     Toolbar toolbar;
 

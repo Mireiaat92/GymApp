@@ -15,17 +15,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".controller.Login"
-            android:label="Login to your Account">
+            android:label="Login to your Account"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--  (intent-filter)Per indicar que és la primera activitat en inciar-se -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <!--  Entry for Register.class -->
         <activity android:name=".controller.Register"
-            android:label="Register New Account"></activity>
+            android:label="Register New Account"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for NoInternetConnection.class -->
         <activity android:name=".controller.NoInternetConnection"
@@ -45,7 +48,8 @@
 
         <!--  Entry for AddClient -->
         <activity android:name=".controller.AddClient"
-            android:label="Add Client"></activity>
+            android:label="Add Client"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for PerfilClientFromEntrenador -->
         <activity android:name=".controller.PerfilClientFromEntrenador"
@@ -61,17 +65,12 @@
 
         <!--  Entry for AddTask -->
         <activity android:name=".controller.AddTask"
-            android:label="Add Task"></activity>
+            android:label="Add Task"
+            android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for TaskViewFromClient -->
         <activity android:name=".controller.TaskViewFromClient"
             android:label="Task"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
 
     </application>
 </manifest>
