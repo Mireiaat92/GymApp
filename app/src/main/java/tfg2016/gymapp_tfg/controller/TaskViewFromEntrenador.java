@@ -77,17 +77,10 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
     public void initializeTascaData() {
 
-        String titol = selectedTasca.getTitol();
-        TextView txttitol = (TextView) findViewById(R.id.titol);
-        txttitol.setText(titol);
-
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
 
-        String duedate = String.valueOf(selectedTasca.getDueDate());
-        TextView txtduedate = (TextView) findViewById(R.id.duedate);
-        txtduedate.setText(duedate);
     }
 
     public void doBack(){

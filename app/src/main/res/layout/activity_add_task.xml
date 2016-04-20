@@ -29,40 +29,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="30dp"
+            android:weightSum="1">
 
-            <!--TITOL TASK LABEL-->
-            <EditText
-                android:id="@+id/titol_task"
-                android:hint="@string/titollabel"
-                android:inputType="textCapWords"
-                android:maxLength="20"
-                android:textColorHint="#bbbbbb"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="20dip"
-                android:textColor="#708090"
-                android:singleLine="true"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/titol_task"/>
 
             <!--DECRIPCIO TASK LABEL-->
             <EditText
                 android:id="@+id/descripcio_task"
                 android:hint="@string/descripciolabel"
-                android:inputType="textCapWords"
+                android:inputType="textCapWords|textMultiLine"
                 android:maxLength="120"
                 android:layout_below="@+id/titol_task"
                 android:textColorHint="#bbbbbb"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="325dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
                 android:textColor="#708090"
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:layout_weight="0.40" />
 
 
             <!--DUE DATE TASK LABEL-->
-
             <EditText
                 android:id="@+id/duedate_task"
                 android:hint="@string/duedatelabel"

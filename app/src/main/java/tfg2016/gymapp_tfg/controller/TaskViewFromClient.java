@@ -70,17 +70,10 @@ public class TaskViewFromClient extends AppCompatActivity {
     }
     public void initializeTascaData() {
 
-        String titol = selectedTasca.getTitol();
-        TextView txttitiol = (TextView) findViewById(R.id.titol);
-        txttitiol.setText(titol);
-
-        String descripcio = selectedTasca.getTitol();
+        String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
 
-        String dueDate = String.valueOf(selectedTasca.getDueDate());
-        TextView txtdueDate = (TextView) findViewById(R.id.duedate);
-        txtdueDate.setText(dueDate);
     }
 
     public void doBack(){

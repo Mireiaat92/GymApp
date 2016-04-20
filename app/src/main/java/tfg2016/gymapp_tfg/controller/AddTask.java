@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +65,8 @@ public class AddTask extends AppCompatActivity {
     private int month;
     private int day;
 
+    String titol;
+
     static final int DATE_DIALOG_ID = 999;
 
     @Override
@@ -96,10 +99,14 @@ public class AddTask extends AppCompatActivity {
     public Button.OnClickListener clickAddTask = new Button.OnClickListener() {
         public void onClick(View v) {
             try {
-                if (AddTask.this.getTitol().equalsIgnoreCase("") || AddTask.this.getDescripcio().equalsIgnoreCase("")) {
+
+                Format formatter = new SimpleDateFormat("d MMM");
+                String titol = formatter.format(AddTask.this.getDueDate());
+
+                if (AddTask.this.getDescripcio().equalsIgnoreCase("")) {
                     Toast.makeText(AddTask.this, "Els camps titol i descripcio son obligatoris", Toast.LENGTH_SHORT).show();
                 } else {
-                    addTask(selectedClient.getObjectId(), AddTask.this.getTitol(), AddTask.this.getDescripcio(), AddTask.this.getDueDate());
+                    addTask(selectedClient.getObjectId(), titol, AddTask.this.getDescripcio(), AddTask.this.getDueDate());
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -162,11 +169,11 @@ public class AddTask extends AppCompatActivity {
      *
      * @return titolText
      */
-    public String getTitol() {
+    /*public String getTitol() {
         EditText titol = (EditText) findViewById(R.id.titol_task);
         String titolText = titol.getText().toString();
         return titolText;
-    }
+    }*/
 
     /**
      * Method getDescripcio
@@ -204,10 +211,10 @@ public class AddTask extends AppCompatActivity {
         day = c.get(Calendar.DAY_OF_MONTH);
 
         // set current date into textview
-        tvDisplayDate.setText(new StringBuilder()
+        /*vDisplayDate.setText(new StringBuilder()
                 // Month is 0 based, just add 1
                 .append(day).append("-").append(month + 1).append("-")
-                .append(year).append(" "));
+                .append(year).append(" "));*/
     }
 
 
@@ -233,9 +240,8 @@ public class AddTask extends AppCompatActivity {
             day = selectedDay;
 
             // set selected date into textview
-            tvDisplayDate.setText(new StringBuilder().append(month + 1)
-                    .append("-").append(day).append("-").append(year)
-                    .append(" "));
+            tvDisplayDate.setText(new StringBuilder().append(day)
+                    .append("-").append(month + 1).append("-").append(year));
         }
     };
 

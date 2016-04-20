@@ -23,7 +23,7 @@
     <string name="customerMail">Email del client</string>
     <string name="descripciolabel">"Descripcio: "</string>
     <string name="titollabel">"Títol: "</string>
-    <string name="duedatelabel">"Due Date: "</string>
+    <string name="duedatelabel">"Due Date (dd-mm-yyyy)"</string>
     <string name="addTask">Add Task</string>
     <string name="toolbarTitle">"toolbarTitle"</string>
     <string name="EntrenadorDashboard">"Entrenador Dashboard"</string>

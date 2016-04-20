@@ -12,56 +12,26 @@
         android:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
 
-
-    <!-- TITOL LABEL -->
-    <TextView
-        android:id="@+id/titollabel"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/TaskScrollView"
         android:layout_below="@+id/toolbar_task_from_entrenador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/titollabel"
-        android:textSize="25sp" />
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/titol"
-        android:layout_below="@+id/toolbar_task_from_entrenador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/titollabel"
-        android:textSize="25sp" />
+            <!-- DESCRIPCIO LABEL -->
+            <TextView
+                android:id="@+id/descripcio"
+                android:layout_below="@+id/descripciolabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
-    <!-- DESCRIPCIO LABEL -->
-    <TextView
-        android:id="@+id/descripciolabel"
-        android:layout_below="@+id/titol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/descripciolabel"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/descripcio"
-        android:layout_below="@+id/titol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/descripciolabel"
-        android:textSize="25sp" />
-
-    <!-- DUE DATE LABEL -->
-    <TextView
-        android:id="@+id/duedatelabel"
-        android:layout_below="@+id/descripcio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/duedatelabel"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/duedate"
-        android:layout_below="@+id/descripcio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/duedatelabel"
-        android:textSize="25sp" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

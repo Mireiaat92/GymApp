@@ -9,7 +9,7 @@
         <!-- colorPrimaryDark is used for coloring the status bar -->
         <item name="colorPrimaryDark">#FF8F00</item>
         <!-- colorAccent is used as the default value for colorControlActivated
-             which is used to tint widgets -->
+             which is used to tint widgets #FF4081 -->
         <item name="colorAccent">#CDDC39</item>
     </style>
 
