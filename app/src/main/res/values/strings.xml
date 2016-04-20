@@ -19,7 +19,7 @@
     <string name="peslabel">"Pes: "</string>
     <string name="alcadalabel">"Alçada: "</string>
     <string name="userNoExist">El mail introduit no existeix</string>
-    <string name="entrenadorlabel">Entrenador: </string>
+    <string name="entrenadorlabel">El teu entrenador és: </string>
     <string name="customerMail">Email del client</string>
     <string name="descripciolabel">"Descripcio: "</string>
     <string name="titollabel">"Títol: "</string>

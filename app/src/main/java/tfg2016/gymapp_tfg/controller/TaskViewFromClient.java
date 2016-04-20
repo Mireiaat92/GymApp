@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -33,6 +35,8 @@ public class TaskViewFromClient extends AppCompatActivity {
     }
 
     Toolbar toolbar;
+    Button tascaCompletada;
+    TextView deixarComentari;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,9 @@ public class TaskViewFromClient extends AppCompatActivity {
         selectedTasca = (Tasca) i.getSerializableExtra("selectedTasca");
         myClient = (Client) i.getSerializableExtra("myClient");
 
-
         this.initializeTascaData();
         initToolBar();
+
     }
 
     public void initToolBar() {
@@ -73,6 +77,25 @@ public class TaskViewFromClient extends AppCompatActivity {
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
+
+        //BOTÓ TASCA COMPLETADA
+        tascaCompletada = (Button) findViewById(R.id.tascaCompletada);
+
+        tascaCompletada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TaskViewFromClient.this, "TASCA COMPLETADA", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        deixarComentari = (TextView) findViewById(R.id.deixarComentari);
+
+        deixarComentari.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TaskViewFromClient.this, "DEIXAR COMENTARI", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

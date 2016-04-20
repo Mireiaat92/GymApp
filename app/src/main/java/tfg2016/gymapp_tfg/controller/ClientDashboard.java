@@ -169,7 +169,6 @@ public class ClientDashboard extends AppCompatActivity {
 
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
