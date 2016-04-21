@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
@@ -80,6 +82,25 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
+
+
+        Boolean completada = selectedTasca.getCompletada();
+        Date dueDate = selectedTasca.getDueDate();
+        String status =  null;
+            if (completada == true){
+            status="Completed";
+        }
+        else if (completada == false){
+            status = "Not done";
+        }
+        else if (completada == null){
+                //al fer addTask ha de posar completada en False
+                //si esta en false pero la dueDate és del futur o 7 dies del pasat es posarà en pending
+            status="Pending";
+        }
+        TextView txtStatus = (TextView) findViewById(R.id.status);
+        txtStatus.setText(status);
+
 
     }
 

@@ -11,13 +11,17 @@ public class Tasca implements Serializable {
     private String titol;
     private String descripcio;
     private Date dueDate;
+    private Boolean completada;
+    private String comentari;
     private String objectId;
 
-    public Tasca(String idClient, String titol, String descripcio, Date dueDate, String objectId) {
+    public Tasca(String idClient, String titol, String descripcio, Date dueDate,Boolean completada, String comentari, String objectId) {
         this.setIdClient(idClient);
         this.setTitol(titol);
         this.setDescripcio(descripcio);
         this.setDueDate(dueDate);
+        this.setCompletada(completada);
+        this.setComentari(comentari);
         this.setObjectId(objectId);
     }
 
@@ -47,6 +51,20 @@ public class Tasca implements Serializable {
     }
     public Date getDueDate() {
         return this.dueDate;
+    }
+
+    public void setCompletada(Boolean completada) {
+        this.completada = completada;
+    }
+    public Boolean getCompletada() {
+        return this.completada;
+    }
+
+    public void setComentari(String comentari) {
+        this.comentari = comentari;
+    }
+    public String getComentari() {
+        return this.comentari;
     }
 
     public void setObjectId(String objectId) {

@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Tasca;
@@ -37,6 +41,7 @@ public class TaskViewFromClient extends AppCompatActivity {
     Toolbar toolbar;
     Button tascaCompletada;
     TextView deixarComentari;
+    Button textboto;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,13 +83,42 @@ public class TaskViewFromClient extends AppCompatActivity {
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
 
+        Boolean status = selectedTasca.getCompletada();
+        textboto = (Button) findViewById(R.id.tascaCompletada);
+        if (status == true){
+            textboto.setText("TASCA COMPLETA");
+            textboto.setBackgroundColor(000000);
+
+        }
+        else if (status == false){
+            textboto.setText("MARCAR COM A COMPLETA");
+        }
+
         //BOTÓ TASCA COMPLETADA
         tascaCompletada = (Button) findViewById(R.id.tascaCompletada);
+
 
         tascaCompletada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TaskViewFromClient.this, "TASCA COMPLETADA", Toast.LENGTH_SHORT).show();
+                if (selectedTasca.getCompletada() == true){
+                    Toast.makeText(TaskViewFromClient.this, "La tasca ja està completa", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    try {
+                        ParseQuery<ParseObject> query = new ParseQuery<ParseObject >("TASQUES");
+                        ParseObject objFromServer = query.get(selectedTasca.getObjectId());
+                        objFromServer.put("Completada", true);
+
+                        objFromServer.save();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    textboto.setText("TASCA COMPLETA");
+                    textboto.setBackgroundColor(000000);
+                }
+
             }
         });
 
