@@ -135,7 +135,6 @@ public class AddTask extends AppCompatActivity {
                         doBack();
                     }
                 }
-
         );
     }
 

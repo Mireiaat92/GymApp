@@ -28,4 +28,7 @@
     <string name="toolbarTitle">"toolbarTitle"</string>
     <string name="EntrenadorDashboard">"Entrenador Dashboard"</string>
     <string name="clientView">"Client View"</string>
+    <string name="SuperAdminDashboard">"SuperAdmin Dashboard"</string>
+    <string name="addEntrenador">Add Entrenador</string>
+
 </resources>

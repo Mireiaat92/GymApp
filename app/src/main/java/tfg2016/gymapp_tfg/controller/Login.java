@@ -110,11 +110,21 @@ public class Login extends Activity {
                            if (myUserEntrenador != null) {
                                Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
                                entrenadorDashboard.putExtra("myEntrenador", myUserEntrenador);
-
                                startActivity(entrenadorDashboard);
                            } else {
-                               Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
-                               popupWindow.dismiss();
+                               Entrenador superadmin = Login.this.loginSuperAdmin(Login.this.getMail(),
+                                       Login.this.getPassword());
+                               if (superadmin != null){
+                                   Intent entrenadorDashboard = new Intent(Login.this, SuperAdminDashboard.class);
+                                   entrenadorDashboard.putExtra("superadmin", superadmin);
+
+                                   startActivity(entrenadorDashboard);
+                               }
+                               else {
+
+                                   Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
+                                   popupWindow.dismiss();
+                               }
                            }
                        }
                    } catch (java.text.ParseException e) {
@@ -191,6 +201,31 @@ public class Login extends Activity {
             e.printStackTrace();
         }
         return myUserEntrenador;
+    }
+
+
+    public Entrenador loginSuperAdmin(String mail, String password) throws java.text.ParseException {
+        Encrypt encrypt = new Encrypt(getApplicationContext());
+        Entrenador adminEntrenador = null;
+
+        password = encrypt.encryptPassword(password);
+        HashMap<String, Object> loginParams = new HashMap<String, Object>();
+        loginParams.put("mail", mail);
+        loginParams.put("password", password);
+
+        List<ParseObject> loginResponse = null;
+        try {
+            loginResponse = ParseCloud.callFunction("loginSuperAdmin", loginParams);
+
+            if(!loginResponse.isEmpty()) {
+                ParseObject userParse = loginResponse.iterator().next();
+                adminEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
+                        userParse.getString("Mail"), userParse.getObjectId());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return adminEntrenador;
     }
 
     /**

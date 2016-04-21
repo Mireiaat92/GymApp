@@ -42,6 +42,10 @@
         <activity android:name=".controller.EntrenadorDashboard"
             android:label="Entrenador Dashboard"></activity>
 
+        <!--  Entry for SuperAdminDashboard -->
+        <activity android:name=".controller.SuperAdminDashboard"
+            android:label="SuperAdmin Dashboard"></activity>
+
         <!--  Entry for ClientViewFromEntrenador -->
         <activity android:name=".controller.ClientViewFromEntrenador"
             android:label="ClientActivityFromEntrenador"></activity>
@@ -71,6 +75,10 @@
         <!--  Entry for TaskViewFromClient -->
         <activity android:name=".controller.TaskViewFromClient"
             android:label="Task"></activity>
+
+        <!--  Entry for AddEntrenador -->
+        <activity android:name=".controller.AddEntrenador"
+            android:label="Add Entrenador"></activity>
 
     </application>
 </manifest>
