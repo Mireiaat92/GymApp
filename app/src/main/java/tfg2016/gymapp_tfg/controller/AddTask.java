@@ -93,7 +93,6 @@ public class AddTask extends AppCompatActivity {
 
         ImageButton btnChangeDate = (ImageButton) findViewById(R.id.btnChangeDate);
         btnChangeDate.setOnClickListener(clickChangeDate);
-
     }
 
     public Button.OnClickListener clickAddTask = new Button.OnClickListener() {
@@ -164,17 +163,6 @@ public class AddTask extends AppCompatActivity {
 
 
     /**
-     * Method getTitol
-     *
-     * @return titolText
-     */
-    /*public String getTitol() {
-        EditText titol = (EditText) findViewById(R.id.titol_task);
-        String titolText = titol.getText().toString();
-        return titolText;
-    }*/
-
-    /**
      * Method getDescripcio
      *
      * @return descripcioText
@@ -208,12 +196,6 @@ public class AddTask extends AppCompatActivity {
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
-
-        // set current date into textview
-        /*vDisplayDate.setText(new StringBuilder()
-                // Month is 0 based, just add 1
-                .append(day).append("-").append(month + 1).append("-")
-                .append(year).append(" "));*/
     }
 
 
@@ -265,6 +247,7 @@ public class AddTask extends AppCompatActivity {
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
+        finish();
     }
 
     @Override

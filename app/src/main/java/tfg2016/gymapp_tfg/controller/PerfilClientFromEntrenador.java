@@ -85,6 +85,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
+        finish();
     }
 
     @Override

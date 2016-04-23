@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffff">
+    android:background="#E0E0E0">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_task_from_client"
@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:background="#E0E0E0"
+        android:background="#ffffff"
         android:layout_above="@+id/tascaCompletada">
 
             <!-- DESCRIPCIO LABEL -->

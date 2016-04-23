@@ -119,6 +119,7 @@ public class Login extends Activity {
                                    entrenadorDashboard.putExtra("superadmin", superadmin);
 
                                    startActivity(entrenadorDashboard);
+                                   finish();
                                }
                                else {
 

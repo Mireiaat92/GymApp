@@ -106,6 +106,7 @@ public class ClientDashboard extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), PerfilClient.class);
             i.putExtra("client", myClient);
             startActivity(i);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -239,6 +240,7 @@ public class ClientDashboard extends AppCompatActivity {
                     i.putExtra("myClient", myClient);
 
                     startActivity(i);
+                    finish();
                 }
             });
         }

@@ -206,6 +206,7 @@ public class AddEntrenador extends AppCompatActivity {
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), SuperAdminDashboard.class);
         startActivity(i);
+        finish();
     }
 
     @Override

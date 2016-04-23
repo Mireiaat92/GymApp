@@ -2,7 +2,6 @@ package tfg2016.gymapp_tfg.controller;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -77,7 +76,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
         initToolBar();
 
-        //=============================0
+        //=============================
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.messages);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +114,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), AddClient.class);
             i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
+            finish();
             //return true;
         }
 
@@ -193,6 +193,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
                     i.putExtra("myEntrenador", myEntrenador);
                     // Open SingleItemView.java Activity
                     startActivity(i);
+                    finish();
                 }
             });
         }

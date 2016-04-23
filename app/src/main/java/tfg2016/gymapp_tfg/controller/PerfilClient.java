@@ -75,6 +75,7 @@ public class PerfilClient extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
         i.putExtra("myClient", client);
         startActivity(i);
+        finish();
     }
 
     @Override

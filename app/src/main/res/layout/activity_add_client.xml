@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    android:background="#eee">
+    android:background="#FFFFFF">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_add_client"
@@ -44,11 +44,12 @@
 
             <Button
                 android:id="@+id/addClient"
-                android:background="#CDDC39"
-                android:layout_width="fill_parent"
+                android:background="#FF4081"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/addClient"/>
+                android:text="@string/addClient"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

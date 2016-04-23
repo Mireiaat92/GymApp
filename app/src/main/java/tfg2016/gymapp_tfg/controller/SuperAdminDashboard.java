@@ -84,6 +84,7 @@ public class SuperAdminDashboard extends AppCompatActivity {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), AddEntrenador.class);
             startActivity(i);
+            finish();
             //return true;
         }
 

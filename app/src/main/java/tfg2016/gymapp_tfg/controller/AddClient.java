@@ -171,6 +171,7 @@ public class AddClient extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
+        finish();
     }
 
     @Override

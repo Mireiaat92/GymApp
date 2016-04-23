@@ -55,6 +55,7 @@ public class Register extends Activity {
             // Switching to Register screen
             Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);
+            finish();
         }
     };
 

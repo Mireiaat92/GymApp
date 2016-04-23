@@ -71,11 +71,12 @@
                 android:password="true"/>
             <!-- Login button -->
             <Button android:id="@+id/btnLogin"
-                android:background="#CDDC39"
-                android:layout_width="fill_parent"
+                android:background="#3F51B5"
+                android:layout_width="216dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="Login"/>
+                android:text="Login"
+                android:layout_gravity="center_horizontal" />
             <!-- Link to Registration Screen -->
             <TextView android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"

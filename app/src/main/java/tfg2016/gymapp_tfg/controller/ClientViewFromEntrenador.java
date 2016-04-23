@@ -122,6 +122,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
             i.putExtra("selectedClient", selectedClient);
             i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
+            finish();
         }
         else if (id == R.id.action_add_task){
             // Switching to addClient screen
@@ -129,6 +130,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
             i.putExtra("selectedClient", selectedClient);
             i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -208,6 +210,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
                     i.putExtra("myEntrenador", myEntrenador);
 
                     startActivity(i);
+                    finish();
                 }
             });
         }
@@ -217,6 +220,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
+        finish();
     }
 
     @Override

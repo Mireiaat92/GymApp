@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#E0E0E0">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_client_dashboard"
@@ -17,32 +17,51 @@
 <RelativeLayout
     android:id="@+id/infoEntrenador"
     android:layout_width="match_parent"
-    android:layout_height="220px"
-    android:layout_below="@+id/btnPerfil"
-    android:background="#E0E0E0">
+    android:layout_height="100px"
+    android:layout_below="@+id/toolbar_client_dashboard"
+    android:background="#ffffff">
     <TextView
         android:id="@+id/entrenadorlabel"
         android:text="@string/entrenadorlabel"
         android:textStyle="bold"
         android:textColor="#000000"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/entrenador"
-        android:layout_below="@+id/entrenadorlabel"
+        android:layout_toRightOf="@+id/entrenadorlabel"
         android:textColor="#404040"
+        android:layout_gravity="center_horizontal|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/clientslabel"
+        android:layout_below="@+id/infoEntrenador"
+        android:layout_width="wrap_content"
+        android:layout_height="100px"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="#424242"
+            android:text="TASQUES"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/tascalistview"
         android:layout_below="@+id/infoEntrenador"
-        android:divider="#000000"
+        android:background="#ffffff"
+        android:divider="#E0E0E0"
+        android:dividerHeight="4px"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

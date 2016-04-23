@@ -137,6 +137,7 @@ public class TaskViewFromClient extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
         i.putExtra("myClient", myClient);
         startActivity(i);
+        finish();
     }
 
     @Override
