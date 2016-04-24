@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -74,17 +71,8 @@ public class EntrenadorDashboard extends AppCompatActivity {
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
 
-        initToolBar();
-
-        //=============================
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.messages);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Pendent d'implementar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-
+        this.initToolBar();
+        this.initFloatingButton();
     }
 
     public void initToolBar() {
@@ -94,6 +82,21 @@ public class EntrenadorDashboard extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    public void initFloatingButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addClient);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Snackbar.make(view, "Pendent d'implementar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Intent i = new Intent(getApplicationContext(), AddClient.class);
+                i.putExtra("myEntrenador", myEntrenador);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -108,18 +111,10 @@ public class EntrenadorDashboard extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_client) {
-            // Switching to addClient screen
-            Intent i = new Intent(getApplicationContext(), AddClient.class);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            finish();
-            //return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
+
+    */
 
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {

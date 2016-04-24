@@ -41,15 +41,6 @@
                 android:layout_marginBottom="20dip"
                 android:textColor="#708090"
                 android:singleLine="true"/>
-
-            <Button
-                android:id="@+id/addClient"
-                android:background="#FF4081"
-                android:layout_width="199dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:text="@string/addClient"
-                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -33,6 +33,22 @@
         android:layout_below="@+id/toolbar_add_task"
         android:layout_centerHorizontal="true">
 
+        <!--TITOL TASK LABEL-->
+        <EditText
+            android:id="@+id/titol_task"
+            android:hint="@string/titollabel"
+            android:inputType="textCapWords"
+            android:maxLength="250"
+            android:layout_below="@+id/toolbar_add_task"
+            android:textColorHint="#bbbbbb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="20dip"
+            android:textColor="#708090"
+            android:singleLine="false"
+            android:textSize="20dp"/>
+
         <!--DECRIPCIO TASK LABEL-->
         <EditText
             android:id="@+id/descripcio_task"
@@ -42,29 +58,30 @@
             android:layout_below="@+id/titol_task"
             android:textColorHint="#bbbbbb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500px"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="20dip"
             android:textColor="#708090"
-            android:singleLine="false" />
+            android:singleLine="false"
+            android:textSize="20dp"/>
 
     <RelativeLayout
-        android:id="@+id/layoutDate"
-        android:layout_width="wrap_content"
+        android:id="@+id/layoutDataInici"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/descripcio_task"
         android:weightSum="1">
         <!--DUE DATE TASK LABEL-->
-        <EditText
-            android:id="@+id/duedate_task"
+        <TextView
+            android:id="@+id/iniciDate_task"
             android:hint="@string/duedatelabel"
+            android:textSize="20dp"
             android:textColorHint="#bbbbbb"
-            android:layout_width="wrap_content"
-            android:gravity="left"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:layout_height="100px"
             android:textColor="#708090"
             android:singleLine="true"
-            android:layout_alignParentBottom="false"
             android:layout_alignParentStart="false" />
 
         <ImageButton
@@ -73,22 +90,40 @@
             android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/duedate_task"
-            android:layout_toEndOf="@+id/duedate_task" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
-        <Button
-            android:id="@+id/AddNewTask"
-            android:layout_below="@+id/layoutDate"
-            android:gravity="center|center_vertical"
-            android:background="#FF4081"
-            android:layout_width="172dp"
+    <RelativeLayout
+        android:id="@+id/layoutDataFinal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutDataInici"
+        android:weightSum="1">
+        <!--DUE DATE TASK LABEL-->
+        <TextView
+            android:id="@+id/finalDate_task"
+            android:hint="@string/duedatelabel"
+            android:textSize="20dp"
+            android:textColorHint="#bbbbbb"
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:layout_height="100px"
+            android:textColor="#708090"
+            android:singleLine="true"
+            android:layout_alignParentStart="false" />
+
+        <ImageButton
+            android:id="@+id/btnChangeDate"
+            android:src="@drawable/ic_calendar"
+            android:background="@null"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addTask"
-            android:layout_gravity="center_horizontal"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100px" />
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
     </RelativeLayout>
 </ScrollView>
 

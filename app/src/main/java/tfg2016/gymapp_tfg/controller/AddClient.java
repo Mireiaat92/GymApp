@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,37 +46,8 @@ public class AddClient extends AppCompatActivity {
         Intent intent = getIntent();
         myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
 
-        this.initializeButtons();
-
         initToolBar();
     }
-
-    /**
-     * Method initializeButtons. Interfície
-     */
-    public void initializeButtons(){
-        Button addClient = (Button) findViewById(R.id.addClient);
-        addClient.setOnClickListener(clickAddClient);
-    }
-    public Button.OnClickListener clickAddClient = new Button.OnClickListener() {
-        public void onClick(View v) {
-            try {
-                if (AddClient.this.getMail().equalsIgnoreCase("")) {
-                    Toast.makeText(AddClient.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
-                } else {
-                    //Comprovem que el camp mail tingui el format adequat
-                    checkemail(AddClient.this.getMail());
-                    if (emailcheck == true) {
-                        addClient(AddClient.this.getMail());
-                    } else {
-                        Toast.makeText(AddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
 
     public void initToolBar() {
@@ -98,23 +69,40 @@ public class AddClient extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_add_client, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_client) {
-            // Switching to addClient screen
-            Intent i = new Intent(getApplicationContext(), AddClient.class);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            //return true;
+        if (id == R.id.action_done){
+            try {
+                if (AddClient.this.getMail().equalsIgnoreCase("")) {
+                    Toast.makeText(AddClient.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
+                } else {
+                    //Comprovem que el camp mail tingui el format adequat
+                    checkemail(AddClient.this.getMail());
+                    if (emailcheck == true) {
+                        addClient(AddClient.this.getMail());
+                    } else {
+                        Toast.makeText(AddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      * Method addClient
@@ -139,6 +127,7 @@ public class AddClient extends AppCompatActivity {
             Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
             userDashboard.putExtra("myEntrenador", myEntrenador);
             startActivity(userDashboard);
+            finish();
         }
         else{
             Toast.makeText(AddClient.this, getResources().getString(R.string.userNoExist), Toast.LENGTH_SHORT).show();

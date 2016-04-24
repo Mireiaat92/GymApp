@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -80,6 +81,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         new RemoteDataTask().execute();
 
         initToolBar();
+        this.initFloatingButton();
     }
 
 
@@ -101,6 +103,22 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         );
     }
 
+    public void initFloatingButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addTask);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Snackbar.make(view, "Pendent d'implementar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                // Switching to addTask screen
+                Intent i = new Intent(getApplicationContext(), AddTask.class);
+                i.putExtra("selectedClient", selectedClient);
+                i.putExtra("myEntrenador", myEntrenador);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,14 +137,6 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         if (id == R.id.action_view_profile) {
             // Switching to addClient screen
             Intent i = new Intent(getApplicationContext(), PerfilClientFromEntrenador.class);
-            i.putExtra("selectedClient", selectedClient);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            finish();
-        }
-        else if (id == R.id.action_add_task){
-            // Switching to addClient screen
-            Intent i = new Intent(getApplicationContext(), AddTask.class);
             i.putExtra("selectedClient", selectedClient);
             i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
@@ -200,7 +210,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
 
                         nameResponse = ParseCloud.callFunction("checkTascaData", params);
                         ParseObject userParse = nameResponse.iterator().next();
-                        selectedTasca = new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Due_Date"),userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId());
+                        selectedTasca = new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Init_Date"), userParse.getDate("Final_Date"), userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

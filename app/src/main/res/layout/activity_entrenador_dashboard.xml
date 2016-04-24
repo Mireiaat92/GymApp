@@ -38,11 +38,11 @@
         android:dividerHeight="4px"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/messages"
+        android:id="@+id/addClient"
         android:background="#FF4081"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@drawable/ic_add"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="20dp"

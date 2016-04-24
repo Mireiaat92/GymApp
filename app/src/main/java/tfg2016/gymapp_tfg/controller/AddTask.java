@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,7 +20,6 @@ import android.widget.Toast;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,7 +67,11 @@ public class AddTask extends AppCompatActivity {
     private int month;
     private int day;
 
-    String titol;
+    private TextView pickDateIni;
+    private DatePickerDialog pickDateDialogIni;
+    private TextView pickDateFin;
+    private DatePickerDialog pickDateDialogFin;
+    private SimpleDateFormat dateFormatter;
 
     static final int DATE_DIALOG_ID = 999;
 
@@ -80,40 +86,88 @@ public class AddTask extends AppCompatActivity {
 
         this.initializeButtons();
         initToolBar();
+        this.setDateTimeFieldIni();
+        this.setDateTimeFieldFin();
 
-        setCurrentDateOnView();
+        //setCurrentDateOnaIniciView();
+
     }
 
     /**
      * Method initializeButtons. Interfície
      */
     public void initializeButtons() {
-        Button addTask = (Button) findViewById(R.id.AddNewTask);
-        addTask.setOnClickListener(clickAddTask);
-
-        ImageButton btnChangeDate = (ImageButton) findViewById(R.id.btnChangeDate);
+        /*ImageButton btnChangeDate = (ImageButton) findViewById(R.id.btnChangeDate);
         btnChangeDate.setOnClickListener(clickChangeDate);
+
+        final TextView viewIIniciDate = (TextView) findViewById(R.id.iniciDate_task);
+        viewIIniciDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                viewIIniciDate.setOnClickListener(clickChangeIniciDate);
+            }
+
+        });
+
+        final TextView viewFinalDate = (TextView) findViewById(R.id.finalDate_task);
+        viewFinalDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                viewFinalDate.setOnClickListener(clickChangeFinalDate);
+            }
+
+        });*/
+
+        pickDateIni = (TextView) findViewById(R.id.iniciDate_task);
+        pickDateIni.setOnClickListener(clickPickDateIni);
+        pickDateIni.setInputType(InputType.TYPE_NULL);
+        pickDateIni.setOnFocusChangeListener(focusPickDateIni);
+        pickDateFin = (TextView) findViewById(R.id.finalDate_task);
+        pickDateFin.setOnClickListener(clickPickDateFin);
+        pickDateFin.setInputType(InputType.TYPE_NULL);
+        pickDateFin.setOnFocusChangeListener(focusPickDateFin);
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
     }
 
-    public Button.OnClickListener clickAddTask = new Button.OnClickListener() {
-        public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_add_task, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_done){
             try {
-
-                Format formatter = new SimpleDateFormat("d MMM");
-                String titol = formatter.format(AddTask.this.getDueDate());
-
-                if (AddTask.this.getDescripcio().equalsIgnoreCase("")) {
-                    Toast.makeText(AddTask.this, "Els camps titol i descripcio son obligatoris", Toast.LENGTH_SHORT).show();
+                if (AddTask.this.getDescripcio().equalsIgnoreCase("")/* || AddTask.this.getDueDate().compareTo(null)*/){
+                    Toast.makeText(AddTask.this, "Els camps descripció i data son obligatoris", Toast.LENGTH_SHORT).show();
                 } else {
-                    addTask(selectedClient.getObjectId(), titol, AddTask.this.getDescripcio(), AddTask.this.getDueDate());
+                    addTask(selectedClient.getObjectId(), AddTask.this.getTitol(), AddTask.this.getDescripcio(), AddTask.this.getInitDate(), AddTask.this.getFinalDate());
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public ImageButton.OnClickListener clickChangeIniciDate = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showDialog(DATE_DIALOG_ID);
+        }
     };
 
-    public ImageButton.OnClickListener clickChangeDate = new Button.OnClickListener() {
+    public ImageButton.OnClickListener clickChangeFinalDate = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
             showDialog(DATE_DIALOG_ID);
@@ -144,13 +198,14 @@ public class AddTask extends AppCompatActivity {
      * @return
      * @throws ParseException
      */
-    public void addTask(String objectId, String titol, String descripcio, Date dueDate) throws ParseException {
+    public void addTask(String objectId, String titol, String descripcio, Date initDate, Date finalDate) throws ParseException {
 
         HashMap<String, Object> paramsAddTasca = new HashMap<String, Object>();
         paramsAddTasca.put("idclient", objectId);
         paramsAddTasca.put("titol", titol);
         paramsAddTasca.put("descripcio", descripcio);
-        paramsAddTasca.put("duedate", dueDate);
+        paramsAddTasca.put("initdate", initDate);
+        paramsAddTasca.put("finaldate", finalDate);
         ParseCloud.callFunction("addTask", paramsAddTasca);
 
         Toast.makeText(AddTask.this, "Tasca afegida correctament", Toast.LENGTH_SHORT).show();
@@ -158,9 +213,20 @@ public class AddTask extends AppCompatActivity {
         Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientViewFromEntrenador.class);
         clientActivityFromEntrenador.putExtra("selectedClient", selectedClient);
         startActivity(clientActivityFromEntrenador);
-
+        finish();
     }
 
+
+    /**
+     * Method getTitol
+     *
+     * @return titolText
+     */
+    public String getTitol() {
+        EditText titol = (EditText) findViewById(R.id.titol_task);
+        String titolText = titol.getText().toString();
+        return titolText;
+    }
 
     /**
      * Method getDescripcio
@@ -174,23 +240,35 @@ public class AddTask extends AppCompatActivity {
     }
 
     /**
-     * Method getDueDate
+     * Method getInitDate
      *
-     * @return dueDateText
+     * @return initDateText
      */
-    public Date getDueDate() {
-        EditText dueDateText = (EditText) findViewById(R.id.duedate_task);
-        String dueDateString = dueDateText.getText().toString();
-        Date dueDate = ConvertStringToDate(dueDateString);
-        return dueDate;
+    public Date getInitDate() {
+        TextView initDateText = (TextView) findViewById(R.id.iniciDate_task);
+        String initDateString = initDateText.getText().toString();
+        Date initDate = ConvertStringToDate(initDateString);
+        return initDate;
+    }
+
+    /**
+     * Method getFinalDate
+     *
+     * @return finalDateText
+     */
+    public Date getFinalDate() {
+        TextView finalDateText = (TextView) findViewById(R.id.finalDate_task);
+        String finalDateString = finalDateText.getText().toString();
+        Date finalDate = ConvertStringToDate(finalDateString);
+        return finalDate;
     }
 
 
     //==========================================
     // display current date
-    public void setCurrentDateOnView() {
+    public void setCurrentDateOnaIniciView() {
 
-        tvDisplayDate = (TextView) findViewById(R.id.duedate_task);
+        tvDisplayDate = (TextView) findViewById(R.id.iniciDate_task);
 
         final Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
@@ -254,4 +332,66 @@ public class AddTask extends AppCompatActivity {
     public void onBackPressed(){
         doBack();
     }
+
+    //=========================================================================================
+
+
+
+    private void setDateTimeFieldIni() {
+        Calendar newCalendar = Calendar.getInstance();
+        pickDateDialogIni = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                pickDateIni.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    public EditText.OnClickListener clickPickDateIni = new EditText.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            pickDateDialogIni.show();
+        }
+    };
+
+    public EditText.OnFocusChangeListener focusPickDateIni = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus)
+                pickDateDialogIni.show();
+            v.clearFocus();
+        }
+    };
+
+    private void setDateTimeFieldFin() {
+        Calendar newCalendar = Calendar.getInstance();
+        pickDateDialogFin = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                pickDateFin.setText(dateFormatter.format(newDate.getTime()));
+            }
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public EditText.OnClickListener clickPickDateFin = new EditText.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            pickDateDialogFin.show();
+        }
+    };
+
+    public EditText.OnFocusChangeListener focusPickDateFin = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus)
+                pickDateDialogFin.show();
+            v.clearFocus();
+        }
+    };
 }

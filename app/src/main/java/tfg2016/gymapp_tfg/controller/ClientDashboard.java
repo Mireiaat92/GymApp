@@ -231,7 +231,7 @@ public class ClientDashboard extends AppCompatActivity {
 
                         nameResponse = ParseCloud.callFunction("checkTascaData", params);
                         ParseObject userParse = nameResponse.iterator().next();
-                        selectedTasca = new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Due_Date"),userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId());
+                        selectedTasca = new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Init_Date"), userParse.getDate("Final_Date"), userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

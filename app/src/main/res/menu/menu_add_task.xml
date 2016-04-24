@@ -2,9 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_view_profile"
+        android:id="@+id/action_done"
         android:orderInCategory="200"
-        android:title="ViewProfile"
-        android:icon="@drawable/ic_account_circle"
-        app:showAsAction="ifRoom"></item>
+        android:title="Add Task"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="ifRoom"
+        ></item>
 </menu>
