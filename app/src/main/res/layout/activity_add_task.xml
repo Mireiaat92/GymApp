@@ -58,51 +58,22 @@
             android:layout_below="@+id/titol_task"
             android:textColorHint="#bbbbbb"
             android:layout_width="match_parent"
-            android:layout_height="500px"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="20dip"
             android:textColor="#708090"
             android:singleLine="false"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
     <RelativeLayout
-        android:id="@+id/layoutDataInici"
+        android:id="@+id/layoutDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/descripcio_task"
         android:weightSum="1">
         <!--DUE DATE TASK LABEL-->
         <TextView
-            android:id="@+id/iniciDate_task"
-            android:hint="@string/duedatelabel"
-            android:textSize="20dp"
-            android:textColorHint="#bbbbbb"
-            android:layout_width="match_parent"
-            android:gravity="left|center_vertical"
-            android:layout_height="100px"
-            android:textColor="#708090"
-            android:singleLine="true"
-            android:layout_alignParentStart="false" />
-
-        <ImageButton
-            android:id="@+id/btnChangeDate"
-            android:src="@drawable/ic_calendar"
-            android:background="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layoutDataFinal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutDataInici"
-        android:weightSum="1">
-        <!--DUE DATE TASK LABEL-->
-        <TextView
-            android:id="@+id/finalDate_task"
+            android:id="@+id/dueDate_task"
             android:hint="@string/duedatelabel"
             android:textSize="20dp"
             android:textColorHint="#bbbbbb"

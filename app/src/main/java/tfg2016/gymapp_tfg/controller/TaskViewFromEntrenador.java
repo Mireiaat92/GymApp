@@ -85,8 +85,7 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
 
         Boolean completada = selectedTasca.getCompletada();
-        Date initDate = selectedTasca.getInitDate();
-        Date finalDate = selectedTasca.getFinalDate();
+        Date dueDate = selectedTasca.getDueDate();
         String status =  null;
             if (completada == true){
             status="Completed";

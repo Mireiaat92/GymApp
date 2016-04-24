@@ -10,18 +10,16 @@ public class Tasca implements Serializable {
     private String idClient;
     private String titol;
     private String descripcio;
-    private Date initDate;
-    private Date finalDate;
+    private Date dueDate;
     private Boolean completada;
     private String comentari;
     private String objectId;
 
-    public Tasca(String idClient, String titol, String descripcio, Date initDate, Date finalDate, Boolean completada, String comentari, String objectId) {
+    public Tasca(String idClient, String titol, String descripcio, Date dueDate, Boolean completada, String comentari, String objectId) {
         this.setIdClient(idClient);
         this.setTitol(titol);
         this.setDescripcio(descripcio);
-        this.setInitDate(initDate);
-        this.setFinalDate(finalDate);
+        this.setDueDate(dueDate);
         this.setCompletada(completada);
         this.setComentari(comentari);
         this.setObjectId(objectId);
@@ -48,18 +46,11 @@ public class Tasca implements Serializable {
         return this.descripcio;
     }
 
-    public void setInitDate(Date initDate) {
-        this.initDate = initDate;
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
-    public Date getInitDate() {
-        return this.initDate;
-    }
-
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
-    }
-    public Date getFinalDate() {
-        return this.finalDate;
+    public Date getDueDate() {
+        return this.dueDate;
     }
 
     public void setCompletada(Boolean completada) {
