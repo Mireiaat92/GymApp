@@ -101,6 +101,9 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         TextView txtStatus = (TextView) findViewById(R.id.status);
         txtStatus.setText(status);
 
+        String comentarii = selectedTasca.getComentari();
+        TextView txtcomentari = (TextView) findViewById(R.id.comentari);
+        txtcomentari.setText(comentarii);
 
     }
 

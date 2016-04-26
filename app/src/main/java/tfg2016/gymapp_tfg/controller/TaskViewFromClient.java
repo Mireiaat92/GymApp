@@ -1,11 +1,15 @@
 package tfg2016.gymapp_tfg.controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,10 @@ public class TaskViewFromClient extends AppCompatActivity {
     Button tascaCompletada;
     TextView deixarComentari;
     Button textboto;
+
+    EditText comentari;
+
+    String resultText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,10 @@ public class TaskViewFromClient extends AppCompatActivity {
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
+
+        String comentarii = selectedTasca.getComentari();
+        TextView txtcomentari = (TextView) findViewById(R.id.comentari);
+        txtcomentari.setText(comentarii);
 
         Boolean status = selectedTasca.getCompletada();
         textboto = (Button) findViewById(R.id.tascaCompletada);
@@ -127,11 +139,54 @@ public class TaskViewFromClient extends AppCompatActivity {
         deixarComentari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TaskViewFromClient.this, "DEIXAR COMENTARI", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(TaskViewFromClient.this, "DEIXAR COMENTARI", Toast.LENGTH_SHORT).show();
+
+                //==============================================================
+                // get prompts.xml view
+                LayoutInflater layoutInflater = LayoutInflater.from(TaskViewFromClient.this);
+                View promptView = layoutInflater.inflate(R.layout.dialog, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TaskViewFromClient.this);
+                alertDialogBuilder.setView(promptView);
+
+                comentari = (EditText) promptView.findViewById(R.id.comentariText);
+                comentari.setText(selectedTasca.getComentari());
+
+                // setup a dialog window
+                alertDialogBuilder.setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                resultText= String.valueOf((comentari.getText()));
+
+                                //(====
+                                try {
+                                    ParseQuery<ParseObject> query = new ParseQuery<ParseObject >("TASQUES");
+                                    ParseObject objFromServer = query.get(selectedTasca.getObjectId());
+                                    objFromServer.put("Comentari", resultText);
+                                    objFromServer.save();
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                //=====
+                            }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create an alert dialog
+                AlertDialog alert = alertDialogBuilder.create();
+                alert.show();
+                //==============================================================
             }
+
         });
 
     }
+
 
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
