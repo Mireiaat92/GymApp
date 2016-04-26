@@ -58,6 +58,7 @@ public class ClientDashboard extends AppCompatActivity {
 
     private static Intent intent;
 
+
     Toolbar toolbar;
 
     @Override
@@ -108,6 +109,15 @@ public class ClientDashboard extends AppCompatActivity {
             startActivity(i);
             finish();
         }
+
+        if (id == R.id.action_message){
+            Intent i = new Intent(getApplicationContext(), ChatFromClient.class);
+            i.putExtra("myClient", myClient);
+            i.putExtra("myEntrenador", myEntrenador);
+            startActivity(i);
+            finish();
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

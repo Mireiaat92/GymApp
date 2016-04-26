@@ -30,5 +30,9 @@
     <string name="clientView">"Client View"</string>
     <string name="SuperAdminDashboard">"SuperAdmin Dashboard"</string>
     <string name="addEntrenador">Add Entrenador</string>
+    <string name="message_hint">Say anything</string>
+    <string name="send">Send</string>
+    <string name="profile_me">My Profile Pic</string>
+    <string name="profile_other">Other profile pic</string>
 
 </resources>

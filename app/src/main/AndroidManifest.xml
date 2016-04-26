@@ -80,5 +80,9 @@
         <activity android:name=".controller.AddEntrenador"
             android:label="Add Entrenador"></activity>
 
+        <!--  Entry for AddEntrenador -->
+        <activity android:name=".controller.ChatFromClient"
+            android:label="CHAT"></activity>
+
     </application>
 </manifest>

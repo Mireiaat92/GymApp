@@ -8,4 +8,11 @@
         android:icon="@drawable/ic_account_circle"
         app:showAsAction="ifRoom"
         ></item>
+    <item
+        android:id="@+id/action_message"
+        android:orderInCategory="200"
+        android:title="PerfilClient"
+        android:icon="@drawable/ic_playlist_add"
+        app:showAsAction="ifRoom"
+        ></item>
 </menu>
