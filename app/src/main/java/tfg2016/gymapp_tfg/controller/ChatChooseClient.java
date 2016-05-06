@@ -4,15 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -30,9 +26,9 @@ import tfg2016.gymapp_tfg.model.Entrenador;
 
 
 /**
- * Created by Mireia on 01/04/2016.
+ * Created by Mireia on 06/05/2016.
  */
-public class EntrenadorDashboard extends AppCompatActivity {
+public class ChatChooseClient  extends AppCompatActivity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -72,57 +68,15 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
-
         this.initToolBar();
-        this.initFloatingButton();
     }
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_entrenador_dashboard);
-        toolbar.setTitle(R.string.EntrenadorDashboard);
+        toolbar.setTitle("CHAT");
 
         setSupportActionBar(toolbar);
     }
-
-    public void initFloatingButton() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addClient);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Pendent d'implementar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                Intent i = new Intent(getApplicationContext(), AddClient.class);
-                i.putExtra("myEntrenador", myEntrenador);
-                startActivity(i);
-                finish();
-            }
-        });
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_entrenador_dashboard, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_message){
-            Intent i = new Intent(getApplicationContext(), ChatChooseClient.class);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
 
     // RemoteDataTask AsyncTask
@@ -131,7 +85,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Create a progressdialog
-            mProgressDialog = new ProgressDialog(EntrenadorDashboard.this);
+            mProgressDialog = new ProgressDialog(ChatChooseClient.this);
             // Set progressdialog title
             mProgressDialog.setTitle("Accedint a la llista de clients");
             // Set progressdialog message
@@ -163,7 +117,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
             // Locate the listview in listview_main.xml
             listview = (ListView) findViewById(R.id.listview);
             // Pass the results into an ArrayAdapter
-            adapter = new ArrayAdapter<String>(EntrenadorDashboard.this,
+            adapter = new ArrayAdapter<String>(ChatChooseClient.this,
                     R.layout.item_entrenador_dashboard);
             // Retrieve object "name" from Parse.com database
             for (ParseObject clients : ob) {
@@ -174,12 +128,12 @@ public class EntrenadorDashboard extends AppCompatActivity {
             // Close the progressdialog
             mProgressDialog.dismiss();
             // Capture button clicks on ListView items
-            listview.setOnItemClickListener(new OnItemClickListener() {
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(EntrenadorDashboard.this, ClientViewFromEntrenador.class);
+                    Intent i = new Intent(ChatChooseClient.this, ChatFromEntrenador.class);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();
@@ -208,4 +162,5 @@ public class EntrenadorDashboard extends AppCompatActivity {
     public void onBackPressed(){
 
     }
+
 }

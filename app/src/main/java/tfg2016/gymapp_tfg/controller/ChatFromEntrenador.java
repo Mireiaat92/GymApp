@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +31,10 @@ import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 
-public class ChatFromClient extends Activity {
+/**
+ * Created by Mireia on 06/05/2016.
+ */
+public class ChatFromEntrenador extends Activity {
     public static final String USER_NAME_KEY = "Subjecte";
 
     private static final String TAG = ChatFromClient.class.getName();
@@ -57,12 +59,12 @@ public class ChatFromClient extends Activity {
         this.myEntrenador = myEntrenador;
     }
 
-    private Client myClient;
-    public Client getMyClient() {
-        return myClient;
+    private Client selectedClient;
+    public Client getSelectedClient() {
+        return selectedClient;
     }
-    public void setMyClient(Client myClient) {
-        this.myClient = myClient;
+    public void setSelectedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
     }
 
     private BroadcastReceiver pushReceiver = new BroadcastReceiver() {
@@ -89,11 +91,11 @@ public class ChatFromClient extends Activity {
         Intent intent = getIntent();
 
         myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
-        myClient = (Client) intent.getSerializableExtra("myClient");
-        username = myClient.getName();
+        selectedClient = (Client) intent.getSerializableExtra("selectedClient");
+        username = myEntrenador.getName();
 
         idEntrenador = myEntrenador.getObjectId();
-        idClient = myClient.getObjectId();
+        idClient = selectedClient.getObjectId();
         this.receiveMessage();
     }
 
@@ -110,10 +112,9 @@ public class ChatFromClient extends Activity {
         txtMessage = (EditText) findViewById(R.id.writeMensaje);
         btnSend = (Button) findViewById(R.id.btnSend);
         chatListView = (ListView) findViewById(R.id.chatList);
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         chatListView.setAdapter(adapter);
-        btnSend.setOnClickListener(new OnClickListener() {
+        btnSend.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -191,8 +192,8 @@ public class ChatFromClient extends Activity {
     }
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
-        i.putExtra("myClient", myClient);
+        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+        i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
         finish();
     }

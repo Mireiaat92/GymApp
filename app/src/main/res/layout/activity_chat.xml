@@ -24,13 +24,13 @@
         android:text="Send" />
 
     <EditText
-        android:id="@+id/etMensaje"
+        android:id="@+id/writeMensaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:ems="10"
-        android:hint="etMensaje" />
+        android:hint="@string/write_message" />
 
     <ListView
         android:id="@+id/chatList"
