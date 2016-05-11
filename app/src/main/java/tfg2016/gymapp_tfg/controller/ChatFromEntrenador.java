@@ -112,7 +112,9 @@ public class ChatFromEntrenador extends Activity {
         txtMessage = (EditText) findViewById(R.id.writeMensaje);
         btnSend = (Button) findViewById(R.id.btnSend);
         chatListView = (ListView) findViewById(R.id.chatList);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
+        adapter = new ArrayAdapter<String>(this, R.layout.item_chat);
+
         chatListView.setAdapter(adapter);
         btnSend.setOnClickListener(new View.OnClickListener() {
 

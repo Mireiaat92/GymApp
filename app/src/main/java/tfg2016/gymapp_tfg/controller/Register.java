@@ -30,7 +30,7 @@ public class Register extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set View to register.xml
-        setContentView(R.layout.register);
+        setContentView(R.layout.activity_register);
         this.initializeButtons();
     }
 

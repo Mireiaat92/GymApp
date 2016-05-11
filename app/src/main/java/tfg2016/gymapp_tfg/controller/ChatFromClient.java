@@ -80,9 +80,6 @@ public class ChatFromClient extends Activity {
 
         setupUI();
 
-        //PushService.subscribe(this, "Prueba", Chat.class);
-        //PushService.setDefaultPushCallback(this, Chat.class);
-
         receiveMessage();
         registerReceiver(pushReceiver, new IntentFilter("MyAction"));
 

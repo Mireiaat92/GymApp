@@ -166,9 +166,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
                 // Locate the class table named "TASQUES" in Parse.com
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                    "TASQUES");
-
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TASQUES");
             query.whereEqualTo("ID_Client", selectedClient.getObjectId());
             query.orderByDescending("_created_at");
             try {

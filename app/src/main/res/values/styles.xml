@@ -4,13 +4,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
-        <!-- colorPrimary is used for coloring the Toolbar  1.FFA000  -->
-        <item name="colorPrimary">#3F51B5</item>
-        <!-- colorPrimaryDark is used for coloring the status bar 1.FF8F00 -->
-        <item name="colorPrimaryDark">#303F9F</item>
+        <!-- colorPrimary is used for coloring the Toolbar  1.FFA000 2.3F51B5 3.9B26AF 4.009688 -->
+        <item name="colorPrimary">#009688</item>
+        <!-- colorPrimaryDark is used for coloring the status bar 1.FF8F00 2.303F9F 3.9B26AF 4.009688 -->
+        <item name="colorPrimaryDark">#009688</item>
         <!-- colorAccent is used as the default value for colorControlActivated
-             which is used to tint widgets #FF4081 1. CDDC39 -->
-        <item name="colorAccent">#FF4081</item>
+             which is used to tint widgets #FF4081 1. CDDC39 2.FF4081 3.68EFAD -->
+        <item name="colorAccent">#FF9800</item>
     </style>
 
 </resources>

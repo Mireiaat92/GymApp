@@ -35,7 +35,7 @@ public class Login extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setting default screen to login.xml
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         this.initializeButtons();
     }
 

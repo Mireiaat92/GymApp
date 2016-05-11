@@ -10,7 +10,7 @@
 
     <application
         android:name=".model.EnableDatastore"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/logooo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
@@ -91,6 +91,10 @@
         <!--  Entry for ChatFromEntrenador -->
         <activity android:name=".controller.ChatChooseClient"
             android:label="CHAT CHOOSE CLIENT"></activity>
+
+        <!--  Entry for EditTask -->
+        <activity android:name=".controller.EditTask"
+            android:label="EDIT TASK"></activity>
 
     </application>
 </manifest>

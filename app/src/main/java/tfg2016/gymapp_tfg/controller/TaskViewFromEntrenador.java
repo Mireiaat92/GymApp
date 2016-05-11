@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -107,10 +109,40 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_task_view_from_entrenador, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.editTask){
+            Intent i = new Intent(this, EditTask.class);
+            i.putExtra("selectedTasca", selectedTasca);
+            i.putExtra("selectedClient", selectedClient);
+            i.putExtra("myEntrenador", myEntrenador);
+            startActivity(i);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
+        i.putExtra("taskId", selectedTasca.getObjectId());
         startActivity(i);
         finish();
     }
