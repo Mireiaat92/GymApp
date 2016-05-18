@@ -61,7 +61,7 @@ public class ChatChooseClient  extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from activity_entrenador_dashboard.xml
-        setContentView(R.layout.activity_entrenador_dashboard);
+        setContentView(R.layout.activity_chat_choose_client);
 
         intent = this.getIntent();
         setMyEntrenador((Entrenador) intent.getSerializableExtra("myEntrenador")); //serialització de l'objecte
@@ -72,10 +72,21 @@ public class ChatChooseClient  extends AppCompatActivity {
     }
 
     public void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_entrenador_dashboard);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_chat_choose_client);
         toolbar.setTitle("CHAT");
 
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        doBack();
+                    }
+                }
+
+        );
     }
 
 
@@ -158,9 +169,16 @@ public class ChatChooseClient  extends AppCompatActivity {
         }
     }
 
+    public void doBack(){
+        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+        finish();
+    }
+
     @Override
     public void onBackPressed(){
-
+        doBack();
     }
 
 }

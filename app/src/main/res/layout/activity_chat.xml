@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#E0E0E0">
+    android:background="#fff">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_chat"
@@ -15,7 +15,7 @@
 
     <ListView
         android:id="@+id/chatList"
-        android:background="#CCCCCC"
+        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar_chat"
@@ -38,7 +38,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:ems="10"
-        android:textColor="#a6a3a3"
+        android:textColor="#000"
+        android:textColorHint="#a6a3a3"
         android:hint="@string/write_message" />
 
 </RelativeLayout>

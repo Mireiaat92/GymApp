@@ -1,11 +1,12 @@
 package tfg2016.gymapp_tfg.controller;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -32,7 +33,7 @@ import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 
-public class ChatFromClient extends Activity {
+public class ChatFromClient extends AppCompatActivity {
     public static final String USER_NAME_KEY = "Subjecte";
 
     private static final String TAG = ChatFromClient.class.getName();
@@ -65,6 +66,8 @@ public class ChatFromClient extends Activity {
         this.myClient = myClient;
     }
 
+    Toolbar toolbar;
+
     private BroadcastReceiver pushReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -72,6 +75,7 @@ public class ChatFromClient extends Activity {
             receiveMessage();
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,25 @@ public class ChatFromClient extends Activity {
         idEntrenador = myEntrenador.getObjectId();
         idClient = myClient.getObjectId();
         this.receiveMessage();
+        this.initToolBar();
+    }
+
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar_chat);
+        toolbar.setTitle(myEntrenador.getName()  + " " + myEntrenador.getSurname());
+
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_arrow);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        doBack();
+                    }
+                }
+
+        );
     }
 
     @Override
@@ -107,8 +130,9 @@ public class ChatFromClient extends Activity {
         txtMessage = (EditText) findViewById(R.id.writeMensaje);
         btnSend = (Button) findViewById(R.id.btnSend);
         chatListView = (ListView) findViewById(R.id.chatList);
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1);
+
+        adapter = new ArrayAdapter<String>(this, R.layout.item_chat);
+
         chatListView.setAdapter(adapter);
         btnSend.setOnClickListener(new OnClickListener() {
 
