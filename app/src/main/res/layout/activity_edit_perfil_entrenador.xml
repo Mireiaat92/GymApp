@@ -1,7 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#eee">
 
@@ -31,71 +31,95 @@
             android:layout_height="wrap_content"
             tools:context=".controller.EditPerfilEntrenador">
 
-            <!--NOM -->
+            <!-- AVATAR -->
             <LinearLayout
-                android:id="@+id/linearLayoutNom"
+                android:id="@+id/linear_layout_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/imageEntrenador"
+                    android:clickable="false"
+                    android:src="@drawable/avatar"
+                    android:background="@drawable/rounded_border_image"/>
+            </LinearLayout>
+
+            <!--BOTÓ CAMBIAR FOTO PERFIL -->
+            <LinearLayout
+                android:id="@+id/linearLayoutChangePhoto"
+                android:layout_below="@+id/linear_layout_avatar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="60dp">
-
-                <EditText
-                    android:id="@+id/EditTextNom"
-                    android:layout_width="match_parent"
+                android:gravity="center_horizontal">
+                <Button
+                    android:id="@+id/galleryButton"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="@string/namelabel"
+                    android:text="@string/gallery"
+                    android:textColor="#ffffff"
                     android:padding="10dp"
-                    android:singleLine="true"
-                    android:inputType="textCapWords"
-                    android:textColor="#333333"
-                    android:textColorHint="#bbbbbb" />
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button"
+                    android:textSize="16sp" />
             </LinearLayout>
+
+            <!--NOM -->
+            <TextView
+                android:id="@+id/Nom"
+                android:layout_below="@+id/linearLayoutChangePhoto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/namelabel"/>
+            <EditText android:id="@+id/EditTextNom"
+                android:layout_below="@+id/Nom"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="15dip"/>
+
 
             <!--COGNOM -->
-            <LinearLayout
-                android:id="@+id/linearLayoutCognom"
-                android:layout_below="@+id/linearLayoutNom"
+            <TextView
+                android:id="@+id/Cognom"
+                android:layout_below="@+id/EditTextNom"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="60dp">
-
-                <EditText
-                    android:id="@+id/EditTextCognom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="@string/surnamelabel"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:inputType="textCapWords"
-                    android:textColor="#333333"
-                    android:textColorHint="#bbbbbb" />
-            </LinearLayout>
-
+                android:textColor="#372c24"
+                android:text="@string/surnamelabel"/>
+            <EditText android:id="@+id/EditTextCognom"
+                android:layout_below="@+id/Cognom"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="15dip"/>
 
             <!--ESPECIALITATS -->
-            <LinearLayout
-                android:id="@+id/linearLayoutEspecialitats"
-                android:layout_below="@+id/linearLayoutCognom"
+            <TextView
+                android:id="@+id/Especialitats"
+                android:layout_below="@+id/EditTextCognom"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="60dp">
-
-                <EditText
-                    android:id="@+id/EditTextEspecialitats"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="@string/especialitatslabel"
-                    android:padding="10dp"
-                    android:singleLine="true"
-                    android:inputType="textCapWords"
-                    android:textColor="#333333"
-                    android:textColorHint="#bbbbbb" />
-            </LinearLayout>
+                android:textColor="#372c24"
+                android:text="@string/especialitatslabel"/>
+            <EditText android:id="@+id/EditTextEspecialitats"
+                android:layout_below="@+id/Especialitats"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="15dip"/>
 
         </RelativeLayout>
     </ScrollView>

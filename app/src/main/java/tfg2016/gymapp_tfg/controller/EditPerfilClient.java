@@ -89,6 +89,17 @@ public class EditPerfilClient extends AppCompatActivity {
         gallery.setOnClickListener(clickGallery);
     }
 
+    /**
+     * Method Button.OnClickListener clickGallery
+     */
+    public Button.OnClickListener clickGallery = new Button.OnClickListener() {
+        public void onClick(View v) {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, LOAD_IMAGE);
+        }
+    };
+
 
     public void initializeClientData() {
         EditText name = (EditText)findViewById(R.id.EditTextNom);
@@ -121,16 +132,6 @@ public class EditPerfilClient extends AppCompatActivity {
 
     }
 
-    /**
-     * Method Button.OnClickListener clickGallery
-     */
-    public Button.OnClickListener clickGallery = new Button.OnClickListener() {
-        public void onClick(View v) {
-            Intent i = new Intent(
-                    Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(i, LOAD_IMAGE);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

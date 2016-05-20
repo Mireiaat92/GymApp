@@ -1,22 +1,32 @@
 package tfg2016.gymapp_tfg.controller;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Entrenador;
+import tfg2016.gymapp_tfg.resources.Complements;
 
 /**
  * Created by Mireia on 18/05/2016.
@@ -31,10 +41,20 @@ public class EditPerfilEntrenador extends AppCompatActivity {
         this.myEntrenador = myEntrenador;
     }
 
+    private ParseFile file;
+    public ParseFile getFile() {
+        return file;
+    }
+    public void setFile(ParseFile file) {
+        this.file = file;
+    }
+
 
     private static Intent intent;
 
     Toolbar toolbar;
+
+    private static final int LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +89,21 @@ public class EditPerfilEntrenador extends AppCompatActivity {
     }
 
     public void initializeButtons() {
-        //TODO pendent d 'implementar (per afegir imatge)
+        Button gallery = (Button)findViewById(R.id.galleryButton);
+        gallery.setOnClickListener(clickGallery);
     }
+
+    /**
+     * Method Button.OnClickListener clickGallery
+     */
+    public Button.OnClickListener clickGallery = new Button.OnClickListener() {
+        public void onClick(View v) {
+            Intent i = new Intent(
+                    Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, LOAD_IMAGE);
+        }
+    };
+
 
     public void initializeEntrenadorData() {
         EditText name = (EditText)findViewById(R.id.EditTextNom);
@@ -82,7 +115,16 @@ public class EditPerfilEntrenador extends AppCompatActivity {
         EditText especialitats = (EditText)findViewById(R.id.EditTextEspecialitats);
         especialitats.setText(myEntrenador.getEspecialitats());
 
-        //TODO Afegir camps restants IMATGE
+        try
+        {
+            setFile(Complements.getDataFromBBDD(myEntrenador.getObjectId(), "ENTRENADORS", "objectId").get(0).getParseFile("Foto"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (getFile() != null) {
+            ImageView imageView = (ImageView) findViewById(R.id.imageEntrenador);
+            Complements.setImageViewWithParseFile(imageView, file, true);
+        }
 
     }
 
@@ -159,6 +201,7 @@ public class EditPerfilEntrenador extends AppCompatActivity {
         params.put("cognom", nouPerfil.getSurname());
         params.put("mail", nouPerfil.getMail());
         params.put("especialitats", nouPerfil.getEspecialitats());
+        params.put("Foto", getFile());
 
         //TODO Afegir camps que falten IMATGE
 
@@ -168,6 +211,44 @@ public class EditPerfilEntrenador extends AppCompatActivity {
         return success;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            //Try to reduce the necessary memory
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            options.inSampleSize = 2;
+
+            // String picturePath contains the path of selected Image
+            ImageView imageView = (ImageView) findViewById(R.id.imageEntrenador);
+            Bitmap image = BitmapFactory.decodeFile(picturePath, options);
+            imageView.setImageBitmap(image);
+
+            //file it's a ParseFile that contains the image selected
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.JPEG, 75, stream);
+            byte[] dataImage = stream.toByteArray();
+            setFile(new ParseFile(myEntrenador.getObjectId()+".JPEG", dataImage));
+            try {
+                file.save();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), PerfilEntrenador.class);
