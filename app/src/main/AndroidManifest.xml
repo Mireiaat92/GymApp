@@ -96,5 +96,18 @@
         <activity android:name=".controller.EditTask"
             android:label="EDIT TASK"></activity>
 
+        <!--  Entry for EditPerfilClient -->
+        <activity android:name=".controller.EditPerfilClient"
+            android:label="EDIT PROFILE CLIENT"></activity>
+
+        <!--  Entry for EditPerfilClient -->
+        <activity android:name=".controller.PerfilEntrenador"
+            android:label="PERFIL ENTRENADOR"></activity>
+
+        <!--  Entry for EditPerfilEntrenador -->
+        <activity android:name=".controller.EditPerfilEntrenador"
+            android:label="EDIT PROFILE ENTRENADOR"></activity>
+
+
     </application>
 </manifest>

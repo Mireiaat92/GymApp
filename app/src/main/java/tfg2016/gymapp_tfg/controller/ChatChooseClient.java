@@ -153,7 +153,7 @@ public class ChatChooseClient  extends AppCompatActivity {
 
                         nameResponse = ParseCloud.callFunction("checkUserSignInClients", params);
                         ParseObject userParse = nameResponse.iterator().next();
-                        selectedClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+                        selectedClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

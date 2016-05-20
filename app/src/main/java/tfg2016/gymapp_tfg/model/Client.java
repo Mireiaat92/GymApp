@@ -10,14 +10,23 @@ public class Client implements Serializable{
 
     private String mail;
 
+    private Double weight;
+
+    private Double height;
+
+    private String objectiu;
+
     private String objectId;
 
     private String ID_Entrenador;
 
-    public Client(String name, String surname, String mail, String objectId, String ID_Entrenador) {
+    public Client(String name, String surname, String mail, Double weight, Double height, String objectiu, String objectId, String ID_Entrenador) {
         this.setMail(mail);
         this.setName(name);
         this.setSurname(surname);
+        this.setWeight(weight);
+        this.setHeight(height);
+        this.setObjectiu(objectiu);
         this.setObjectId(objectId);
         this.setID_Entrenador(ID_Entrenador);
     }
@@ -44,6 +53,30 @@ public class Client implements Serializable{
 
     public String getSurname() {
         return this.surname;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getWeight() {
+        return this.weight;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Double getHeight() {
+        return this.height;
+    }
+
+    public void setObjectiu(String objectiu) {
+        this.objectiu = objectiu;
+    }
+
+    public String getObjectiu() {
+        return this.objectiu;
     }
 
     public void setObjectId(String objectId) {

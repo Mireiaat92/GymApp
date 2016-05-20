@@ -14,20 +14,24 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import tfg2016.gymapp_tfg.R;
-import tfg2016.gymapp_tfg.model.Client;
+import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.resources.Complements;
 
 /**
- * Created by Mireia on 10/04/2016.
+ * Created by Mireia on 18/05/2016.
  */
-public class PerfilClient extends AppCompatActivity {
-    private Client client;
-    public Client getClient() {
-        return client;
+public class PerfilEntrenador extends AppCompatActivity {       //TODO Pendent d'implementar
+
+    private Entrenador myEntrenador;
+    public Entrenador getMyEntrenador() {
+        return myEntrenador;
     }
-    public void setClient(Client client) {
-        this.client = client;
+    public void setMyEntrenador(Entrenador myEntrenador) {
+        this.myEntrenador = myEntrenador;
     }
+
+
+    private static Intent intent;
 
     Toolbar toolbar;
 
@@ -35,21 +39,21 @@ public class PerfilClient extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from activity_client_perfil.xml
-        setContentView(R.layout.activity_perfil_client);
+        setContentView(R.layout.activity_perfil_entrenador);
 
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
 
-        setClient((Client) i.getSerializableExtra("client"));
+        setMyEntrenador((Entrenador) i.getSerializableExtra("myEntrenador"));
 
-        this.initializeClientData();
+        this.initializeEntrenadorData();
         initToolBar();
 
     }
 
     public void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_client_perfil);
-        toolbar.setTitle(client.getName() + " " + client.getSurname());
+        toolbar = (Toolbar) findViewById(R.id.toolbar_perfil_entrenador);
+        toolbar.setTitle(myEntrenador.getName() + " " + myEntrenador.getSurname());
 
         setSupportActionBar(toolbar);
 
@@ -68,7 +72,7 @@ public class PerfilClient extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_perfil_client, menu);
+        getMenuInflater().inflate(R.menu.menu_perfil_entrenador, menu);
         return true;
     }
 
@@ -80,8 +84,8 @@ public class PerfilClient extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.editPerfil){
-            Intent i = new Intent(this, EditPerfilClient.class);
-            i.putExtra("client", client);
+            Intent i = new Intent(this, EditPerfilEntrenador.class);
+            i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
             finish();
         }
@@ -89,38 +93,33 @@ public class PerfilClient extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void initializeClientData() {
+    public void initializeEntrenadorData() {
 
-        TextView txtname = (TextView) findViewById(R.id.clientName);
-        txtname.setText(client.getName() + " " + client.getSurname());
+        String name = myEntrenador.getName() + " " + myEntrenador.getSurname();
+        TextView txtname = (TextView) findViewById(R.id.name);
+        txtname.setText(name);
 
-        TextView txtmail = (TextView) findViewById(R.id.clientMail);
-        txtmail.setText(client.getMail());
+        String mail = myEntrenador.getMail();
+        TextView txtmail = (TextView) findViewById(R.id.mail);
+        txtmail.setText(mail);
 
-        TextView weight = (TextView)findViewById(R.id.clientHeight);
-        weight.setText(client.getWeight().toString() + " cm");
-
-        TextView height = (TextView)findViewById(R.id.clientWeight);
-        height.setText(client.getHeight().toString() + " kg");
-
-        TextView objectiu = (TextView)findViewById(R.id.clientObjectiu);
-        objectiu.setText(client.getObjectiu());
+        String especialitats = myEntrenador.getEspecialitats();
+        TextView txtespecialitats = (TextView) findViewById(R.id.especialitats);
+        txtespecialitats.setText(especialitats);
 
         try {
             ParseFile image;
-            image = Complements.getDataFromBBDD(client.getObjectId(), "CLIENTS", "objectId").get(0).getParseFile("Foto");
+            image = Complements.getDataFromBBDD(myEntrenador.getObjectId(), "ENTRENADORS", "objectId").get(0).getParseFile("Foto");
             ImageView imageView = (ImageView) findViewById(R.id.imageView);
             Complements.setImageViewWithParseFile(imageView, image, true);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
-
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
-        i.putExtra("myClient", client);
+        Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+        i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);
         finish();
     }
@@ -129,4 +128,5 @@ public class PerfilClient extends AppCompatActivity {
     public void onBackPressed(){
         doBack();
     }
+
 }

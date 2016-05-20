@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_client_perfil"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
+    <!-- AVATAR -->
+    <LinearLayout
+        android:id="@+id/linear_layout_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="80dp">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/imageView"
+            android:clickable="false"
+            android:src="@drawable/avatar"
+            android:background="@drawable/rounded_border_image"/>
+    </LinearLayout>
+
+    <!-- NAME LABEL -->
+    <TextView
+        android:id="@+id/namelabel"
+        android:layout_below="@+id/linear_layout_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/namelabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/clientName"
+        android:layout_below="@+id/linear_layout_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/namelabel"
+        android:textSize="25sp" />
+
+    <!-- MAIL LABEL -->
+    <TextView
+        android:id="@+id/maillabel"
+        android:layout_below="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/maillabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/clientMail"
+        android:layout_below="@+id/namelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/maillabel"
+        android:textSize="25sp" />
+
+    <!-- HEIGHT LABEL -->
+    <TextView
+        android:id="@+id/heightlabel"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heightlabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/clientHeight"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/heightlabel"
+        android:textSize="25sp" />
+
+    <!-- WEIGHT LABEL -->
+    <TextView
+        android:id="@+id/weightlabel"
+        android:layout_below="@+id/heightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weightlabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/clientWeight"
+        android:layout_below="@+id/heightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/weightlabel"
+        android:textSize="25sp" />
+
+    <!-- OBJECTIU LABEL -->
+    <TextView
+        android:id="@+id/objectiulabel"
+        android:layout_below="@+id/weightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/objectiulabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/clientObjectiu"
+        android:layout_below="@+id/weightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/objectiulabel"
+        android:textSize="25sp" />
+
+</RelativeLayout>

@@ -4,7 +4,7 @@
     android:layout_height="fill_parent" >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_client_perfil"
+        android:id="@+id/toolbar_perfil_entrenador"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:background="?attr/colorPrimary"
@@ -12,11 +12,27 @@
         android:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
 
+    <!-- AVATAR -->
+    <LinearLayout
+        android:id="@+id/linear_layout_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="80dp">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/imageView"
+            android:clickable="false"
+            android:src="@drawable/avatar"
+            android:background="@drawable/rounded_border_image"/>
+    </LinearLayout>
+
 
     <!-- NAME LABEL -->
     <TextView
         android:id="@+id/namelabel"
-        android:layout_below="@+id/toolbar_client_perfil"
+        android:layout_below="@+id/linear_layout_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/namelabel"
@@ -24,7 +40,7 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_below="@+id/toolbar_client_perfil"
+        android:layout_below="@+id/linear_layout_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/namelabel"
@@ -45,6 +61,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/maillabel"
+        android:textSize="25sp" />
+
+    <!-- ESPECIALITATS LABEL -->
+    <TextView
+        android:id="@+id/especialitatslabel"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/especialitatslabel"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/especialitats"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/especialitatslabel"
         android:textSize="25sp" />
 
 </RelativeLayout>

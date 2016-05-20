@@ -13,13 +13,16 @@ public class Entrenador  implements Serializable {
 
     private String mail;
 
+    private String especialitats;
+
     private String objectId;
 
 
-    public Entrenador(String name, String surname, String mail, String objectId) {
+    public Entrenador(String name, String surname, String mail, String especialitats, String objectId) {
         this.setMail(mail);
         this.setName(name);
         this.setSurname(surname);
+        this.setEspecialitats(especialitats);
         this.setObjectId(objectId);
     }
 
@@ -45,6 +48,14 @@ public class Entrenador  implements Serializable {
 
     public String getSurname() {
         return this.surname;
+    }
+
+    public void setEspecialitats(String especialitats) {
+        this.especialitats = especialitats;
+    }
+
+    public String getEspecialitats() {
+        return this.especialitats;
     }
 
     public void setObjectId(String objectId) {

@@ -1,0 +1,102 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:background="#eee">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_edit_perfil_entrenador"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/toolbar_edit_perfil_entrenador"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--suppress CheckTagEmptyBody -->
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".controller.EditPerfilEntrenador">
+
+            <!--NOM -->
+            <LinearLayout
+                android:id="@+id/linearLayoutNom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="60dp">
+
+                <EditText
+                    android:id="@+id/EditTextNom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/namelabel"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textCapWords"
+                    android:textColor="#333333"
+                    android:textColorHint="#bbbbbb" />
+            </LinearLayout>
+
+            <!--COGNOM -->
+            <LinearLayout
+                android:id="@+id/linearLayoutCognom"
+                android:layout_below="@+id/linearLayoutNom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="60dp">
+
+                <EditText
+                    android:id="@+id/EditTextCognom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/surnamelabel"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textCapWords"
+                    android:textColor="#333333"
+                    android:textColorHint="#bbbbbb" />
+            </LinearLayout>
+
+
+            <!--ESPECIALITATS -->
+            <LinearLayout
+                android:id="@+id/linearLayoutEspecialitats"
+                android:layout_below="@+id/linearLayoutCognom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="60dp">
+
+                <EditText
+                    android:id="@+id/EditTextEspecialitats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/especialitatslabel"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textCapWords"
+                    android:textColor="#333333"
+                    android:textColorHint="#bbbbbb" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -149,8 +149,8 @@ public class EditTask extends AppCompatActivity {
     }
 
     /**
-     * Method CargarViaje. Recuperamos la información de los datos del viaje especificado por el usuario
-     * @return Site
+     * Method CargarTasca. Recuperamos la información de los datos de la tarea seleccionada
+     * @return Tasca
      */
     public Tasca CargarTasca(){
         EditText TextTitol =(EditText)findViewById(R.id.EditTextTaskTitol);

@@ -163,8 +163,7 @@ public class Login extends Activity {
 
                 if (!loginResponse.isEmpty()) {
                     ParseObject userParse = loginResponse.iterator().next();
-                    myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"),
-                            userParse.getString("Mail"), /*userParse.getString("Contrasenya"),*/ userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+                    myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -196,7 +195,7 @@ public class Login extends Activity {
             if(!loginResponse.isEmpty()) {
                 ParseObject userParse = loginResponse.iterator().next();
                 myUserEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
-                        userParse.getString("Mail"), userParse.getObjectId());
+                        userParse.getString("Mail"), userParse.getString("Especialitats"), userParse.getObjectId());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -221,7 +220,7 @@ public class Login extends Activity {
             if(!loginResponse.isEmpty()) {
                 ParseObject userParse = loginResponse.iterator().next();
                 adminEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
-                        userParse.getString("Mail"), userParse.getObjectId());
+                        userParse.getString("Mail"), userParse.getString("Especialitats"), userParse.getObjectId());
             }
         } catch (ParseException e) {
             e.printStackTrace();

@@ -166,7 +166,7 @@ public class ClientDashboard extends AppCompatActivity {
 
                 if (!entrenadorResponse.isEmpty()) {
                     ParseObject userParse = entrenadorResponse.iterator().next();
-                    myEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getObjectId());
+                    myEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"), userParse.getString("Especialitats"), userParse.getObjectId());
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

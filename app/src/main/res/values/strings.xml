@@ -14,6 +14,7 @@
     <string name="mailClient">mailClient</string>
     <string name="addClient">Afegir client</string>
     <string name="namelabel">"Nom: "</string>
+    <string name="surnamelabel">"Cognom: "</string>
     <string name="maillabel">"Mail: "</string>
     <string name="naixementlabel">"Data naixement: "</string>
     <string name="peslabel">"Pes: "</string>
@@ -39,6 +40,14 @@
     <string name="save">Save</string>
     <string name="Edit">Edit</string>
     <string name="editTask">Edit Task</string>
+    <string name="editPerfilClient">Edit Profile</string>
+    <string name="heightlabel">"Alçada: "</string>
+    <string name="weightlabel">"Pes: "</string>
+    <string name="objectiulabel">"Objectiu: "</string>
+    <string name="especialitatslabel">"Especialitats: "</string>
+    <string name="editPerfilEntrenador">Edit Profile</string>
+    <string name="gallery">Galeria</string>
+    <string name="addProfileImage">Añadir foto de perfil</string>
 
 
 </resources>

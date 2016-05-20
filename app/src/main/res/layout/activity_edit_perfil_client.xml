@@ -1,0 +1,163 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:background="#eee">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_edit_perfil_client"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/toolbar_edit_perfil_client"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--suppress CheckTagEmptyBody -->
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".EditPerfilClient">
+
+            <!-- AVATAR -->
+            <LinearLayout
+                android:id="@+id/linear_layout_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/imageClient"
+                    android:clickable="false"
+                    android:src="@drawable/avatar"
+                    android:background="@drawable/rounded_border_image"/>
+            </LinearLayout>
+
+            <!--BOTÓ CAMBIAR FOTO PERFIL -->
+            <LinearLayout
+                android:id="@+id/linearLayoutChangePhoto"
+                android:layout_below="@+id/linear_layout_avatar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <Button
+                    android:id="@+id/galleryButton"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gallery"
+                    android:textColor="#ffffff"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!--NOM -->
+            <TextView
+                android:id="@+id/Nom"
+                android:layout_below="@+id/linearLayoutChangePhoto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/namelabel"/>
+            <EditText android:id="@+id/EditTextNom"
+                android:layout_below="@+id/Nom"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="20dip"/>
+
+
+            <!--COGNOM -->
+            <TextView
+                android:id="@+id/Cognom"
+                android:layout_below="@+id/EditTextNom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/surnamelabel"/>
+            <EditText android:id="@+id/EditTextCognom"
+                android:layout_below="@+id/Cognom"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="20dip"/>
+
+            <!--ALÇADA -->
+            <TextView
+                android:id="@+id/Alçada"
+                android:layout_below="@+id/EditTextCognom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/heightlabel"/>
+            <EditText android:id="@+id/EditTextAlçada"
+                android:layout_below="@+id/Alçada"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="20dip"/>
+
+            <!--PES -->
+            <TextView
+                android:id="@+id/Pes"
+                android:layout_below="@+id/EditTextAlçada"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/weightlabel"/>
+            <EditText android:id="@+id/EditTextPes"
+                android:layout_below="@+id/Pes"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#708090"
+                android:layout_marginBottom="20dip"/>
+
+            <!--OBJECTIU -->
+            <TextView
+                android:id="@+id/Objectiu"
+                android:layout_below="@+id/EditTextPes"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="@string/objectiulabel"/>
+            <EditText android:id="@+id/EditTextObjectiu"
+                android:layout_below="@+id/Objectiu"
+                android:maxLength="250"
+                android:inputType="textCapWords"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="false"
+                android:textColor="#708090"
+                android:layout_marginBottom="20dip"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
