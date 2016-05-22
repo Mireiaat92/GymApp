@@ -1,5 +1,7 @@
 package tfg2016.gymapp_tfg.controller;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,13 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -54,7 +60,16 @@ public class EditTask extends AppCompatActivity {
 
     private String taskId;
 
+    private DatePickerDialog pickDateDialog;
+
     private SimpleDateFormat dateFormatter;
+
+    private int year;
+    private int month;
+    private int day;
+
+    static final int DATE_DIALOG_ID = 999;
+    private TextView tvDisplayDate;
 
     Toolbar toolbar;
 
@@ -73,6 +88,8 @@ public class EditTask extends AppCompatActivity {
         this.initializeButtons();
         this.initializeTaskData();
         initToolBar();
+
+        setCurrentDateOnView();
     }
 
     public void initToolBar() {
@@ -93,7 +110,27 @@ public class EditTask extends AppCompatActivity {
         );
     }
 
+    public ImageButton.OnClickListener clickChangeDate = new Button.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showDialog(DATE_DIALOG_ID);
+        }
+    };
+
     public void initializeButtons() {
+        ImageButton btnChangeDate = (ImageButton) findViewById(R.id.btnChangeDate);
+        btnChangeDate.setOnClickListener(clickChangeDate);
+
+        final TextView view = (TextView) findViewById(R.id.dueDate_task);
+        view.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                view.setOnClickListener(clickChangeDate);
+            }
+
+        });
+
         Button sendDeleteThisTask = (Button) findViewById(R.id.sendDeleteThisTask);
         sendDeleteThisTask.setOnClickListener(clickSendDeleteThisTask);
     }
@@ -105,7 +142,7 @@ public class EditTask extends AppCompatActivity {
         EditText descripcio = (EditText)findViewById(R.id.EditTextTaskDescription);
         descripcio.setText(selectedTasca.getDescripcio());
 
-        EditText dueDate = (EditText)findViewById(R.id.EditTextTaskDueDate);
+        TextView dueDate = (TextView)findViewById(R.id.dueDate_task);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         dueDate.setText(dateFormatter.format(selectedTasca.getDueDate()));
 
@@ -159,7 +196,7 @@ public class EditTask extends AppCompatActivity {
         EditText TextDescripcio =(EditText)findViewById(R.id.EditTextTaskDescription);
         String descripcio = TextDescripcio.getText().toString();
 
-        EditText TextDueDate =(EditText)findViewById(R.id.EditTextTaskDueDate);
+        TextView TextDueDate =(TextView)findViewById(R.id.dueDate_task);
         String dueDateString = TextDueDate.getText().toString();
         Date dueDate = ConvertStringToDate(dueDateString);
 
@@ -234,6 +271,46 @@ public class EditTask extends AppCompatActivity {
 
         }
     };
+
+    //==========================================
+    // display current date
+    public void setCurrentDateOnView() {
+
+        tvDisplayDate = (TextView) findViewById(R.id.dueDate_task);
+
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                // set date picker as current date
+                return new DatePickerDialog(this, datePickerListener,
+                        year, month, day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener datePickerListener
+            = new DatePickerDialog.OnDateSetListener() {
+
+        // when dialog box is closed, below method will be called.
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            year = selectedYear;
+            month = selectedMonth;
+            day = selectedDay;
+
+            // set selected date into textview
+            tvDisplayDate.setText(new StringBuilder().append(day)
+                    .append("-").append(month + 1).append("-").append(year));
+        }
+    };
+
 
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), TaskViewFromEntrenador.class);

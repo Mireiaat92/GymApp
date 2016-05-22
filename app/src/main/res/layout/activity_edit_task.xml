@@ -65,36 +65,48 @@
 
                 <EditText
                     android:id="@+id/EditTextTaskDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
+                    android:hint="@string/descripciolabel"
                     android:scrollbars="vertical"
                     android:gravity="top|left"
                     android:lines="3"
                     android:inputType="textMultiLine"
                     android:singleLine="true"
                     android:textColor="#333333"
-                    android:textColorHint="#bbbbbb"/>
+                    android:textColorHint="#bbbbbb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayoutTaskDueDate"
-                android:layout_below="@+id/linearLayoutTaskDescription"
+                android:id="@+id/layoutDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/EditTextTaskDueDate"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_below="@+id/linearLayoutTaskDescription"
+                android:weightSum="1">
+                <!--DUE DATE TASK LABEL-->
+                <TextView
+                    android:id="@+id/dueDate_task"
+                    android:hint="@string/duedatelabel"
+                    android:textSize="20dp"
+                    android:textColorHint="#bbbbbb"
+                    android:layout_width="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:layout_height="100px"
+                    android:textColor="#708090"
                     android:singleLine="true"
-                    android:inputType="text"
-                    android:textColor="#333333"
-                    android:textColorHint="#bbbbbb"/>
+                    android:layout_alignParentStart="false" />
+
+                <ImageButton
+                    android:id="@+id/btnChangeDate"
+                    android:src="@drawable/ic_calendar"
+                    android:background="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true" />
             </LinearLayout>
 
             <LinearLayout
