@@ -80,7 +80,12 @@ public class ChatFromClient extends AppCompatActivity {
         Intent intent = getIntent();
         myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
         myClient = (Client) intent.getSerializableExtra("myClient");
-        if(myClient.getID_Entrenador()== null){
+
+        if(myClient.getID_Entrenador().isEmpty() || myClient.getID_Entrenador() == null){
+            Intent i = new Intent(getApplicationContext(), NoEntrenador.class);
+            i.putExtra("myClient", myClient);
+            startActivity(i);
+            finish();
 
         }else {
 
@@ -123,7 +128,7 @@ public class ChatFromClient extends AppCompatActivity {
         super.onDestroy();
 
         if (pushReceiver != null) {
-            unregisterReceiver(pushReceiver);
+            //unregisterReceiver(pushReceiver);
         }
     }
 
