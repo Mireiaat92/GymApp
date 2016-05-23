@@ -21,6 +21,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -165,7 +167,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-                // Locate the class table named "TASQUES" in Parse.com
+            // Locate the class table named "TASQUES" in Parse.com
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TASQUES");
             query.whereEqualTo("ID_Client", selectedClient.getObjectId());
             query.orderByDescending("_created_at");
@@ -184,10 +186,14 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
             listview = (ListView) findViewById(R.id.tascalistview);
             // Pass the results into an ArrayAdapter
             adapter = new ArrayAdapter<String>(ClientViewFromEntrenador.this,
-                    R.layout.item_entrenador_dashboard);
+                    R.layout.item);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
-                adapter.add((String) tasques.get("Titol"));
+
+                String date = convertStringToDate(tasques.getDate("Due_Date"));
+
+                adapter.add(date + " - "+ tasques.get("Titol"));
+
             }
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);
@@ -224,6 +230,18 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         }
     }
 
+    public String convertStringToDate(Date indate)
+    {
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM");
+
+        try{
+            dateString = sdfr.format( indate );
+        }catch (Exception ex ){
+            System.out.println(ex);
+        }
+        return dateString;
+    }
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
         i.putExtra("myEntrenador", myEntrenador);

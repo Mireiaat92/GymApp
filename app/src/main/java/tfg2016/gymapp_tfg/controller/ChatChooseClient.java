@@ -129,7 +129,7 @@ public class ChatChooseClient  extends AppCompatActivity {
             listview = (ListView) findViewById(R.id.listview);
             // Pass the results into an ArrayAdapter
             adapter = new ArrayAdapter<String>(ChatChooseClient.this,
-                    R.layout.item_entrenador_dashboard);
+                    R.layout.item);
             // Retrieve object "name" from Parse.com database
             for (ParseObject clients : ob) {
                 adapter.add((String) clients.get("Nom") + " " + clients.get("Cognom"));

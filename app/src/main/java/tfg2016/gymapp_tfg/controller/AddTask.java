@@ -119,8 +119,8 @@ public class AddTask extends AppCompatActivity {
 
         if (id == R.id.action_done){
             try {
-                if (AddTask.this.getDescripcio().equalsIgnoreCase("")/* || AddTask.this.getDueDate().compareTo(null)*/){
-                    Toast.makeText(AddTask.this, "Els camps descripció i data son obligatoris", Toast.LENGTH_SHORT).show();
+                if (AddTask.this.getDescripcio().equalsIgnoreCase("") || AddTask.this.getTitol().equalsIgnoreCase("")){
+                    Toast.makeText(AddTask.this, "Els camps descripció i titol son obligatoris", Toast.LENGTH_SHORT).show();
                 } else {
                     addTask(selectedClient.getObjectId(), AddTask.this.getTitol(), AddTask.this.getDescripcio(), AddTask.this.getDueDate());
                 }

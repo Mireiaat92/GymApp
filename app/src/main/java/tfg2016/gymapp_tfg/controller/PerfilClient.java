@@ -97,11 +97,25 @@ public class PerfilClient extends AppCompatActivity {
         TextView txtmail = (TextView) findViewById(R.id.clientMail);
         txtmail.setText(client.getMail());
 
-        TextView weight = (TextView)findViewById(R.id.clientHeight);
-        weight.setText(client.getWeight().toString() + " cm");
+        String weightValue = null;
+        TextView weight = (TextView)findViewById(R.id.weight);
+        if (client.getWeight().toString() == null || client.getWeight().toString() == "0.0"){
+            weightValue = "not assigned";
+        }
+        else{
+            weightValue = client.getWeight().toString() + " kg";
+        }
+        weight.setText(weightValue);
 
-        TextView height = (TextView)findViewById(R.id.clientWeight);
-        height.setText(client.getHeight().toString() + " kg");
+        String heightValue = null;
+        TextView height = (TextView)findViewById(R.id.height);
+        if (client.getHeight().toString() == null || client.getHeight().toString() == "0.0"){
+            heightValue = "not assigned";
+        }
+        else{
+            heightValue = client.getHeight().toString() + " cm";
+        }
+        height.setText(heightValue);
 
         TextView objectiu = (TextView)findViewById(R.id.clientObjectiu);
         objectiu.setText(client.getObjectiu());

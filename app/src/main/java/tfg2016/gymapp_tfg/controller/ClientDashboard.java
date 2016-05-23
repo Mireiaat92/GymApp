@@ -216,7 +216,7 @@ public class ClientDashboard extends AppCompatActivity {
             listview = (ListView) findViewById(R.id.tascalistview);
             // Pass the results into an ArrayAdapter
             adapter = new ArrayAdapter<String>(ClientDashboard.this,
-                    R.layout.item_entrenador_dashboard);
+                    R.layout.item);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
                 adapter.add((String) tasques.get("Titol"));

@@ -12,22 +12,41 @@
         android:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
 
+    <!-- AVATAR -->
+    <LinearLayout
+        android:id="@+id/linear_layout_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="80dp">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/imageView"
+            android:clickable="false"
+            android:src="@drawable/avatar"
+            android:background="@drawable/rounded_border_image"/>
+    </LinearLayout>
+
     <!-- NAME LABEL -->
     <TextView
         android:id="@+id/namelabel"
-        android:layout_below="@+id/toolbar_perfil_client_from_entrenador"
+        android:layout_below="@+id/linear_layout_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/namelabel"
-        android:textSize="25sp" />
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/name"
-        android:layout_below="@+id/toolbar_perfil_client_from_entrenador"
+        android:layout_below="@+id/linear_layout_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/namelabel"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_marginTop="40dp"/>
 
     <!-- MAIL LABEL -->
     <TextView
@@ -36,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/maillabel"
+        android:textStyle="bold"
         android:textSize="25sp" />
 
     <TextView
@@ -44,6 +64,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/maillabel"
+        android:textSize="25sp" />
+
+    <!-- HEIGHT LABEL -->
+    <TextView
+        android:id="@+id/heightlabel"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/heightlabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_below="@+id/maillabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/heightlabel"
+        android:textSize="25sp" />
+
+    <!-- WEIGHT LABEL -->
+    <TextView
+        android:id="@+id/weightlabel"
+        android:layout_below="@+id/heightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weightlabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_below="@+id/heightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/weightlabel"
+        android:textSize="25sp" />
+
+    <!-- OBJECTIU LABEL -->
+    <TextView
+        android:id="@+id/objectiulabel"
+        android:layout_below="@+id/weightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/objectiulabel"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/objectiu"
+        android:layout_below="@+id/weightlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/objectiulabel"
         android:textSize="25sp" />
 
 </RelativeLayout>

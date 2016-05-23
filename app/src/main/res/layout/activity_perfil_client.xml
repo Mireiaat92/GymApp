@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:text="@string/namelabel"
         android:textStyle="bold"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/clientName"

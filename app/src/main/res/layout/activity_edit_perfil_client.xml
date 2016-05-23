@@ -149,8 +149,8 @@
                 android:text="@string/objectiulabel"/>
             <EditText android:id="@+id/EditTextObjectiu"
                 android:layout_below="@+id/Objectiu"
+                android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="250"
-                android:inputType="textCapWords"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"

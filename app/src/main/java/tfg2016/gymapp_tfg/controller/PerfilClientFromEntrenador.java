@@ -45,7 +45,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
         myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
-        this.initializeUserData();
+        this.initializeClientData();
         initToolBar();
     }
 
@@ -67,15 +67,36 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         );
     }
 
-    public void initializeUserData() {
+    public void initializeClientData() {
 
-        String name = selectedClient.getName() + " " + selectedClient.getSurname();
         TextView txtname = (TextView) findViewById(R.id.name);
-        txtname.setText(name);
+        txtname.setText(selectedClient.getName() + " " + selectedClient.getSurname());
 
-        String mail = selectedClient.getMail();
         TextView txtmail = (TextView) findViewById(R.id.mail);
-        txtmail.setText(mail);
+        txtmail.setText(selectedClient.getMail());
+
+        String weightValue = null;
+        TextView weight = (TextView)findViewById(R.id.weight);
+        if (selectedClient.getWeight().toString() == null || selectedClient.getWeight().toString() == "0.0"){
+            weightValue = "not assigned";
+        }
+        else{
+            weightValue = selectedClient.getWeight().toString() + " kg";
+        }
+        weight.setText(weightValue);
+
+        String heightValue = null;
+        TextView height = (TextView)findViewById(R.id.height);
+        if (selectedClient.getHeight().toString() == null || selectedClient.getHeight().toString() == "0.0"){
+            heightValue = "not assigned";
+        }
+        else{
+            heightValue = selectedClient.getHeight().toString() + " cm";
+        }
+        height.setText(heightValue);
+
+        TextView objectiu = (TextView)findViewById(R.id.objectiu);
+        objectiu.setText(selectedClient.getObjectiu());
 
 
     }

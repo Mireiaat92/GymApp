@@ -37,7 +37,7 @@
         <EditText
             android:id="@+id/titol_task"
             android:hint="@string/titollabel"
-            android:inputType="textCapWords"
+            android:inputType="textCapSentences"
             android:maxLength="250"
             android:layout_below="@+id/toolbar_add_task"
             android:textColorHint="#bbbbbb"
@@ -53,7 +53,7 @@
         <EditText
             android:id="@+id/descripcio_task"
             android:hint="@string/descripciolabel"
-            android:inputType="textCapWords|textMultiLine"
+            android:inputType="textCapSentences|textMultiLine"
             android:maxLength="250"
             android:layout_below="@+id/titol_task"
             android:textColorHint="#bbbbbb"

@@ -107,17 +107,18 @@
             <TextView
                 android:id="@+id/Especialitats"
                 android:layout_below="@+id/EditTextCognom"
+                android:inputType="textCapSentences|textMultiLine"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="@string/especialitatslabel"/>
             <EditText android:id="@+id/EditTextEspecialitats"
                 android:layout_below="@+id/Especialitats"
-                android:inputType="textCapWords"
+                android:inputType="textCapSentences|textMultiLine"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:textColor="#708090"
                 android:layout_marginBottom="15dip"/>
 
