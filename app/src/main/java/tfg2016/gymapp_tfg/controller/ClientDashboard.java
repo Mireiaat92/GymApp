@@ -20,6 +20,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -219,7 +221,9 @@ public class ClientDashboard extends AppCompatActivity {
                     R.layout.item);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
-                adapter.add((String) tasques.get("Titol"));
+                String date = convertStringToDate(tasques.getDate("Due_Date"));
+
+                adapter.add(date + " - "+ tasques.get("Titol"));
             }
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);
@@ -253,6 +257,19 @@ public class ClientDashboard extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public String convertStringToDate(Date indate)
+    {
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM");
+
+        try{
+            dateString = sdfr.format( indate );
+        }catch (Exception ex ){
+            System.out.println(ex);
+        }
+        return dateString;
     }
 
     @Override

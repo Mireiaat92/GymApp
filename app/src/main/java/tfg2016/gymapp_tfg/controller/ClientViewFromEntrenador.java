@@ -242,6 +242,7 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
         }
         return dateString;
     }
+
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
         i.putExtra("myEntrenador", myEntrenador);

@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dip"
                 android:layout_marginBottom="40dip"
-                android:text="Nuevo en la aplicación? Registrate aquí"
+                android:text="Nuevo en la aplicació? Registrate aquí"
                 android:gravity="center"
                 android:textSize="20dip"
                 android:textColor="#0b84aa"/>

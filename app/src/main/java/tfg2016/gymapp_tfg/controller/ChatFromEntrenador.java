@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -88,7 +87,7 @@ public class ChatFromEntrenador extends AppCompatActivity {
         //PushService.subscribe(this, "Prueba", Chat.class);
         //PushService.setDefaultPushCallback(this, Chat.class);
 
-        receiveMessage();
+        //receiveMessage();
         registerReceiver(pushReceiver, new IntentFilter("MyAction"));
 
         Intent intent = getIntent();
@@ -161,11 +160,6 @@ public class ChatFromEntrenador extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_parse_chat, menu);
-        return true;
-    }
 
     public void createPushNotifications(String message) {
         JSONObject object = new JSONObject();

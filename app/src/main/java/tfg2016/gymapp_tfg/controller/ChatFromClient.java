@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -34,8 +33,6 @@ import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 
 public class ChatFromClient extends AppCompatActivity {
-    public static final String USER_NAME_KEY = "Subjecte";
-
     private static final String TAG = ChatFromClient.class.getName();
 
     // TODO: fix the layout to be able to put 100 here
@@ -80,23 +77,27 @@ public class ChatFromClient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-
-        setupUI();
-
-        receiveMessage();
-        registerReceiver(pushReceiver, new IntentFilter("MyAction"));
-
         Intent intent = getIntent();
-
         myEntrenador = (Entrenador) intent.getSerializableExtra("myEntrenador");
         myClient = (Client) intent.getSerializableExtra("myClient");
-        username = myClient.getName();
+        if(myClient.getID_Entrenador()== null){
 
-        idEntrenador = myEntrenador.getObjectId();
-        idClient = myClient.getObjectId();
-        this.receiveMessage();
-        this.initToolBar();
+        }else {
+
+            setContentView(R.layout.activity_chat);
+
+            setupUI();
+
+            //receiveMessage();
+            registerReceiver(pushReceiver, new IntentFilter("MyAction"));
+
+            username = myClient.getName();
+
+            idEntrenador = myEntrenador.getObjectId();
+            idClient = myClient.getObjectId();
+            this.receiveMessage();
+            this.initToolBar();
+        }
     }
 
     public void initToolBar() {
@@ -142,7 +143,7 @@ public class ChatFromClient extends AppCompatActivity {
                 ParseObject message = new ParseObject("MISSATGES");
                 message.put("ID_client", idClient);
                 message.put("ID_entrenador", idEntrenador);
-                message.put(USER_NAME_KEY, username);
+                message.put("Subjecte", username);
                 message.put("Missatge", data);
                 message.saveInBackground(new SaveCallback() {
 
@@ -157,11 +158,6 @@ public class ChatFromClient extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_parse_chat, menu);
-        return true;
-    }
 
     public void createPushNotifications(String message) {
         JSONObject object = new JSONObject();
@@ -194,7 +190,7 @@ public class ChatFromClient extends AppCompatActivity {
 
                     StringBuilder builder = new StringBuilder();
                     for (int i = messages.size() - 1; i >= 0; i--) {
-                        builder.append(messages.get(i).getString(USER_NAME_KEY)
+                        builder.append(messages.get(i).getString("Subjecte")
                                 + ": " + messages.get(i).getString("Missatge") + "\n");
                     }
                     addItemstoListView(builder.toString());

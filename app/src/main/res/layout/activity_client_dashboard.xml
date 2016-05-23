@@ -17,7 +17,7 @@
 <RelativeLayout
     android:id="@+id/infoEntrenador"
     android:layout_width="match_parent"
-    android:layout_height="100px"
+    android:layout_height="wrap_content"
     android:layout_below="@+id/toolbar_client_dashboard"
     android:background="#ffffff">
     <TextView

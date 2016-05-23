@@ -97,9 +97,9 @@ public class PerfilClient extends AppCompatActivity {
         TextView txtmail = (TextView) findViewById(R.id.clientMail);
         txtmail.setText(client.getMail());
 
-        String weightValue = null;
-        TextView weight = (TextView)findViewById(R.id.weight);
-        if (client.getWeight().toString() == null || client.getWeight().toString() == "0.0"){
+        String weightValue = "blar";
+        TextView weight = (TextView)findViewById(R.id.clientWeight);
+        if (client.getWeight() == null || client.getWeight().toString() == "0.0"){
             weightValue = "not assigned";
         }
         else{
@@ -108,7 +108,7 @@ public class PerfilClient extends AppCompatActivity {
         weight.setText(weightValue);
 
         String heightValue = null;
-        TextView height = (TextView)findViewById(R.id.height);
+        TextView height = (TextView)findViewById(R.id.clientHeight);
         if (client.getHeight().toString() == null || client.getHeight().toString() == "0.0"){
             heightValue = "not assigned";
         }
