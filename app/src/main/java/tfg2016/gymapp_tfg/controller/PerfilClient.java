@@ -10,8 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+
+import java.util.HashMap;
+import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -91,13 +96,31 @@ public class PerfilClient extends AppCompatActivity {
 
     public void initializeClientData() {
 
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        //params.put("objectid", client.getObjectId());
+        params.put("valueFieldTable", client.getObjectId());
+        params.put("table", "CLIENTS");
+        params.put("field", "objectId");
+
+        List<ParseObject> clientResponse = null;
+        try {
+            clientResponse = ParseCloud.callFunction("getData", params);
+
+            ParseObject userParse = clientResponse.iterator().next();
+            setClient(new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador")));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         TextView txtname = (TextView) findViewById(R.id.clientName);
         txtname.setText(client.getName() + " " + client.getSurname());
 
         TextView txtmail = (TextView) findViewById(R.id.clientMail);
         txtmail.setText(client.getMail());
 
-        String weightValue = "blar";
+        String weightValue = null;
         TextView weight = (TextView)findViewById(R.id.clientWeight);
         if (client.getWeight() == null || client.getWeight().toString() == "0.0"){
             weightValue = "not assigned";

@@ -10,8 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+
+import java.util.HashMap;
+import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Entrenador;
@@ -94,6 +99,22 @@ public class PerfilEntrenador extends AppCompatActivity {       //TODO Pendent d
     }
 
     public void initializeEntrenadorData() {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("valueFieldTable", myEntrenador.getObjectId());
+        params.put("table", "ENTRENADORS");
+        params.put("field", "objectId");
+
+        List<ParseObject> entrenadorResponse = null;
+        try {
+            entrenadorResponse = ParseCloud.callFunction("getData", params);
+
+            ParseObject userParse = entrenadorResponse.iterator().next();
+            setMyEntrenador(new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
+                    userParse.getString("Mail"), userParse.getString("Especialitats"), userParse.getObjectId()));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         String name = myEntrenador.getName() + " " + myEntrenador.getSurname();
         TextView txtname = (TextView) findViewById(R.id.name);
