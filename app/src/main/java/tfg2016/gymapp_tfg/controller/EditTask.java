@@ -169,7 +169,9 @@ public class EditTask extends AppCompatActivity {
                 Toast.makeText(this, ("titol i edscripcio obligatoris"), Toast.LENGTH_SHORT).show();
             }
             else {
+                String selectedTascaId = selectedTasca.getObjectId();
                 Intent i = new Intent(this, TaskViewFromEntrenador.class);
+                i.putExtra("selectedTascaId", selectedTascaId);
                 i.putExtra("selectedTasca", selectedTasca);
                 i.putExtra("selectedClient", selectedClient);
                 i.putExtra("myEntrenador", myEntrenador);
@@ -313,8 +315,9 @@ public class EditTask extends AppCompatActivity {
 
 
     public void doBack(){
+        String selectedTascaId = selectedTasca.getObjectId();
         Intent i = new Intent(getApplicationContext(), TaskViewFromEntrenador.class);
-        i.putExtra("selectedTasca", selectedTasca);
+        i.putExtra("selectedTascaId", selectedTascaId);
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);

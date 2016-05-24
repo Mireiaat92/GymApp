@@ -16,14 +16,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
@@ -207,19 +205,10 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
                     // Send single item click data to SingleItemView Class
                     Intent i = new Intent(ClientViewFromEntrenador.this, TaskViewFromEntrenador.class);
 
-                    try {
-                        HashMap<String, Object> params = new HashMap<String, Object>();
-                        params.put("objectid", ob.get(position).getObjectId());
-                        List<ParseObject> nameResponse = null;
+                    String selectedTascaId = ob.get(position).getObjectId();
 
-                        nameResponse = ParseCloud.callFunction("checkTascaData", params);
-                        ParseObject userParse = nameResponse.iterator().next();
-                        selectedTasca = new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Due_Date"), userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
 
-                    i.putExtra("selectedTasca", selectedTasca);
+                    i.putExtra("selectedTascaId", selectedTascaId);
                     i.putExtra("selectedClient", selectedClient);
                     i.putExtra("myEntrenador", myEntrenador);
 

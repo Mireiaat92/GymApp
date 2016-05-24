@@ -9,7 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.parse.ParseCloud;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -20,6 +26,9 @@ import tfg2016.gymapp_tfg.model.Tasca;
  * Created by Mireia on 11/04/2016.
  */
 public class TaskViewFromEntrenador extends AppCompatActivity {
+
+    String selectedTascaId;
+
     private Tasca selectedTasca;
     public Tasca getSelectedTasca() {
         return selectedTasca;
@@ -54,7 +63,7 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
-        selectedTasca = (Tasca) i.getSerializableExtra("selectedTasca");
+        selectedTascaId = (String) i.getSerializableExtra("selectedTascaId");
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
         myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
@@ -80,6 +89,20 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
     }
 
     public void initializeTascaData() {
+            HashMap<String, Object> params = new HashMap<String, Object>();
+            params.put("objectid", selectedTascaId);
+
+            List<ParseObject> taskresponse = null;
+            try {
+                taskresponse = ParseCloud.callFunction("checkTascaData", params);
+
+                ParseObject userParse = taskresponse.iterator().next();
+                setSelectedTasca(new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Due_Date"), userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId()));
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
 
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
