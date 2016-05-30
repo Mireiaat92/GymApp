@@ -112,6 +112,10 @@
         <activity android:name=".controller.NoEntrenador"
             android:label="NO ENTRENADOR"></activity>
 
+        <!--  Entry for NoEntrenador -->
+        <activity android:name=".controller.ClientsFromEntrenadorSuperAdmin"
+            android:label="CLIENTS"></activity>
+
 
     </application>
 </manifest>

@@ -9,13 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
@@ -99,7 +103,7 @@ public class SuperAdminDashboard extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(SuperAdminDashboard.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de entrenadors");
+            mProgressDialog.setTitle("Accedint a la llista d'entrenadors");
             // Set progressdialog message
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
@@ -138,6 +142,35 @@ public class SuperAdminDashboard extends AppCompatActivity {
             // Close the progressdialog
             mProgressDialog.dismiss();
             // Capture button clicks on ListView items
+
+            //===============================
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // Send single item click data to SingleItemView Class
+                    Intent i = new Intent(SuperAdminDashboard.this, ClientsFromEntrenadorSuperAdmin.class);
+
+                    try {
+                        HashMap<String, Object> params = new HashMap<String, Object>();
+                        params.put("mail", ob.get(position).getString("Mail"));
+                        List<ParseObject> nameResponse = null;
+
+                        nameResponse = ParseCloud.callFunction("checkUserSignInEntrenadors", params);
+                        ParseObject userParse = nameResponse.iterator().next();
+                        selectedEntrenador = new Entrenador(userParse.getString("Nom"), userParse.getString("Cognom"),
+                                userParse.getString("Mail"), userParse.getString("Especialitats"), userParse.getObjectId());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    i.putExtra("selectedEntrenador", selectedEntrenador);
+                    // Open SingleItemView.java Activity
+                    startActivity(i);
+                    finish();
+
+                }
+            });
         }
     }
 

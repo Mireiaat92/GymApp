@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E0E0E0">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_clients_from_entrenador"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/clientslabel"
+        android:layout_below="@+id/toolbar_clients_from_entrenador"
+        android:layout_width="wrap_content"
+        android:layout_height="100px"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="#424242"
+            android:text="CLIENTS"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_below="@+id/clientslabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:divider="#E0E0E0"
+        android:dividerHeight="4px"/>
+
+</RelativeLayout>
