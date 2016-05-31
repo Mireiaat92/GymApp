@@ -1,20 +1,26 @@
 package tfg2016.gymapp_tfg.controller;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.HashMap;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
@@ -75,6 +81,70 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
                 }
 
         );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_clients_from_entrenador_superadmin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.deleteEntrenador) {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            // set title
+           //String alert_title = getResources().getString("Confirmación");
+            String alert_title = ("Confirmación");
+            String alert_description = ("¿Estas seguro que deseas eliminar este entrenador?");
+            alertDialogBuilder.setTitle(alert_title);
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage(alert_description)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        // Lo que sucede si se pulsa yes
+                        public void onClick(DialogInterface dialog,int id) {
+                            // Código propio del método borrado para ejemplo
+                            try {
+                                HashMap<String, Object> params = new HashMap<String, Object>();
+                                params.put("entrenadorId", selectedEntrenador.getObjectId());
+                                ParseCloud.callFunction("deleteEntrenador", params);
+                                ParseCloud.callFunction("deleteEntrenadorDependencies", params);
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            Intent i = new Intent(getApplicationContext(), SuperAdminDashboard.class);
+                            startActivity(i);
+                            finish();
+                        }
+
+
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // Si se pulsa no no hace nada
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
