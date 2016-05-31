@@ -37,7 +37,7 @@ public class NoEntrenador extends AppCompatActivity {
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_no_entrenador);
-        toolbar.setTitle("Chat");
+        toolbar.setTitle("Sin Entrenador");
 
         setSupportActionBar(toolbar);
 
@@ -46,22 +46,11 @@ public class NoEntrenador extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        doBack();
+                        onBackPressed();
                     }
                 }
 
         );
     }
 
-    public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
-        i.putExtra("myClient", myClient);
-        startActivity(i);
-        finish();
-    }
-
-    @Override
-    public void onBackPressed(){
-        doBack();
-    }
 }

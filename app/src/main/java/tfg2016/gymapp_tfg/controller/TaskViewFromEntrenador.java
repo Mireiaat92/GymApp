@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
@@ -149,12 +150,17 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.editTask){
-            Intent i = new Intent(this, EditTask.class);
-            i.putExtra("selectedTasca", selectedTasca);
-            i.putExtra("selectedClient", selectedClient);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            finish();
+            if(selectedTasca.getCompletada() == true){
+                Toast.makeText(TaskViewFromEntrenador.this, "No pots editar una tasca completada", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent i = new Intent(this, EditTask.class);
+                i.putExtra("selectedTasca", selectedTasca);
+                i.putExtra("selectedClient", selectedClient);
+                i.putExtra("myEntrenador", myEntrenador);
+                startActivity(i);
+                finish();
+            }
         }
 
         return super.onOptionsItemSelected(item);

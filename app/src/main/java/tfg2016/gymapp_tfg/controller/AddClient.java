@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tfg2016.gymapp_tfg.R;
+import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 
 /**
@@ -36,6 +37,14 @@ public class AddClient extends AppCompatActivity {
     }
     public void setMyEntrenador(Entrenador myEntrenador) {
         this.myEntrenador = myEntrenador;
+    }
+
+    private Client selectedClient;
+    public Client getSelectedClient() {
+        return selectedClient;
+    }
+    public void setSelectedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
     }
 
     @Override
@@ -114,20 +123,37 @@ public class AddClient extends AppCompatActivity {
         HashMap<String, Object> paramsCheckMail = new HashMap<String, Object>();
         paramsCheckMail.put("mail", mail);
         //Comprovem si el mail existeix a la BD
-        List<ParseObject> checkRegistro = ParseCloud.callFunction("checkUserSignInClients", paramsCheckMail);
+        List<ParseObject> loginResponse = null;
+        try {
+            loginResponse = ParseCloud.callFunction("checkUserSignInClients", paramsCheckMail);
 
-        if (checkRegistro.size() == 1) {//mail e
-            HashMap<String, Object> paramsAddEntrenador = new HashMap<String, Object>();
-            paramsAddEntrenador.put("mail", mail);
-            paramsAddEntrenador.put("identrenador", myEntrenador.getObjectId());
-            ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
+            if (!loginResponse.isEmpty()) {
+                ParseObject userParse = loginResponse.iterator().next();
+                setSelectedClient(new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador")));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-            Toast.makeText(AddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
 
-            Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
-            userDashboard.putExtra("myEntrenador", myEntrenador);
-            startActivity(userDashboard);
-            finish();
+        if (loginResponse.size() == 1) {//mail existent
+            if(selectedClient.getID_Entrenador().isEmpty()) {
+                HashMap<String, Object> paramsAddEntrenador = new HashMap<String, Object>();
+                paramsAddEntrenador.put("mail", mail);
+                paramsAddEntrenador.put("identrenador", myEntrenador.getObjectId());
+                ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
+
+                Toast.makeText(AddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
+
+                Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
+                userDashboard.putExtra("myEntrenador", myEntrenador);
+                startActivity(userDashboard);
+                finish();
+            }
+            else{
+                Toast.makeText(AddClient.this, "El client seleccionat ja té entrenador", Toast.LENGTH_SHORT).show();
+            }
+
         }
         else{
             Toast.makeText(AddClient.this, getResources().getString(R.string.userNoExist), Toast.LENGTH_SHORT).show();

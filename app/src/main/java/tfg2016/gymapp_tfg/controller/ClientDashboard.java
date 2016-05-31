@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.ParseCloud;
@@ -66,16 +67,16 @@ public class ClientDashboard extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-            super.onCreate(savedInstanceState);
-            // Set View to activity_client_dashboard.xml
-            setContentView(R.layout.activity_client_dashboard);
+        super.onCreate(savedInstanceState);
+        // Set View to activity_client_dashboard.xml
+        setContentView(R.layout.activity_client_dashboard);
 
-            intent = this.getIntent();
-            myClient = (Client) intent.getSerializableExtra("myClient"); //serialització de l'objecte
+        intent = this.getIntent();
+        myClient = (Client) intent.getSerializableExtra("myClient"); //serialització de l'objecte
 
-            initToolBar();
+        initToolBar();
 
-            this.initializeNomEntrenador();
+        this.initializeNomEntrenador();
 
         // Execute RemoteDataTask AsyncTask
         new RemoteDataTask().execute();
@@ -143,6 +144,24 @@ public class ClientDashboard extends AppCompatActivity {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
          }
+
+        RelativeLayout relativeclic1 =(RelativeLayout)findViewById(R.id.infoEntrenador);
+        relativeclic1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if (myEntrenador==null){
+                    Intent i = new Intent(ClientDashboard.this, NoEntrenador.class);
+                    startActivity(i);
+                }
+                else{
+                    Intent i = new Intent(ClientDashboard.this, PerfilEntrenadorFromClient.class);
+                    i.putExtra("myEntrenadorId", myEntrenador.getObjectId());
+                    i.putExtra("myClient", myClient);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
     }
 
 

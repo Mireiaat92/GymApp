@@ -112,10 +112,14 @@
         <activity android:name=".controller.NoEntrenador"
             android:label="NO ENTRENADOR"></activity>
 
-        <!--  Entry for NoEntrenador -->
+        <!--  Entry for Clients From Entrenadro SuperAdrmin -->
         <activity android:name=".controller.ClientsFromEntrenadorSuperAdmin"
             android:label="CLIENTS"></activity>
 
+
+        <!--  Entry for PerfilEntrenadorFromClient -->
+        <activity android:name=".controller.PerfilEntrenadorFromClient"
+            android:label="PERFIL ENTRENADOR"></activity>
 
     </application>
 </manifest>
