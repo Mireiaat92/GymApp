@@ -2,8 +2,10 @@ package tfg2016.gymapp_tfg.controller;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -254,22 +256,53 @@ public class EditTask extends AppCompatActivity {
 
         public void onClick(View v) {
 
-            //ELIMINAR UNA TASCA
-            String alertString = getResources().getString(R.string.deleteTask); //missatge de alerta
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditTask.this);
+            // set title
+            //String alert_title = getResources().getString("Confirmación");
+            String alert_title = ("Confirmación");
+            String alert_description = ("¿Estas seguro que deseas eliminar esta tarea?");
+            alertDialogBuilder.setTitle(alert_title);
 
-            HashMap<String, Object> paramsQuery = new HashMap<String, Object>();
-            paramsQuery.put("objectId", selectedTasca.getObjectId()); //ell cap a mi
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage(alert_description)
+                    .setCancelable(false)
+                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                        // Lo que sucede si se pulsa yes
+                        public void onClick(DialogInterface dialog,int id) {
+                            // Código propio del método borrado para ejemplo
+                            //ELIMINAR UNA TASCA
+                            String alertString = getResources().getString(R.string.deleteTask); //missatge de alerta
 
-            try {
-                ParseCloud.callFunction("deleteTask", paramsQuery);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+                            HashMap<String, Object> paramsQuery = new HashMap<String, Object>();
+                            paramsQuery.put("objectId", selectedTasca.getObjectId()); //ell cap a mi
 
-            Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
-            i.putExtra("selectedClient", selectedClient);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
+                            try {
+                                ParseCloud.callFunction("deleteTask", paramsQuery);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+                            i.putExtra("selectedClient", selectedClient);
+                            i.putExtra("myEntrenador", myEntrenador);
+                            startActivity(i);
+                        }
+
+
+                    })
+                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            // Si se pulsa no no hace nada
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
 
         }
     };

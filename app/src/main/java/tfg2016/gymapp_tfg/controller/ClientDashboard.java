@@ -221,7 +221,7 @@ public class ClientDashboard extends AppCompatActivity {
                     "TASQUES");
 
             query.whereEqualTo("ID_Client", myClient.getObjectId());
-            query.orderByDescending("_created_at");
+            query.orderByAscending("Due_Date");
             try {
                 ob = query.find();
             } catch (ParseException e) {
@@ -237,11 +237,10 @@ public class ClientDashboard extends AppCompatActivity {
             listview = (ListView) findViewById(R.id.tascalistview);
             // Pass the results into an ArrayAdapter
             adapter = new ArrayAdapter<String>(ClientDashboard.this,
-                    R.layout.item);
+                    R.layout.item_task);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
                 String date = convertStringToDate(tasques.getDate("Due_Date"));
-
                 adapter.add(date + " - "+ tasques.get("Titol"));
             }
             // Binds the Adapter to the ListView
