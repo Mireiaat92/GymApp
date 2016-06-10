@@ -97,7 +97,6 @@ public class PerfilClient extends AppCompatActivity {
     public void initializeClientData() {
 
         HashMap<String, Object> params = new HashMap<String, Object>();
-        //params.put("objectid", client.getObjectId());
         params.put("valueFieldTable", client.getObjectId());
         params.put("table", "CLIENTS");
         params.put("field", "objectId");

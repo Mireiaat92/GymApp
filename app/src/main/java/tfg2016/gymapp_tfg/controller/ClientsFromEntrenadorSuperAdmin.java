@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
+import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 
 /**
@@ -113,14 +114,25 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
                     .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                         // Lo que sucede si se pulsa yes
                         public void onClick(DialogInterface dialog,int id) {
-                            // Código propio del método borrado para ejemplo
+
                             try {
+                                Client myUserClient = null;
+                                do {
+                                    myUserClient = ClientsFromEntrenadorSuperAdmin.this.searchEntrenador(selectedEntrenador.getObjectId());
+                                    if (myUserClient != null) {
+                                        HashMap<String, Object> params = new HashMap<String, Object>();
+                                        params.put("entrenadorId", selectedEntrenador.getObjectId());
+                                        ParseCloud.callFunction("deleteEntrenadorDependencies", params);
+                                    }
+                                }while(myUserClient != null);
+
                                 HashMap<String, Object> params = new HashMap<String, Object>();
                                 params.put("entrenadorId", selectedEntrenador.getObjectId());
                                 ParseCloud.callFunction("deleteEntrenador", params);
-                                ParseCloud.callFunction("deleteEntrenadorDependencies", params);
 
                             } catch (ParseException e) {
+                                e.printStackTrace();
+                            } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
                             Intent i = new Intent(getApplicationContext(), SuperAdminDashboard.class);
@@ -198,6 +210,27 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
             mProgressDialog.dismiss();
             // Capture button clicks on ListView items
         }
+    }
+
+
+    public Client searchEntrenador(String idEntrenador) throws java.text.ParseException {
+        Client myUserClient = null;
+
+        HashMap<String, Object> paramIdEntrenador = new HashMap<String, Object>();
+        paramIdEntrenador.put("identrenador", idEntrenador);
+
+        List<ParseObject> loginResponse = null;
+        try {
+            loginResponse = ParseCloud.callFunction("searchEntrenador", paramIdEntrenador);
+
+            if (!loginResponse.isEmpty()) {
+                ParseObject userParse = loginResponse.iterator().next();
+                myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return myUserClient;
     }
 
     public void doBack(){
