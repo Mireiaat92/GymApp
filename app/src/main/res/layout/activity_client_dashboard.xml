@@ -74,7 +74,7 @@
         android:id="@+id/tascalistview"
         android:layout_below="@+id/infoEntrenador"
         android:background="#ffffff"
-        android:divider="#E0E0E0"
+        android:divider="#009688"
         android:dividerHeight="4px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />

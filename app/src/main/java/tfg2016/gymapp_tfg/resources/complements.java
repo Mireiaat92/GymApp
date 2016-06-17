@@ -21,6 +21,8 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -181,5 +183,18 @@ public class Complements {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
+    }
+
+    public static String convertStringToDate(Date indate)
+    {
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM");
+
+        try{
+            dateString = sdfr.format( indate );
+        }catch (Exception ex ){
+            System.out.println(ex);
+        }
+        return dateString;
     }
 }

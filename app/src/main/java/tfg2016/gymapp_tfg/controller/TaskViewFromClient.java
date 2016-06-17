@@ -13,9 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
@@ -86,10 +92,28 @@ public class TaskViewFromClient extends AppCompatActivity {
         );
     }
     public void initializeTascaData() {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("objectid", selectedTasca.getObjectId());
+
+        List<ParseObject> taskresponse = null;
+        try {
+            taskresponse = ParseCloud.callFunction("checkTascaData", params);
+
+            ParseObject userParse = taskresponse.iterator().next();
+            setSelectedTasca(new Tasca(userParse.getString("idClient"), userParse.getString("Titol"), userParse.getString("Descripcio"), userParse.getDate("Due_Date"), userParse.getBoolean("Completada"), userParse.getString("Comentari"), userParse.getObjectId()));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         String descripcio = selectedTasca.getDescripcio();
         TextView txtdescripcio = (TextView) findViewById(R.id.descripcio);
         txtdescripcio.setText(descripcio);
+
+        String duedate = convertStringToDate(selectedTasca.getDueDate());
+        TextView txtduedate = (TextView) findViewById(R.id.duedate);
+        txtduedate.setText(duedate);
 
         String comentarii = selectedTasca.getComentari();
         TextView txtcomentari = (TextView) findViewById(R.id.comentari);
@@ -134,6 +158,11 @@ public class TaskViewFromClient extends AppCompatActivity {
             }
         });
 
+        if(selectedTasca.getComentari()!= null){
+            TextView comment = (TextView)findViewById(R.id.deixarComentari);
+            comment.setText("Edita el comentari");
+        }
+
         deixarComentari = (TextView) findViewById(R.id.deixarComentari);
 
         deixarComentari.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +187,7 @@ public class TaskViewFromClient extends AppCompatActivity {
                                     ParseObject objFromServer = query.get(selectedTasca.getObjectId());
                                     objFromServer.put("Comentari", resultText);
                                     objFromServer.save();
+                                    initializeTascaData();
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -176,6 +206,19 @@ public class TaskViewFromClient extends AppCompatActivity {
 
         });
 
+    }
+
+    public static String convertStringToDate(Date indate)
+    {
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM yyyy");
+
+        try{
+            dateString = sdfr.format( indate );
+        }catch (Exception ex ){
+            System.out.println(ex);
+        }
+        return dateString;
     }
 
 

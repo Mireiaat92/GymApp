@@ -21,8 +21,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +28,7 @@ import tfg2016.gymapp_tfg.R;
 import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
+import tfg2016.gymapp_tfg.resources.Complements;
 
 /**
  * Created by Mireia on 27/03/2016.
@@ -246,7 +245,7 @@ public class ClientDashboard extends AppCompatActivity {
                     R.layout.item_task);
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
-                String date = convertStringToDate(tasques.getDate("Due_Date"));
+                String date = Complements.convertStringToDate(tasques.getDate("Due_Date"));
                 adapter.add(date + " - "+ tasques.get("Titol"));
             }
             // Binds the Adapter to the ListView
@@ -283,18 +282,6 @@ public class ClientDashboard extends AppCompatActivity {
         }
     }
 
-    public String convertStringToDate(Date indate)
-    {
-        String dateString = null;
-        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM");
-
-        try{
-            dateString = sdfr.format( indate );
-        }catch (Exception ex ){
-            System.out.println(ex);
-        }
-        return dateString;
-    }
 
     @Override
     public void onBackPressed(){
