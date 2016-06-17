@@ -77,62 +77,61 @@ public class Login extends Activity {
             checkemail(Login.this.getMail());
             if (emailcheck == true) {
                 //Comprovar que disposem d'internet
-               if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
-                   Toast.makeText(Login.this, "no hi ha internet", Toast.LENGTH_SHORT).show();
+                if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
                     Intent noInternet = new Intent(Login.this, NoInternetConnection.class);
                     startActivity(noInternet);
                 }
                 else {
-                   //POPUP DE LOGIN
-                   LayoutInflater layoutInflater
-                           = (LayoutInflater) getBaseContext()
-                           .getSystemService(LAYOUT_INFLATER_SERVICE);
+                    //POPUP DE LOGIN
+                    LayoutInflater layoutInflater
+                            = (LayoutInflater) getBaseContext()
+                            .getSystemService(LAYOUT_INFLATER_SERVICE);
 
-                   final View popupView = layoutInflater.inflate(R.layout.popup_login, null);
-                   final PopupWindow popupWindow = new PopupWindow(popupView);
-                   popupWindow.setFocusable(true);
-                   popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                   popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-                   popupWindow.showAsDropDown(popupView);
-                   boolean login = false;
-                   try {
-                       //Crida de les funcions login
-                       Client myUserClient = Login.this.loginClient(Login.this.getMail(),
-                               Login.this.getPassword());
-                       if (myUserClient != null) {
-                           Intent userDashboard = new Intent(Login.this, ClientDashboard.class);
-                           userDashboard.putExtra("myClient", myUserClient);
+                    final View popupView = layoutInflater.inflate(R.layout.popup_login, null);
+                    final PopupWindow popupWindow = new PopupWindow(popupView);
+                    popupWindow.setFocusable(true);
+                    popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                    popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                    popupWindow.showAsDropDown(popupView);
+                    boolean login = false;
+                    try {
+                        //Crida de les funcions login
+                        Client myUserClient = Login.this.loginClient(Login.this.getMail(),
+                                Login.this.getPassword());
+                        if (myUserClient != null) {
+                            Intent userDashboard = new Intent(Login.this, ClientDashboard.class);
+                            userDashboard.putExtra("myClient", myUserClient);
 
-                           startActivity(userDashboard);
-                       } else {
-                           Entrenador myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
-                                   Login.this.getPassword());
-                           if (myUserEntrenador != null) {
-                               Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
-                               entrenadorDashboard.putExtra("myEntrenador", myUserEntrenador);
-                               startActivity(entrenadorDashboard);
-                           } else {
-                               Entrenador superadmin = Login.this.loginSuperAdmin(Login.this.getMail(),
-                                       Login.this.getPassword());
-                               if (superadmin != null){
-                                   Intent entrenadorDashboard = new Intent(Login.this, SuperAdminDashboard.class);
-                                   entrenadorDashboard.putExtra("superadmin", superadmin);
+                            startActivity(userDashboard);
+                        } else {
+                            Entrenador myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
+                                    Login.this.getPassword());
+                            if (myUserEntrenador != null) {
+                                Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
+                                entrenadorDashboard.putExtra("myEntrenador", myUserEntrenador);
+                                startActivity(entrenadorDashboard);
+                            } else {
+                                Entrenador superadmin = Login.this.loginSuperAdmin(Login.this.getMail(),
+                                        Login.this.getPassword());
+                                if (superadmin != null){
+                                    Intent entrenadorDashboard = new Intent(Login.this, SuperAdminDashboard.class);
+                                    entrenadorDashboard.putExtra("superadmin", superadmin);
 
-                                   startActivity(entrenadorDashboard);
-                                   finish();
-                               }
-                               else {
+                                    startActivity(entrenadorDashboard);
+                                    finish();
+                                }
+                                else {
 
-                                   Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
-                                   popupWindow.dismiss();
-                               }
-                           }
-                       }
-                   } catch (java.text.ParseException e) {
-                       e.printStackTrace();
-               }
-           }
-           }
+                                    Complements.showInfoAlert(getResources().getString(R.string.loginErr), Login.this);
+                                    popupWindow.dismiss();
+                                }
+                            }
+                        }
+                    } catch (java.text.ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             else{
                 //Si el format de l'email no és correcte ho notificarà mitjançant un popup
                 Toast.makeText(Login.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
@@ -152,22 +151,22 @@ public class Login extends Activity {
         Encrypt encrypt = new Encrypt(getApplicationContext());
         Client myUserClient = null;
 
-            password = encrypt.encryptPassword(password);
-            HashMap<String, Object> loginParams = new HashMap<String, Object>();
-            loginParams.put("mail", mail);
-            loginParams.put("password", password);
+        password = encrypt.encryptPassword(password);
+        HashMap<String, Object> loginParams = new HashMap<String, Object>();
+        loginParams.put("mail", mail);
+        loginParams.put("password", password);
 
-            List<ParseObject> loginResponse = null;
-            try {
-                loginResponse = ParseCloud.callFunction("loginClient", loginParams);
+        List<ParseObject> loginResponse = null;
+        try {
+            loginResponse = ParseCloud.callFunction("loginClient", loginParams);
 
-                if (!loginResponse.isEmpty()) {
-                    ParseObject userParse = loginResponse.iterator().next();
-                    myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (!loginResponse.isEmpty()) {
+                ParseObject userParse = loginResponse.iterator().next();
+                myUserClient = new Client(userParse.getString("Nom"), userParse.getString("Cognom"), userParse.getString("Mail"),  userParse.getDouble("Pes"), (Double) userParse.getDouble("Alcada"), userParse.getString("Objectiu"), userParse.getObjectId(), userParse.getString("ID_Entrenador"));
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return myUserClient;
     }
 

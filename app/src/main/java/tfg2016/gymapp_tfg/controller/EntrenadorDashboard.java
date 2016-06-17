@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.ParseCloud;
 import com.parse.ParseException;
@@ -79,9 +80,23 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_entrenador_dashboard);
-        toolbar.setTitle(R.string.EntrenadorDashboard);
+        ((TextView) findViewById(R.id.main_toolbar_title)).setText(myEntrenador.getName() + " " + myEntrenador.getSurname());
 
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_perm_identity);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), PerfilEntrenador.class);
+                        i.putExtra("myEntrenador", myEntrenador);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+
+        );
     }
 
     public void initFloatingButton() {
@@ -112,13 +127,6 @@ public class EntrenadorDashboard extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        if (id == R.id.action_perfil_entrenador) {
-            Intent i = new Intent(getApplicationContext(), PerfilEntrenador.class);
-            i.putExtra("myEntrenador", myEntrenador);
-            startActivity(i);
-            finish();
-        }
 
         if (id == R.id.action_message){
             Intent i = new Intent(getApplicationContext(), ChatChooseClient.class);

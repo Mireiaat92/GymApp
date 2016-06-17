@@ -1,38 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/no_internet_connection">
+    android:background="#F7F7F7"
+    android:weightSum="1">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_no_internet_connection"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:titleTextColor="#ffffff">
-    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/no_internet"
+        android:layout_weight="0.10"
+        android:id="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <!--RETRY BUTTON-->
+
 
     <TextView
-        android:layout_below="@+id/toolbar_no_internet_connection"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/noInternet"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:textColor="#FFFFFF"/>
-    <!--RETRY BUTTON-->
+        android:textColor="#000000"
+        android:textSize="10dp"
+        android:id="@+id/editText"
+        android:layout_above="@+id/tryAgain"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="No internet connection, check your connectivity"
+        android:gravity="center_horizontal" />
+
     <Button
         android:id="@+id/tryAgain"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:text="@string/tryAgain"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="15dp"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp" />
 
-</LinearLayout>
+</RelativeLayout>

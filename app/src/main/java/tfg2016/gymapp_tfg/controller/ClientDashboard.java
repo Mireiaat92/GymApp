@@ -86,9 +86,23 @@ public class ClientDashboard extends AppCompatActivity {
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_client_dashboard);
-        toolbar.setTitle(myClient.getName() + " " + myClient.getSurname());
+        ((TextView) findViewById(R.id.main_toolbar_title)).setText(myClient.getName() + " " + myClient.getSurname());
 
         setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_perm_identity);
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(getApplicationContext(), PerfilClient.class);
+                        i.putExtra("client", myClient);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+
+        );
     }
 
     @Override
@@ -104,14 +118,6 @@ public class ClientDashboard extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_perfil_client) {
-            Intent i = new Intent(getApplicationContext(), PerfilClient.class);
-            i.putExtra("client", myClient);
-            startActivity(i);
-            finish();
-        }
 
         if (id == R.id.action_message){
             Intent i = new Intent(getApplicationContext(), ChatFromClient.class);
@@ -143,7 +149,7 @@ public class ClientDashboard extends AppCompatActivity {
 
         } catch (java.text.ParseException e) {
             e.printStackTrace();
-         }
+        }
 
         RelativeLayout relativeclic1 =(RelativeLayout)findViewById(R.id.infoEntrenador);
         relativeclic1.setOnClickListener(new View.OnClickListener(){

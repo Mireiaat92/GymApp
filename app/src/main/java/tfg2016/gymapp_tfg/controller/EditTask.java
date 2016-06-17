@@ -168,7 +168,7 @@ public class EditTask extends AppCompatActivity {
             Tasca nuevaTasca = CargarTasca();
 
             if (nuevaTasca.getTitol().equalsIgnoreCase("") || nuevaTasca.getDescripcio().equalsIgnoreCase("")){
-                Toast.makeText(this, ("titol i edscripcio obligatoris"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, ("Titol i descripcio obligatoris"), Toast.LENGTH_SHORT).show();
             }
             else {
                 String selectedTascaId = selectedTasca.getObjectId();

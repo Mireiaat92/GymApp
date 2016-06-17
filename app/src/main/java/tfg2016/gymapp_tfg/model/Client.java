@@ -94,4 +94,5 @@ public class Client implements Serializable{
     public String getID_Entrenador() {
         return this.ID_Entrenador;
     }
+
 }

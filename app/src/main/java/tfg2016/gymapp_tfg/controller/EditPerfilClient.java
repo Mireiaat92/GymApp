@@ -1,5 +1,6 @@
 package tfg2016.gymapp_tfg.controller;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseCloud;
@@ -22,6 +24,8 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import tfg2016.gymapp_tfg.R;
@@ -51,6 +55,17 @@ public class EditPerfilClient extends AppCompatActivity {
     Toolbar toolbar;
 
     private static final int LOAD_IMAGE = 1;
+
+    private DatePickerDialog pickDateDialog;
+
+    private SimpleDateFormat dateFormatter;
+
+    private int year;
+    private int month;
+    private int day;
+
+    static final int DATE_DIALOG_ID = 999;
+    private TextView tvDisplayDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,8 +221,6 @@ public class EditPerfilClient extends AppCompatActivity {
         EditText TextObjectiu =(EditText)findViewById(R.id.EditTextObjectiu);
         String objectiu = TextObjectiu.getText().toString();
 
-        //TODO Afegir els camps que falten
-
         return new Client(nom, cognom, mail, pes, altura, objectiu, objectId, ID_Entrenador);
     }
 
@@ -228,11 +241,9 @@ public class EditPerfilClient extends AppCompatActivity {
         params.put("pes", nouPerfil.getWeight());
         params.put("altura", nouPerfil.getHeight());
         params.put("objectiu", nouPerfil.getObjectiu());
-        params.put("Foto", getFile());
+        params.put("foto", getFile());
 
         //TODO Afegir camps que falten
-
-
         ParseCloud.callFunction("editPerfilClientData", params);
 
         return success;
@@ -277,6 +288,21 @@ public class EditPerfilClient extends AppCompatActivity {
         }
     }
 
+    /**
+     * ConvertStringToDate
+     * @param fecha
+     * @return data
+     */
+    public Date ConvertStringToDate(String fecha) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = null;
+        try {
+            data = formatter.parse(fecha);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), PerfilClient.class);

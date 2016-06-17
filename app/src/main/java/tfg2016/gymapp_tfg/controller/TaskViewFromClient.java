@@ -139,10 +139,7 @@ public class TaskViewFromClient extends AppCompatActivity {
         deixarComentari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(TaskViewFromClient.this, "DEIXAR COMENTARI", Toast.LENGTH_SHORT).show();
 
-                //==============================================================
-                // get prompts.xml view
                 LayoutInflater layoutInflater = LayoutInflater.from(TaskViewFromClient.this);
                 View promptView = layoutInflater.inflate(R.layout.dialog, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TaskViewFromClient.this);
@@ -155,10 +152,7 @@ public class TaskViewFromClient extends AppCompatActivity {
                 alertDialogBuilder.setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-
                                 resultText= String.valueOf((comentari.getText()));
-
-                                //(====
                                 try {
                                     ParseQuery<ParseObject> query = new ParseQuery<ParseObject >("TASQUES");
                                     ParseObject objFromServer = query.get(selectedTasca.getObjectId());
@@ -167,7 +161,6 @@ public class TaskViewFromClient extends AppCompatActivity {
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
-                                //=====
                             }
                         })
                         .setNegativeButton("Cancel",
@@ -177,10 +170,8 @@ public class TaskViewFromClient extends AppCompatActivity {
                                     }
                                 });
 
-                // create an alert dialog
                 AlertDialog alert = alertDialogBuilder.create();
                 alert.show();
-                //==============================================================
             }
 
         });

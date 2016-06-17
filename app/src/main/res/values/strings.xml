@@ -48,6 +48,8 @@
     <string name="editPerfilEntrenador">Edit Profile</string>
     <string name="gallery">Galeria</string>
     <string name="addProfileImage">Añadir foto de perfil</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 
 </resources>

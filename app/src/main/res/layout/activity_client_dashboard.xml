@@ -11,35 +11,50 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:titleTextColor="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/main_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/main_toolbar_title"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
 
-<RelativeLayout
-    android:id="@+id/infoEntrenador"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/toolbar_client_dashboard"
-    android:background="#ffffff">
-    <TextView
-        android:id="@+id/entrenadorlabel"
-        android:text="@string/entrenadorlabel"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_gravity="center_horizontal|center"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/infoEntrenador"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:layout_below="@+id/toolbar_client_dashboard"
+        android:background="#ffffff">
+        <TextView
+            android:id="@+id/entrenadorlabel"
+            android:text="@string/entrenadorlabel"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/entrenador"
-        android:layout_toRightOf="@+id/entrenadorlabel"
-        android:textColor="#404040"
-        android:layout_gravity="center_horizontal|center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/entrenador"
+            android:layout_toRightOf="@+id/entrenadorlabel"
+            android:textColor="#404040"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/clientslabel"

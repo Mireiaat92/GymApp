@@ -25,7 +25,7 @@ public class NoInternetConnection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_internet_connection);
         this.initializeButtons();
-        initToolBar();
+        //initToolBar();
     }
 
     private void initializeButtons() {
@@ -36,11 +36,13 @@ public class NoInternetConnection extends AppCompatActivity {
 
     public Button.OnClickListener clickRetry = new Button.OnClickListener() {
         public void onClick(View v) {
-            if(Complements.isNetworkStatusAvialable(getApplicationContext())) {
+            if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
+                Toast.makeText(NoInternetConnection.this, "No hi ha internet", Toast.LENGTH_SHORT).show();
+            }
+            else{
                 Intent login = new Intent(NoInternetConnection.this, Login.class);
                 startActivity(login);
             }
-            else Toast.makeText(getApplicationContext(), getResources().getString(R.string.NotInternet), Toast.LENGTH_SHORT).show();
         }
     };
 
