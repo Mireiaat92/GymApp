@@ -42,7 +42,6 @@ public class NoInternetConnection extends AppCompatActivity {
             else{
                 Intent login = new Intent(NoInternetConnection.this, Login.class);
                 startActivity(login);
-
             }
         }
     };
