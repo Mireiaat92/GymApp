@@ -168,7 +168,7 @@ public class EditTask extends AppCompatActivity {
             Tasca nuevaTasca = CargarTasca();
 
             if (nuevaTasca.getTitol().equalsIgnoreCase("") || nuevaTasca.getDescripcio().equalsIgnoreCase("")){
-                Toast.makeText(this, ("Titol i descripcio obligatoris"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, (getResources().getString(R.string.titleandDescriptionRequired)), Toast.LENGTH_SHORT).show();
             }
             else {
                 String selectedTascaId = selectedTasca.getObjectId();
@@ -259,15 +259,15 @@ public class EditTask extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditTask.this);
             // set title
             //String alert_title = getResources().getString("Confirmación");
-            String alert_title = ("Confirmación");
-            String alert_description = ("¿Estas seguro que deseas eliminar esta tarea?");
+            String alert_title = (getResources().getString(R.string.confirmation));
+            String alert_description = (getResources().getString(R.string.areYouSureDeleteTask));
             alertDialogBuilder.setTitle(alert_title);
 
             // set dialog message
             alertDialogBuilder
                     .setMessage(alert_description)
                     .setCancelable(false)
-                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
                         // Lo que sucede si se pulsa yes
                         public void onClick(DialogInterface dialog,int id) {
                             // Código propio del método borrado para ejemplo
@@ -291,7 +291,7 @@ public class EditTask extends AppCompatActivity {
 
 
                     })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
                             // Si se pulsa no no hace nada
                             dialog.cancel();

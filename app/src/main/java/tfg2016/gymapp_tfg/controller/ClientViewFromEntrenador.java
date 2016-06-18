@@ -155,9 +155,9 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(ClientViewFromEntrenador.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de rutines");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingTasks));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();

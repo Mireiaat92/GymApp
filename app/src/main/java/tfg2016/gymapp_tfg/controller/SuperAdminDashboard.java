@@ -103,9 +103,9 @@ public class SuperAdminDashboard extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(SuperAdminDashboard.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista d'entrenadors");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingTrainers));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();

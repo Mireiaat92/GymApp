@@ -73,7 +73,7 @@ public class ChatChooseClient  extends AppCompatActivity {
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_chat_choose_client);
-        toolbar.setTitle("CHAT");
+        toolbar.setTitle(getResources().getString(R.string.chat));
 
         setSupportActionBar(toolbar);
 
@@ -98,9 +98,9 @@ public class ChatChooseClient  extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(ChatChooseClient.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de clients");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingClients));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();

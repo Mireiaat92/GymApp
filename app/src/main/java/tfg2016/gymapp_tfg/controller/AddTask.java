@@ -120,7 +120,7 @@ public class AddTask extends AppCompatActivity {
         if (id == R.id.action_done){
             try {
                 if (AddTask.this.getDescripcio().equalsIgnoreCase("") || AddTask.this.getTitol().equalsIgnoreCase("")|| (AddTask.this.getDueDate() == null)){
-                    Toast.makeText(AddTask.this, "Tots els camps són obligatoris", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTask.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
                 } else {
                     addTask(selectedClient.getObjectId(), AddTask.this.getTitol(), AddTask.this.getDescripcio(), AddTask.this.getDueDate());
                 }
@@ -172,7 +172,7 @@ public class AddTask extends AppCompatActivity {
         paramsAddTasca.put("duedate", dueDate);
         ParseCloud.callFunction("addTask", paramsAddTasca);
 
-        Toast.makeText(AddTask.this, "Tasca afegida correctament", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddTask.this, getResources().getString(R.string.taskAdded), Toast.LENGTH_SHORT).show();
 
         Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientViewFromEntrenador.class);
         clientActivityFromEntrenador.putExtra("selectedClient", selectedClient);

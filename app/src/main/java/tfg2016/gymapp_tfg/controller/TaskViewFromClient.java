@@ -122,12 +122,12 @@ public class TaskViewFromClient extends AppCompatActivity {
         Boolean status = selectedTasca.getCompletada();
         textboto = (Button) findViewById(R.id.tascaCompletada);
         if (status == true){
-            textboto.setText("TASCA COMPLETA");
+            textboto.setText(getResources().getString(R.string.taskCompleted));
             textboto.setBackgroundColor(000000);
 
         }
         else if (status == false){
-            textboto.setText("MARCAR COM A COMPLETA");
+            textboto.setText(getResources().getString(R.string.markCompleted));
         }
 
         //BOTÓ TASCA COMPLETADA
@@ -138,7 +138,7 @@ public class TaskViewFromClient extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (selectedTasca.getCompletada() == true){
-                    Toast.makeText(TaskViewFromClient.this, "La tasca ja està completa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskViewFromClient.this, getResources().getString(R.string.alreadyCompleted), Toast.LENGTH_SHORT).show();
                 }
                 else{
                     try {
@@ -151,7 +151,7 @@ public class TaskViewFromClient extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    textboto.setText("TASCA COMPLETA");
+                    textboto.setText(getResources().getString(R.string.taskCompleted));
                     textboto.setBackgroundColor(000000);
                 }
 
@@ -160,7 +160,7 @@ public class TaskViewFromClient extends AppCompatActivity {
 
         if(selectedTasca.getComentari()!= null){
             TextView comment = (TextView)findViewById(R.id.deixarComentari);
-            comment.setText("Edita el comentari");
+            comment.setText(getResources().getString(R.string.editComment));
         }
 
         deixarComentari = (TextView) findViewById(R.id.deixarComentari);
@@ -179,7 +179,7 @@ public class TaskViewFromClient extends AppCompatActivity {
 
                 // setup a dialog window
                 alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 resultText= String.valueOf((comentari.getText()));
                                 try {
@@ -193,7 +193,7 @@ public class TaskViewFromClient extends AppCompatActivity {
                                 }
                             }
                         })
-                        .setNegativeButton("Cancel",
+                        .setNegativeButton(getResources().getString(R.string.cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();

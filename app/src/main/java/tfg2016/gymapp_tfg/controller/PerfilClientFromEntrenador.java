@@ -78,7 +78,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         String weightValue = null;
         TextView weight = (TextView)findViewById(R.id.weight);
         if (selectedClient.getWeight().toString() == null || selectedClient.getWeight().toString() == "0.0"){
-            weightValue = "not assigned";
+            weightValue = getResources().getString(R.string.notAssigned);
         }
         else{
             weightValue = selectedClient.getWeight().toString() + " kg";
@@ -88,7 +88,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         String heightValue = null;
         TextView height = (TextView)findViewById(R.id.height);
         if (selectedClient.getHeight().toString() == null || selectedClient.getHeight().toString() == "0.0"){
-            heightValue = "not assigned";
+            heightValue = getResources().getString(R.string.notAssigned);
         }
         else{
             heightValue = selectedClient.getHeight().toString() + " cm";

@@ -114,15 +114,15 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
         Date dueDate = selectedTasca.getDueDate();
         String status =  null;
             if (completada == true){
-            status="Completed";
+            status=getResources().getString(R.string.completed);
         }
         else if (completada == false){
-            status = "Not done";
+            status = getResources().getString(R.string.notDone);
         }
         else if (completada == null){
                 //al fer addTask ha de posar completada en False
                 //si esta en false pero la dueDate és del futur o 7 dies del pasat es posarà en pending
-            status="Pending";
+            status=getResources().getString(R.string.pending);
         }
         TextView txtStatus = (TextView) findViewById(R.id.status);
         txtStatus.setText(status);
@@ -151,7 +151,7 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
         if (id == R.id.editTask){
             if(selectedTasca.getCompletada() == true){
-                Toast.makeText(TaskViewFromEntrenador.this, "No pots editar una tasca completada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TaskViewFromEntrenador.this, getResources().getString(R.string.cantEdit), Toast.LENGTH_SHORT).show();
             }
             else {
                 Intent i = new Intent(this, EditTask.class);

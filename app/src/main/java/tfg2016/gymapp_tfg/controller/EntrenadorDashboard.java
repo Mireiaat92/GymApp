@@ -148,9 +148,9 @@ public class EntrenadorDashboard extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(EntrenadorDashboard.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de clients");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingClients));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();

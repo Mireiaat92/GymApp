@@ -37,7 +37,7 @@ public class NoEntrenador extends AppCompatActivity {
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_no_entrenador);
-        toolbar.setTitle("Sin Entrenador");
+        toolbar.setTitle(getResources().getString(R.string.noCoach));
 
         setSupportActionBar(toolbar);
 

@@ -101,7 +101,7 @@ public class AddClient extends AppCompatActivity {
                     if (emailcheck == true) {
                         addClient(AddClient.this.getMail());
                     } else {
-                        Toast.makeText(AddClient.this, "Adreça de correu incorrecte", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddClient.this, getResources().getString(R.string.invalidEmail), Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (ParseException e) {
@@ -143,7 +143,7 @@ public class AddClient extends AppCompatActivity {
                 paramsAddEntrenador.put("identrenador", myEntrenador.getObjectId());
                 ParseCloud.callFunction("addEntrenador", paramsAddEntrenador);
 
-                Toast.makeText(AddClient.this, "Client afegit correctament", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddClient.this, getResources().getString(R.string.addedSuccessfully), Toast.LENGTH_SHORT).show();
 
                 Intent userDashboard = new Intent(AddClient.this, EntrenadorDashboard.class);
                 userDashboard.putExtra("myEntrenador", myEntrenador);
@@ -151,7 +151,7 @@ public class AddClient extends AppCompatActivity {
                 finish();
             }
             else{
-                Toast.makeText(AddClient.this, "El client seleccionat ja té entrenador", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddClient.this, getResources().getString(R.string.haveTrainer), Toast.LENGTH_SHORT).show();
             }
 
         }

@@ -138,7 +138,7 @@ public class ClientDashboard extends AppCompatActivity {
 
             myEntrenador = getEntrenadorName();
             if (myEntrenador==null){
-                entrenadorName = "Encara no tens un entrenador assignat";
+                entrenadorName = getResources().getString(R.string.noTrainer);
             }
             else{
                 entrenadorName = myEntrenador.getName() + " " + myEntrenador.getSurname();
@@ -211,9 +211,9 @@ public class ClientDashboard extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(ClientDashboard.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de tasques");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingTasks));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();

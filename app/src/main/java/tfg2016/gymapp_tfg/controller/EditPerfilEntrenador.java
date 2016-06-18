@@ -146,7 +146,7 @@ public class EditPerfilEntrenador extends AppCompatActivity {
             Entrenador nouPerfil = CargarPerfil();
 
             if (nouPerfil.getName().equalsIgnoreCase("") || nouPerfil.getSurname().equalsIgnoreCase("")){
-                Toast.makeText(this, ("Nom i cognoms obligatoris"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, (getResources().getString(R.string.nameandSurenameRequired)), Toast.LENGTH_SHORT).show();
             }
             else {
                 Intent i = new Intent(this, PerfilEntrenador.class);

@@ -37,7 +37,7 @@ public class NoInternetConnection extends AppCompatActivity {
     public Button.OnClickListener clickRetry = new Button.OnClickListener() {
         public void onClick(View v) {
             if(!Complements.isNetworkStatusAvialable(getApplicationContext())) {
-                Toast.makeText(NoInternetConnection.this, "No hi ha internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoInternetConnection.this, getResources().getString(R.string.noInternet), Toast.LENGTH_SHORT).show();
             }
             else{
                 Intent login = new Intent(NoInternetConnection.this, Login.class);

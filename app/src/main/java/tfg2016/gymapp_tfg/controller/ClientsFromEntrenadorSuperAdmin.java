@@ -103,15 +103,15 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             // set title
            //String alert_title = getResources().getString("Confirmación");
-            String alert_title = ("Confirmación");
-            String alert_description = ("¿Estas seguro que deseas eliminar este entrenador?");
+            String alert_title = (getResources().getString(R.string.confirmation));
+            String alert_description = (getResources().getString(R.string.areYouSure));
             alertDialogBuilder.setTitle(alert_title);
 
             // set dialog message
             alertDialogBuilder
                     .setMessage(alert_description)
                     .setCancelable(false)
-                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
                         // Lo que sucede si se pulsa yes
                         public void onClick(DialogInterface dialog,int id) {
 
@@ -142,7 +142,7 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
 
 
                     })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
                             // Si se pulsa no no hace nada
                             dialog.cancel();
@@ -168,9 +168,9 @@ public class ClientsFromEntrenadorSuperAdmin extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(ClientsFromEntrenadorSuperAdmin.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Accedint a la llista de clients");
+            mProgressDialog.setTitle(getResources().getString(R.string.accessingClients));
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getResources().getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
             mProgressDialog.show();
