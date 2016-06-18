@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="noInternet">No Internet Connection</string>
     <string name="tryAgain">Try Again</string>
-    <string name="NotInternet">Check your connectivity or try again</string>
+    <string name="NotInternet">No internet connection. Please, check your connectivity.</string>
     <string name="login">Login</string>
     <string name="register">New to the application? Sign up here</string>
     <string name="loginErr">Email and/or password do not match. Check both</string>
@@ -84,5 +84,6 @@
     <string name="cantEdit">"You can't edit a completed task"</string>
     <string name="commentlabel">Comment:</string>
     <string name="addComment">"+ Add comment"</string>
+
 
 </resources>

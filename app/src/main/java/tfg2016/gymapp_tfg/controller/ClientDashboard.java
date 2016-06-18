@@ -241,8 +241,10 @@ public class ClientDashboard extends AppCompatActivity {
             // Locate the listview in listview_main.xml
             listview = (ListView) findViewById(R.id.tascalistview);
             // Pass the results into an ArrayAdapter
-            adapter = new ArrayAdapter<String>(ClientDashboard.this,
+
+            adapter = new ArrayAdapter<>(ClientDashboard.this,
                     R.layout.item_task);
+
             // Retrieve object "name" from Parse.com database
             for (ParseObject tasques : ob) {
                 String date = Complements.convertStringToDate(tasques.getDate("Due_Date"));
