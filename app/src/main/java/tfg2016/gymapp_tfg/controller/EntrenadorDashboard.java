@@ -41,10 +41,10 @@ public class EntrenadorDashboard extends AppCompatActivity {
     ArrayAdapter<String> adapter;
 
     private Client selectedClient;
-    public Client getSeectedClient() {
+    public Client getSelectedClient() {
         return selectedClient;
     }
-    public void setSelelctedClient(Client selectedClient) {
+    public void setSelectedClient(Client selectedClient) {
         this.selectedClient = selectedClient;
     }
 
@@ -194,7 +194,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(EntrenadorDashboard.this, ClientViewFromEntrenador.class);
+                    Intent i = new Intent(EntrenadorDashboard.this, ClientViewFromEntrenadors.class);
 
                     try {
                         HashMap<String, Object> params = new HashMap<String, Object>();

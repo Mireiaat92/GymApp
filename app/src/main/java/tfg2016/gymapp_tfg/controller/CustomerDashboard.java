@@ -58,7 +58,7 @@ public class CustomerDashboard extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
+        final ClientPagerAdapter adapter = new ClientPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount(), myClient);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -84,8 +84,6 @@ public class CustomerDashboard extends AppCompatActivity {
     }
 
     public void initToolBar() {
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar_customer_dashboard);
         ((TextView) findViewById(R.id.main_toolbar_title)).setText(myClient.getName() + " " + myClient.getSurname());
         setSupportActionBar(toolbar);

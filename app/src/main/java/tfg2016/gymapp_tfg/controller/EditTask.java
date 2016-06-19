@@ -283,7 +283,7 @@ public class EditTask extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+                            Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenadors.class);
                             i.putExtra("selectedClient", selectedClient);
                             i.putExtra("myEntrenador", myEntrenador);
                             startActivity(i);

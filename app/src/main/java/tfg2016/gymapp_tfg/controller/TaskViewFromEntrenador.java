@@ -168,7 +168,7 @@ public class TaskViewFromEntrenador extends AppCompatActivity {
 
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenadors.class);
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
         i.putExtra("taskId", selectedTasca.getObjectId());

@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".model.EnableDatastore"
         android:icon="@drawable/logooo"
@@ -34,10 +33,6 @@
         <!--  Entry for NoInternetConnection.class -->
         <activity android:name=".controller.NoInternetConnection"
             android:label="No internet connection"></activity>
-
-        <!--  Entry for ClientDashboard -->
-        <activity android:name=".controller.ClientDashboard"
-            android:label="Client Dashboard"></activity>
 
         <!--  Entry for EntrenadorDashboard -->
         <activity android:name=".controller.EntrenadorDashboard"
@@ -117,14 +112,13 @@
         <activity android:name=".controller.ClientsFromEntrenadorSuperAdmin"
             android:label="CLIENTS"></activity>
 
-
         <!--  Entry for PerfilEntrenadorFromClient -->
         <activity android:name=".controller.PerfilEntrenadorFromClient"
             android:label="PERFIL ENTRENADOR"></activity>
 
-        <!--  Entry for PerfilEntrenadorFromClient -->
-        <activity android:name=".controller.CustomerDashboard"
-            android:label="PERFIL ENTRENADOR"></activity>
+        <!--  Entry for ClientViewFromEntrenadors -->
+        <activity android:name=".controller.ClientViewFromEntrenadors"
+            android:label="Client Dashboard"></activity>
 
     </application>
 </manifest>

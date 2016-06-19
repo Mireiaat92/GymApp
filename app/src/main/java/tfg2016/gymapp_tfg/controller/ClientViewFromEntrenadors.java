@@ -1,27 +1,22 @@
 package tfg2016.gymapp_tfg.controller;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import tfg2016.gymapp_tfg.R;
@@ -29,11 +24,10 @@ import tfg2016.gymapp_tfg.model.Client;
 import tfg2016.gymapp_tfg.model.Entrenador;
 import tfg2016.gymapp_tfg.model.Tasca;
 
-
 /**
- * Created by Mireia on 01/04/2016.
+ * Created by Mireia on 19/06/2016.
  */
-public class ClientViewFromEntrenador extends AppCompatActivity {
+public class ClientViewFromEntrenadors extends AppCompatActivity {
     // Declare Variables
     ListView listview;
     List<ParseObject> ob;
@@ -66,28 +60,53 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
 
     Toolbar toolbar;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from singleitemview.xml
-        setContentView(R.layout.activity_client_from_entrenador);
+        setContentView(R.layout.activity_client_from_entrenadors);
 
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
         selectedClient = (Client) i.getSerializableExtra("selectedClient");
         myEntrenador = (Entrenador) i.getSerializableExtra("myEntrenador");
 
-        // Execute RemoteDataTask AsyncTask
-        new RemoteDataTask().execute();
 
         initToolBar();
         this.initFloatingButton();
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Old Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Current Tasks"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final EntrenadorPagerAdapter adapter = new EntrenadorPagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount(), myEntrenador, selectedClient);
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
-
-
     public void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_client_from_entrenador);
-        toolbar.setTitle(selectedClient.getName() + " " + selectedClient.getSurname());
+        toolbar = (Toolbar) findViewById(R.id.toolbar_client_view_from_entrenadors);
+        ((TextView) findViewById(R.id.main_toolbar_title)).setText(selectedClient.getName() + " " + selectedClient.getSurname());
 
         setSupportActionBar(toolbar);
 
@@ -145,99 +164,13 @@ public class ClientViewFromEntrenador extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //===============================================0
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(ClientViewFromEntrenador.this);
-            // Set progressdialog title
-            mProgressDialog.setTitle(getResources().getString(R.string.accessingTasks));
-            // Set progressdialog message
-            mProgressDialog.setMessage(getResources().getString(R.string.loading));
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Locate the class table named "TASQUES" in Parse.com
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TASQUES");
-            query.whereEqualTo("ID_Client", selectedClient.getObjectId());
-            query.orderByDescending("_created_at");
-            try {
-                ob = query.find();
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            // Locate the listview in listview_main.xml
-            listview = (ListView) findViewById(R.id.tascalistview);
-            // Pass the results into an ArrayAdapter
-            adapter = new ArrayAdapter<String>(ClientViewFromEntrenador.this,
-                    R.layout.item);
-            // Retrieve object "name" from Parse.com database
-            for (ParseObject tasques : ob) {
-
-                String date = convertStringToDate(tasques.getDate("Due_Date"));
-
-                adapter.add(date + " - "+ tasques.get("Titol"));
-
-            }
-            // Binds the Adapter to the ListView
-            listview.setAdapter(adapter);
-            // Close the progressdialog
-            mProgressDialog.dismiss();
-            // Capture button clicks on ListView items
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    // Send single item click data to SingleItemView Class
-                    Intent i = new Intent(ClientViewFromEntrenador.this, TaskViewFromEntrenador.class);
-
-                    String selectedTascaId = ob.get(position).getObjectId();
-
-
-                    i.putExtra("selectedTascaId", selectedTascaId);
-                    i.putExtra("selectedClient", selectedClient);
-                    i.putExtra("myEntrenador", myEntrenador);
-
-                    startActivity(i);
-                    finish();
-                }
-            });
-        }
-    }
-
-    public String convertStringToDate(Date indate)
-    {
-        String dateString = null;
-        SimpleDateFormat sdfr = new SimpleDateFormat("dd MMM");
-
-        try{
-            dateString = sdfr.format( indate );
-        }catch (Exception ex ){
-            System.out.println(ex);
-        }
-        return dateString;
-    }
 
     public void doBack(){
         Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
-    i.putExtra("myEntrenador", myEntrenador);
-    startActivity(i);
-    finish();
-}
+        i.putExtra("myEntrenador", myEntrenador);
+        startActivity(i);
+        finish();
+    }
 
     @Override
     public void onBackPressed(){

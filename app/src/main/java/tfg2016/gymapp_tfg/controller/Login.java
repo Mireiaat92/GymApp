@@ -107,17 +107,17 @@ public class Login extends Activity {
                             Entrenador myUserEntrenador = Login.this.loginEntrenador(Login.this.getMail(),
                                     Login.this.getPassword());
                             if (myUserEntrenador != null) {
-                                Intent entrenadorDashboard = new Intent(Login.this, EntrenadorDashboard.class);
-                                entrenadorDashboard.putExtra("myEntrenador", myUserEntrenador);
-                                startActivity(entrenadorDashboard);
+                                Intent entrenadorsDashboard = new Intent(Login.this, EntrenadorDashboard.class);
+                                entrenadorsDashboard.putExtra("myEntrenador", myUserEntrenador);
+                                startActivity(entrenadorsDashboard);
                             } else {
                                 Entrenador superadmin = Login.this.loginSuperAdmin(Login.this.getMail(),
                                         Login.this.getPassword());
                                 if (superadmin != null){
-                                    Intent entrenadorDashboard = new Intent(Login.this, SuperAdminDashboard.class);
-                                    entrenadorDashboard.putExtra("superadmin", superadmin);
+                                    Intent entrenadorsDashboard = new Intent(Login.this, SuperAdminDashboard.class);
+                                    entrenadorsDashboard.putExtra("superadmin", superadmin);
 
-                                    startActivity(entrenadorDashboard);
+                                    startActivity(entrenadorsDashboard);
                                     finish();
                                 }
                                 else {

@@ -74,8 +74,6 @@ public class CustomerCurrentTasks extends Fragment {
     }
 
         public class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-
-
             @Override
             protected Void doInBackground(Void... params) {
                 // Locate the class table named "TASQUES" in Parse.com

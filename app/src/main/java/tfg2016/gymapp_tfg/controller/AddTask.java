@@ -174,8 +174,9 @@ public class AddTask extends AppCompatActivity {
 
         Toast.makeText(AddTask.this, getResources().getString(R.string.taskAdded), Toast.LENGTH_SHORT).show();
 
-        Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientViewFromEntrenador.class);
+        Intent clientActivityFromEntrenador = new Intent(AddTask.this, ClientViewFromEntrenadors.class);
         clientActivityFromEntrenador.putExtra("selectedClient", selectedClient);
+        clientActivityFromEntrenador.putExtra("myEntrenador", myEntrenador);
         startActivity(clientActivityFromEntrenador);
         finish();
     }
@@ -275,7 +276,7 @@ public class AddTask extends AppCompatActivity {
     }
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenador.class);
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenadors.class);
         i.putExtra("selectedClient", selectedClient);
         i.putExtra("myEntrenador", myEntrenador);
         startActivity(i);

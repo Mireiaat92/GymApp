@@ -9,7 +9,7 @@ import tfg2016.gymapp_tfg.model.Client;
 /**
  * Created by Mireia on 18/06/2016.
  */
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class ClientPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
     private Client myClient;
     public Client getMyClient() {
@@ -19,7 +19,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         this.myClient = myClient;
     }
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs, Client client) {
+    public ClientPagerAdapter(FragmentManager fm, int NumOfTabs, Client client) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
         setMyClient(client);
