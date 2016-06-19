@@ -213,7 +213,7 @@ public class ChatFromClient extends AppCompatActivity {
     }
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
+        Intent i = new Intent(getApplicationContext(), CustomerDashboard.class);
         i.putExtra("myClient", myClient);
         startActivity(i);
         finish();

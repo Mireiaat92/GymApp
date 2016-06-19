@@ -99,7 +99,7 @@ public class Login extends Activity {
                         Client myUserClient = Login.this.loginClient(Login.this.getMail(),
                                 Login.this.getPassword());
                         if (myUserClient != null) {
-                            Intent userDashboard = new Intent(Login.this, ClientDashboard.class);
+                            Intent userDashboard = new Intent(Login.this, CustomerDashboard.class);
                             userDashboard.putExtra("myClient", myUserClient);
 
                             startActivity(userDashboard);

@@ -122,5 +122,9 @@
         <activity android:name=".controller.PerfilEntrenadorFromClient"
             android:label="PERFIL ENTRENADOR"></activity>
 
+        <!--  Entry for PerfilEntrenadorFromClient -->
+        <activity android:name=".controller.CustomerDashboard"
+            android:label="PERFIL ENTRENADOR"></activity>
+
     </application>
 </manifest>

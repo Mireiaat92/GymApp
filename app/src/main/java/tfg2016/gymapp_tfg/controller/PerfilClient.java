@@ -155,7 +155,7 @@ public class PerfilClient extends AppCompatActivity {
 
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ClientDashboard.class);
+        Intent i = new Intent(getApplicationContext(), CustomerDashboard.class);
         i.putExtra("myClient", client);
         startActivity(i);
         finish();
