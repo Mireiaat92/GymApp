@@ -69,14 +69,14 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
 
     public void initializeClientData() {
 
-        TextView txtname = (TextView) findViewById(R.id.name);
+        TextView txtname = (TextView) findViewById(R.id.clientName);
         txtname.setText(selectedClient.getName() + " " + selectedClient.getSurname());
 
-        TextView txtmail = (TextView) findViewById(R.id.mail);
+        TextView txtmail = (TextView) findViewById(R.id.clientMail);
         txtmail.setText(selectedClient.getMail());
 
         String weightValue = null;
-        TextView weight = (TextView)findViewById(R.id.weight);
+        TextView weight = (TextView)findViewById(R.id.clientWeight);
         if (selectedClient.getWeight().toString() == null || selectedClient.getWeight().toString() == "0.0"){
             weightValue = getResources().getString(R.string.notAssigned);
         }
@@ -86,7 +86,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         weight.setText(weightValue);
 
         String heightValue = null;
-        TextView height = (TextView)findViewById(R.id.height);
+        TextView height = (TextView)findViewById(R.id.clientHeight);
         if (selectedClient.getHeight().toString() == null || selectedClient.getHeight().toString() == "0.0"){
             heightValue = getResources().getString(R.string.notAssigned);
         }
@@ -95,7 +95,7 @@ public class PerfilClientFromEntrenador extends AppCompatActivity {
         }
         height.setText(heightValue);
 
-        TextView objectiu = (TextView)findViewById(R.id.objectiu);
+        TextView objectiu = (TextView)findViewById(R.id.clientObjectiu);
         objectiu.setText(selectedClient.getObjectiu());
 
 

@@ -210,8 +210,9 @@ public class ChatFromEntrenador extends AppCompatActivity {
     }
 
     public void doBack(){
-        Intent i = new Intent(getApplicationContext(), ChatChooseClient.class);
+        Intent i = new Intent(getApplicationContext(), ClientViewFromEntrenadors.class);
         i.putExtra("myEntrenador", myEntrenador);
+        i.putExtra("selectedClient", selectedClient);
         startActivity(i);
         finish();
     }

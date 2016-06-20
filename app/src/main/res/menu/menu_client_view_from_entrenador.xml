@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_chat"
+        android:orderInCategory="200"
+        android:title="Chat"
+        android:icon="@drawable/ic_chat"
+        app:showAsAction="ifRoom"></item>
+    <item
         android:id="@+id/action_view_profile"
         android:orderInCategory="200"
         android:title="ViewProfile"

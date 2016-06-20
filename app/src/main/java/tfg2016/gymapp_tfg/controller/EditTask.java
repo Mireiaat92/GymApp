@@ -258,7 +258,6 @@ public class EditTask extends AppCompatActivity {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EditTask.this);
             // set title
-            //String alert_title = getResources().getString("Confirmación");
             String alert_title = (getResources().getString(R.string.confirmation));
             String alert_description = (getResources().getString(R.string.areYouSureDeleteTask));
             alertDialogBuilder.setTitle(alert_title);
@@ -270,12 +269,10 @@ public class EditTask extends AppCompatActivity {
                     .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
                         // Lo que sucede si se pulsa yes
                         public void onClick(DialogInterface dialog,int id) {
-                            // Código propio del método borrado para ejemplo
-                            //ELIMINAR UNA TASCA
-                            String alertString = getResources().getString(R.string.deleteTask); //missatge de alerta
 
+                            //ELIMINAR UNA TASCA
                             HashMap<String, Object> paramsQuery = new HashMap<String, Object>();
-                            paramsQuery.put("objectId", selectedTasca.getObjectId()); //ell cap a mi
+                            paramsQuery.put("objectId", selectedTasca.getObjectId());
 
                             try {
                                 ParseCloud.callFunction("deleteTask", paramsQuery);

@@ -16,6 +16,7 @@
         <activity
             android:name=".controller.Login"
             android:label="Login to your Account"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar">
             <!--  (intent-filter)Per indicar que és la primera activitat en inciar-se -->
@@ -28,97 +29,120 @@
         <!--  Entry for Register.class -->
         <activity android:name=".controller.Register"
             android:label="Register New Account"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for NoInternetConnection.class -->
         <activity android:name=".controller.NoInternetConnection"
+            android:screenOrientation="portrait"
             android:label="No internet connection"></activity>
 
         <!--  Entry for EntrenadorDashboard -->
         <activity android:name=".controller.EntrenadorDashboard"
+            android:screenOrientation="portrait"
             android:label="Entrenador Dashboard"></activity>
 
         <!--  Entry for SuperAdminDashboard -->
         <activity android:name=".controller.SuperAdminDashboard"
+            android:screenOrientation="portrait"
             android:label="SuperAdmin Dashboard"></activity>
-
-        <!--  Entry for ClientViewFromEntrenador -->
-        <activity android:name=".controller.ClientViewFromEntrenador"
-            android:label="ClientActivityFromEntrenador"></activity>
 
         <!--  Entry for AddClient -->
         <activity android:name=".controller.AddClient"
+            android:screenOrientation="portrait"
             android:label="Add Client"
             android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for PerfilClientFromEntrenador -->
         <activity android:name=".controller.PerfilClientFromEntrenador"
+            android:screenOrientation="portrait"
             android:label="Perfil del client"></activity>
 
         <!--  Entry for PerfilClient -->
         <activity android:name=".controller.PerfilClient"
+            android:screenOrientation="portrait"
             android:label="Perfil del client"></activity>
 
         <!--  Entry for TaskViewFromEntrenador -->
         <activity android:name=".controller.TaskViewFromEntrenador"
+            android:screenOrientation="portrait"
             android:label="Descripció de la tasca"></activity>
 
         <!--  Entry for AddTask -->
         <activity android:name=".controller.AddTask"
             android:label="Add Task"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
         <!--  Entry for TaskViewFromClient -->
         <activity android:name=".controller.TaskViewFromClient"
+            android:screenOrientation="portrait"
             android:label="Task"></activity>
 
         <!--  Entry for AddEntrenador -->
         <activity android:name=".controller.AddEntrenador"
+            android:screenOrientation="portrait"
             android:label="Add Entrenador"></activity>
 
         <!--  Entry for ChatClientFromClient -->
         <activity android:name=".controller.ChatFromClient"
+            android:screenOrientation="portrait"
             android:label="CHAT CLIENT"></activity>
 
         <!--  Entry for ChatClientFromClient -->
         <activity android:name=".controller.ChatFromEntrenador"
+            android:screenOrientation="portrait"
             android:label="CHAT ENTRENADOR"></activity>
 
         <!--  Entry for ChatFromEntrenador -->
         <activity android:name=".controller.ChatChooseClient"
+            android:screenOrientation="portrait"
             android:label="CHAT CHOOSE CLIENT"></activity>
 
         <!--  Entry for EditTask -->
         <activity android:name=".controller.EditTask"
+            android:screenOrientation="portrait"
             android:label="EDIT TASK"></activity>
 
         <!--  Entry for EditPerfilClient -->
         <activity android:name=".controller.EditPerfilClient"
+            android:screenOrientation="portrait"
             android:label="EDIT PROFILE CLIENT"></activity>
 
         <!--  Entry for EditPerfilClient -->
         <activity android:name=".controller.PerfilEntrenador"
+            android:screenOrientation="portrait"
             android:label="PERFIL ENTRENADOR"></activity>
 
         <!--  Entry for EditPerfilEntrenador -->
         <activity android:name=".controller.EditPerfilEntrenador"
+            android:screenOrientation="portrait"
             android:label="EDIT PROFILE ENTRENADOR"></activity>
 
         <!--  Entry for NoEntrenador -->
         <activity android:name=".controller.NoEntrenador"
+            android:screenOrientation="portrait"
             android:label="NO ENTRENADOR"></activity>
 
         <!--  Entry for Clients From Entrenadro SuperAdrmin -->
         <activity android:name=".controller.ClientsFromEntrenadorSuperAdmin"
+            android:screenOrientation="portrait"
             android:label="CLIENTS"></activity>
 
         <!--  Entry for PerfilEntrenadorFromClient -->
         <activity android:name=".controller.PerfilEntrenadorFromClient"
+            android:screenOrientation="portrait"
             android:label="PERFIL ENTRENADOR"></activity>
 
         <!--  Entry for ClientViewFromEntrenadors -->
         <activity android:name=".controller.ClientViewFromEntrenadors"
+            android:screenOrientation="portrait"
             android:label="Client Dashboard"></activity>
+
+        <!--  Entry for CustomerDashboard -->
+        <activity android:name=".controller.CustomerDashboard"
+            android:screenOrientation="portrait"
+            android:label="Customer Dashboard"></activity>
 
     </application>
 </manifest>

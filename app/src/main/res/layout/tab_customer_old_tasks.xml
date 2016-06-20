@@ -4,20 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/clientslabel"
-        android:layout_below="@+id/infoEntrenador"
-        android:layout_width="wrap_content"
-        android:layout_height="100px"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:textColor="#424242"
-            android:text="TASQUES"/>
-    </LinearLayout>
-
     <ListView
         android:id="@+id/tascalistview"
         android:layout_below="@+id/infoEntrenador"

@@ -6,6 +6,5 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="10sp"
-    android:textSize="20sp"
-    android:drawableRight="@drawable/ic_check_box_outline">
+    android:textSize="20sp">
 </TextView>

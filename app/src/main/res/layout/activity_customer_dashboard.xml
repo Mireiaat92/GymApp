@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_customer_dashboard"
-        android:background="#ffffff">
+        android:background="#E0E0E0">
         <TextView
             android:id="@+id/entrenadorlabel"
             android:text="@string/entrenadorlabel"

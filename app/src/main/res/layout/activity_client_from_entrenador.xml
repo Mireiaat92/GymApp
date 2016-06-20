@@ -14,24 +14,9 @@
         android:titleTextColor="#ffffff">
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/tasqueslabel"
-        android:layout_below="@+id/toolbar_client_from_entrenador"
-        android:layout_width="wrap_content"
-        android:layout_height="100px"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center"
-            android:textColor="#424242"
-            android:text="TASQUES"/>
-    </LinearLayout>
-
-
     <ListView
         android:id="@+id/tascalistview"
-        android:layout_below="@+id/tasqueslabel"
+        android:layout_below="@+id/toolbar_client_from_entrenador"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"

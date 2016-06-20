@@ -1,10 +1,12 @@
 package tfg2016.gymapp_tfg.controller;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -83,20 +85,6 @@ public class EntrenadorDashboard extends AppCompatActivity {
         ((TextView) findViewById(R.id.main_toolbar_title)).setText(myEntrenador.getName() + " " + myEntrenador.getSurname());
 
         setSupportActionBar(toolbar);
-
-        toolbar.setNavigationIcon(R.drawable.ic_perm_identity);
-        toolbar.setNavigationOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(getApplicationContext(), PerfilEntrenador.class);
-                        i.putExtra("myEntrenador", myEntrenador);
-                        startActivity(i);
-                        finish();
-                    }
-                }
-
-        );
     }
 
     public void initFloatingButton() {
@@ -128,8 +116,8 @@ public class EntrenadorDashboard extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_message){
-            Intent i = new Intent(getApplicationContext(), ChatChooseClient.class);
+        if (id == R.id.action_profile){
+            Intent i = new Intent(getApplicationContext(), PerfilEntrenador.class);
             i.putExtra("myEntrenador", myEntrenador);
             startActivity(i);
             finish();
@@ -216,7 +204,60 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
                 }
             });
-        }
+            listview.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EntrenadorDashboard.this);
+                    // set title
+                    String alert_title = (getResources().getString(R.string.confirmation));
+                    String alert_description = (getResources().getString(R.string.areYouSureDeleteClient));
+                    alertDialogBuilder.setTitle(alert_title);
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage(alert_description)
+                            .setCancelable(false)
+                            .setPositiveButton(getResources().getString(R.string.yes),new DialogInterface.OnClickListener() {
+                                // Lo que sucede si se pulsa yes
+                                public void onClick(DialogInterface dialog,int id) {
+                                    //ELIMINAR CLIENTE
+                                    HashMap<String, Object> paramsQuery = new HashMap<String, Object>();
+                                    paramsQuery.put("clientId", selectedClient.getObjectId());
+
+                                    try {
+                                        ParseCloud.callFunction("deleteClient", paramsQuery);
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Intent i = new Intent(getApplicationContext(), EntrenadorDashboard.class);
+                                    i.putExtra("myEntrenador", myEntrenador);
+                                    startActivity(i);
+                                }
+
+
+                            })
+                            .setNegativeButton(getResources().getString(R.string.no),new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // Si se pulsa no no hace nada
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+
+                    return false;
+
+                }
+
+            });
+
+                }
     }
 
     @Override

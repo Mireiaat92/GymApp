@@ -162,6 +162,15 @@ public class ClientViewFromEntrenadors extends AppCompatActivity {
             finish();
         }
 
+        else if (id == R.id.action_chat) {
+            // Switching to addClient screen
+            Intent i = new Intent(getApplicationContext(), ChatFromEntrenador.class);
+            i.putExtra("selectedClient", selectedClient);
+            i.putExtra("myEntrenador", myEntrenador);
+            startActivity(i);
+            finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
