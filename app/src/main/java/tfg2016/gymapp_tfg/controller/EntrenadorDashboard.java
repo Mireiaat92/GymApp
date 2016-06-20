@@ -178,9 +178,10 @@ public class EntrenadorDashboard extends AppCompatActivity {
             mProgressDialog.dismiss();
             // Capture button clicks on ListView items
             listview.setOnItemClickListener(new OnItemClickListener() {
+
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
+                public void onItemClick(AdapterView<?> arg0, View v, int position,
+                                        long id) {
                     // Send single item click data to SingleItemView Class
                     Intent i = new Intent(EntrenadorDashboard.this, ClientViewFromEntrenadors.class);
 
@@ -204,10 +205,12 @@ public class EntrenadorDashboard extends AppCompatActivity {
 
                 }
             });
-            listview.setOnLongClickListener(new View.OnLongClickListener() {
+
+            listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                               final int position, long arg3) {
 
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EntrenadorDashboard.this);
                     // set title
@@ -224,7 +227,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog,int id) {
                                     //ELIMINAR CLIENTE
                                     HashMap<String, Object> paramsQuery = new HashMap<String, Object>();
-                                    paramsQuery.put("clientId", selectedClient.getObjectId());
+                                    paramsQuery.put("clientId", ob.get(position).getObjectId());
 
                                     try {
                                         ParseCloud.callFunction("deleteClient", paramsQuery);
@@ -251,7 +254,7 @@ public class EntrenadorDashboard extends AppCompatActivity {
                     // show it
                     alertDialog.show();
 
-                    return false;
+                    return true;
 
                 }
 
