@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:text="@string/namelabel"/>
+                android:text="@string/maillabel"/>
             <EditText android:id="@+id/reg_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

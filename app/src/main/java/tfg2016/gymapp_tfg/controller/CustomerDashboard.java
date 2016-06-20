@@ -53,8 +53,8 @@ public class CustomerDashboard extends AppCompatActivity {
         this.initializeNomEntrenador();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Old Tasks"));
         tabLayout.addTab(tabLayout.newTab().setText("Current Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Old Tasks"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

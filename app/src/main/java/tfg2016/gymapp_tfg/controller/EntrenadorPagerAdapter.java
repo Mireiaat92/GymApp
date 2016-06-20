@@ -42,15 +42,15 @@ public class EntrenadorPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                EntrenadorOldTasks tabOld = new EntrenadorOldTasks();
-                tabOld.setMyEntrenador(getMyEntrenador());
-                tabOld.setSelectedClient(getSelectedClient());
-                return tabOld;
-            case 1:
                 EntrenadorCurrentTasks tabCurrent = new EntrenadorCurrentTasks();
                 tabCurrent.setMyEntrenador(getMyEntrenador());
                 tabCurrent.setSelectedClient(getSelectedClient());
                 return tabCurrent;
+            case 1:
+                EntrenadorOldTasks tabOld = new EntrenadorOldTasks();
+                tabOld.setMyEntrenador(getMyEntrenador());
+                tabOld.setSelectedClient(getSelectedClient());
+                return tabOld;
             default:
                 return null;
         }

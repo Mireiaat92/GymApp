@@ -31,13 +31,13 @@ public class ClientPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                CustomerOldTasks tabOld = new CustomerOldTasks();
-                tabOld.setMyClient(getMyClient());
-                return tabOld;
-            case 1:
                 CustomerCurrentTasks tabCurrent = new CustomerCurrentTasks();
                 tabCurrent.setMyClient(getMyClient());
                 return tabCurrent;
+            case 1:
+                CustomerOldTasks tabOld = new CustomerOldTasks();
+                tabOld.setMyClient(getMyClient());
+                return tabOld;
             default:
                 return null;
         }

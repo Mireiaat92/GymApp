@@ -25,6 +25,8 @@ import tfg2016.gymapp_tfg.resources.Encrypt;
 public class Register extends Activity {
 
     private boolean emailcheck;
+    private boolean pwdcheck;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class Register extends Activity {
         @Override
         public void onClick(View v) {
             try {
+                checkemail(Register.this.getMail());
+                checkpwd(Register.this.getPassword());
             //Comprovació de que tots els camps estan omplerts sinó mostrarà popup solicitant omplir tots els camps
             if (Register.this.getName().equalsIgnoreCase("")
                     || Register.this.getSurname().equalsIgnoreCase("")
@@ -73,9 +77,12 @@ public class Register extends Activity {
                     || Register.this.getPassword().equalsIgnoreCase("")){
                 Toast.makeText(Register.this, getResources().getString(R.string.allFieldsRequired), Toast.LENGTH_SHORT).show();
             }
+            else if (pwdcheck == false){
+                    Toast.makeText(Register.this, "Contrasenya ha de tenir més de 6 caracters", Toast.LENGTH_SHORT).show();
+                }
             //Comprovació de que el camp mail té el format adequat - mitjaçant la funció emailcheck
-            checkemail(Register.this.getMail());
-            if (emailcheck == true) {
+
+            else if (emailcheck == true) {
                 //Comprovar que disposem d'internet
                 if (!Complements.isNetworkStatusAvialable(getApplicationContext())) {
                     Intent noInternet = new Intent(Register.this, NoInternetConnection.class);
@@ -161,6 +168,19 @@ public class Register extends Activity {
         Matcher matcher = pattern.matcher(mail);
         emailcheck = matcher.matches();
     }
+
+    /**
+     * Method checkpwd
+     * @param pwd
+     */
+    public void checkpwd(String pwd) {
+        int counter = pwd.length();
+        if (counter >= 6){
+            pwdcheck = true;
+        }
+        else pwdcheck = false;
+    }
+
     /**
      * Method getName
      * @return nameText

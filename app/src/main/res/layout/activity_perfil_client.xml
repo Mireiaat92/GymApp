@@ -42,7 +42,6 @@
             android:layout_height="70dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_profile_black"/>
-
         <TextView
             android:id="@+id/clientName"
             android:layout_width="wrap_content"
@@ -117,7 +116,6 @@
     </RelativeLayout>
 
     <!-- OBJECTIU LABEL -->
-    <!-- HEIGHT LABEL -->
     <RelativeLayout
         android:id="@+id/goalslayout"
         android:layout_width="match_parent"
