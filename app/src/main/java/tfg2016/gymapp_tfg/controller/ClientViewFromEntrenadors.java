@@ -77,8 +77,8 @@ public class ClientViewFromEntrenadors extends AppCompatActivity {
         this.initFloatingButton();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Current Tasks"));
-        tabLayout.addTab(tabLayout.newTab().setText("Old Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Pending Tasks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Completed Tasks"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

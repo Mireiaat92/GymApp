@@ -74,8 +74,8 @@ public class EntrenadorOldTasks extends Fragment {
             // Locate the class table named "TASQUES" in Parse.com
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("TASQUES");
             query.whereEqualTo("ID_Client", selectedClient.getObjectId());
-            query.whereLessThan("Due_Date", dateWeekAgo);
-            query.orderByDescending("Due_Date");
+            query.whereEqualTo("Completada", true);
+            query.orderByAscending("Due_Date");
             try {
                 ob = query.find();
             } catch (ParseException e) {

@@ -81,7 +81,7 @@ public class CustomerCurrentTasks extends Fragment {
                         "TASQUES");
 
                 query.whereEqualTo("ID_Client", getMyClient().getObjectId());
-                query.whereGreaterThanOrEqualTo("Due_Date", dateWeekAgo);
+                query.whereEqualTo("Completada", false);
                 query.orderByAscending("Due_Date");
                 try {
                     ob = query.find();
